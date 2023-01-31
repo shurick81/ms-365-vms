@@ -24,7 +24,7 @@ jobs:
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
       MS_365_VMS_PACKER_VM_NAME: swaz0${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm win2022-ad.json
   clean-win2022-ad:
     needs: build-win2022-ad
@@ -57,7 +57,7 @@ jobs:
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
       MS_365_VMS_PACKER_VM_NAME: swaz1${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm win2022-sql2016.json
   clean-win2022-sql2016:
     needs: build-win2022-sql2016
@@ -90,7 +90,7 @@ jobs:
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
       MS_365_VMS_PACKER_VM_NAME: swaz2${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm win2022-soe.json
   clean-win2022-soe:
     needs: build-win2022-soe
