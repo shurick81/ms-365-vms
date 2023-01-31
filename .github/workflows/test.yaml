@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cd infrastructure/images
+      - run: ls
       - run: packer build -only azure-arm win2022-ad.json
   clean-win2022-ad:
     needs: build-win2022-ad
