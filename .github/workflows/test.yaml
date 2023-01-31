@@ -25,7 +25,7 @@ jobs:
       MS_365_VMS_PACKER_VM_NAME: swaz0${{ github.run_number }}
     steps:
       - uses: actions/checkout@v2
-      - run: packer build -only azure-arm infrastructure/images/win2022-ad.json
+      - run: cd infrastructure/images; packer build -only azure-arm win2022-ad.json
   clean-win2022-ad:
     needs: build-win2022-ad
     runs-on: ubuntu-latest
