@@ -40,7 +40,6 @@ jobs:
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
     steps:
-      - uses: actions/checkout@v2
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az image delete --subscription $ARM_SUBSCRIPTION_ID -g $MS_365_VMS_IMAGE_RG_NAME -n $MS_365_VMS_IMAGE_NAME
   build-win2022-sql2016:
@@ -74,7 +73,6 @@ jobs:
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
     steps:
-      - uses: actions/checkout@v2
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az image delete --subscription $ARM_SUBSCRIPTION_ID -g $MS_365_VMS_IMAGE_RG_NAME -n $MS_365_VMS_IMAGE_NAME
   build-win2022-soe:
@@ -108,6 +106,5 @@ jobs:
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
     steps:
-      - uses: actions/checkout@v2
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az image delete --subscription $ARM_SUBSCRIPTION_ID -g $MS_365_VMS_IMAGE_RG_NAME -n $MS_365_VMS_IMAGE_NAME
