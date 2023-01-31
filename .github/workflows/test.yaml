@@ -56,7 +56,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-sql2016-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz0${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz1${{ github.run_number }}
     steps:
       - uses: actions/checkout@v2
       - run: cd infrastructure/images; packer build -only azure-arm win2022-sql2016.json
