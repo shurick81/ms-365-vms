@@ -40,6 +40,8 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-ad_crm-test-00-
     steps:
       - uses: actions/checkout@v3
+      - run: cd infrastructure/stacks/azure/ad_crm; terraform init
+      - run: cd infrastructure/stacks/azure/ad_crm; terraform workspace new $env:TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/ad_crm; terraform apply -auto-approve
   clean-ad_crm:
     if: ${{ always() }}
