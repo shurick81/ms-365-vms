@@ -1,11 +1,11 @@
-name: Test
+name: Test Stacks Only
 
 on:
   workflow_dispatch:
   push: 
     paths:
       - 'infrastructure/stacks'
-      - '.github/workflows/test-stack-only.yaml'
+      - '.github/workflows/test-stacks-only.yaml'
       - '!infrastructure/images'
       - '!.github/workflows/test.yaml'
 jobs:
