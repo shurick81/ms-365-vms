@@ -25,7 +25,7 @@ jobs:
       MS_365_VMS_PACKER_VM_NAME: swaz0${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm win2022-ad.json
+      - run: cd infrastructure/images; packer build -only azure-arm win2022-ad.json -force
 #  clean-win2022-ad:
 #    needs: build-win2022-ad
 #    runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
       MS_365_VMS_PACKER_VM_NAME: swaz1${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm win2022-sql2016.json
+      - run: cd infrastructure/images; packer build -only azure-arm win2022-sql2016.json -force
 #  clean-win2022-sql2016:
 #    needs: build-win2022-sql2016
 #    runs-on: ubuntu-latest
@@ -89,7 +89,7 @@ jobs:
       MS_365_VMS_PACKER_VM_NAME: swaz2${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm win2022-soe.json
+      - run: cd infrastructure/images; packer build -only azure-arm win2022-soe.json -force
 #  clean-win2022-soe:
 #    needs: build-win2022-soe
 #    runs-on: ubuntu-latest
@@ -121,7 +121,7 @@ jobs:
       MS_365_VMS_PACKER_VM_NAME: swaz3${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm win2016-web.json
+      - run: cd infrastructure/images; packer build -only azure-arm win2016-web.json -force
 #  clean-win2016-web:
 #    needs: build-win2016-web
 #    runs-on: ubuntu-latest
