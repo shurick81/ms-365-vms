@@ -5,7 +5,7 @@ Review variable values in `.\shared.variables.ps1`.
 # Build images
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -22,7 +22,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -39,7 +39,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -56,7 +56,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -73,7 +73,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -90,7 +90,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -107,7 +107,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\ad_crm-sql2016-web-file\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -124,7 +124,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm-sql2016-web-file/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
