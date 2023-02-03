@@ -1,6 +1,6 @@
 # Set variables
 
-Review variable values in `.\shared.variables.ps1`.
+Review variable values in `.\shared-variables-ignore-soft.ps1` or `./shared-variables-ignore-soft.sh`.
 
 # Build images
 
