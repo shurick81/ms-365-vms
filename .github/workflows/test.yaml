@@ -79,7 +79,7 @@ jobs:
     needs: build-win2022-ad
     runs-on: ubuntu-latest
     container:
-      image: hashicorp/packer:1.8.5
+      image: hashicorp/terraform:0.11.15
     env:
       TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
