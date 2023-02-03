@@ -21,8 +21,8 @@ jobs:
       TF_VAR_MS_365_VMS_LOCATION: westeurope
       TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
       TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+      TF_VAR_MS_365_VMS_WIN2019_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+      TF_VAR_MS_365_VMS_WIN2019_AD_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/ad_crm; terraform init
-      - run: cd infrastructure/stacks/azure/ad_crm; terraform workspace new $env:TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/ad_crm; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/ad_crm; terraform apply -auto-approve
   clean-ad_crm:
     if: ${{ always() }}
