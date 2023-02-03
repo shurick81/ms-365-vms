@@ -3,8 +3,6 @@ name: Test
 on:
   workflow_dispatch:
   push: 
-    branches:
-      - main
     paths:
       - 'infrastructure/images'
       - '.github/workflows/test.yaml'
