@@ -1,0 +1,126 @@
+{
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "iso_checksum": "18a4f00a675b0338f3c7c93c4f131beb",
+            "iso_url": "https://download.microsoft.com/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO",
+            "floppy_files": [
+                "autounattend/virtualbox/win2016/Autounattend.xml",
+                "winrm.ps1",
+                "sysprep.bat",
+                "autounattend_sysprep.xml"
+            ],
+            "guest_additions_mode": "attach",
+            "guest_os_type": "Windows2016_64",
+            "headless": true,
+            "shutdown_command": "a:/sysprep.bat",
+            "vboxmanage": [
+                [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+                [ "modifyvm", "{{.Name}}", "--cpus", "4" ]
+            ],
+            "communicator": "winrm",
+            "winrm_username": "packer",
+            "winrm_password": "Fractalsol365",
+            "winrm_timeout": "2h"
+        },
+        {
+            "type": "hyperv-iso",
+            "iso_checksum": "18a4f00a675b0338f3c7c93c4f131beb",
+            "iso_url": "https://download.microsoft.com/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO",
+            "floppy_files": [
+                "autounattend/hyper-v/win2016/Autounattend.xml",
+                "hyperv-init.ps1",
+                "sysprep.bat",
+                "autounattend_sysprep.xml"
+            ],
+            "headless": true,
+            "shutdown_command": "a:/sysprep.bat",
+            "memory": 2048,
+            "cpus": 4,
+            "switch_name": "{{user `hyperv_switch_name`}}",
+            "communicator": "winrm",
+            "winrm_username": "packer",
+            "winrm_password": "Fractalsol365",
+            "winrm_timeout": "2h"
+        },
+        {
+            "type": "azure-arm",
+        
+            "client_id": "{{user `client_id`}}",
+            "client_secret": "{{user `client_secret`}}",
+            "subscription_id": "{{user `subscription_id`}}",
+            "tenant_id": "{{user `tenant_id`}}",
+        
+            "managed_image_resource_group_name": "{{user `managed_image_resource_group_name`}}",
+            "managed_image_name": "{{user `box_name`}}",
+            "polling_duration_timeout": "40m",
+        
+            "os_type": "Windows",
+            "image_publisher": "MicrosoftWindowsServer",
+            "image_offer": "WindowsServer",
+            "image_sku": "2019-Datacenter-smalldisk",
+            "image_version": "latest",
+        
+            "communicator": "winrm",
+            "winrm_use_ssl": "true",
+            "winrm_insecure": "true",
+            "winrm_timeout": "30m",
+            "winrm_username": "packer",
+            "temp_compute_name": "{{user `vm_name`}}",
+
+            "location": "{{user `location`}}",
+            "vm_size": "{{user `vm_size`}}",
+            "managed_image_storage_account_type": "Standard_LRS"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "VirtualBox/installadditions.ps1",
+            "only": ["virtualbox-iso"]
+        },
+        {
+            "type": "powershell",
+            "script": "HyperV/integration.ps1",
+            "only": ["hyperv-iso"]
+        },
+        {
+            "type": "powershell",
+            "script": "rdpenable.ps1",
+            "only": ["virtualbox-iso","hyperv-iso"]
+        },
+        {
+            "type": "powershell",
+            "script": "winrm.ps1",
+            "only": ["azure-arm"]
+        },
+        { "type": "powershell", "script": "PackageManagementProviderResource.ps1" },
+        { "type": "powershell", "script": "basepsmodules.ps1" },
+        { "type": "powershell", "script": "adpsmodules.ps1" },
+        { "type": "powershell", "script": "adbin.ps1" },
+        { "type": "powershell", "script": "waitforcpucalm.ps1" },
+        {
+            "type": "powershell",
+            "script": "azure/sysprep.ps1",
+            "only": ["azure-arm"]
+        }
+    ],
+    "post-processors": [
+        {
+          "type": "vagrant",
+          "output": "{{user `box_name`}}.box"
+        }
+    ],
+    "variables": {
+        "box_name": "{{env `MS_365_VMS_IMAGE_NAME`}}",
+        "vm_size": "{{env `MS_365_VMS_VM_SIZE`}}",
+        "location": "{{env `MS_365_VMS_LOCATION`}}",
+        "managed_image_resource_group_name": "{{env `MS_365_VMS_IMAGE_RG_NAME`}}",
+        "client_id": "{{env `ARM_CLIENT_ID`}}",
+        "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+        "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+        "tenant_id": "{{env `ARM_TENANT_ID`}}",
+        "vm_name": "{{env `MS_365_VMS_PACKER_VM_NAME`}}",
+        "hyperv_switch_name": "{{env `MS_365_VMS_HYPERV_SWITCH`}}"
+    }
+}
