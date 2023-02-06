@@ -24,20 +24,14 @@ variable "CRM_VSS_WRITER_PASSWORD" {}
 variable "CRM_ASYNC_SERVICE_PASSWORD" {}
 variable "CRM_MONITORING_SERVICE_PASSWORD" {}
 
-terraform {
-  required_providers {
-    azurerm = {
-      version = "=2.91.0"
-    }
-  }
-}
-
+# Configure the Microsoft Azure Provider
 provider "azurerm" {
-  subscription_id               = var.ARM_SUBSCRIPTION_ID
-  client_id                     = var.ARM_CLIENT_ID
-  client_secret                 = var.ARM_CLIENT_SECRET
-  tenant_id                     = var.ARM_TENANT_ID
-  features {}
+  version         = "=1.33.0"
+  subscription_id = "${var.ARM_SUBSCRIPTION_ID}"
+  client_id       = "${var.ARM_CLIENT_ID}"
+  client_secret   = "${var.ARM_CLIENT_SECRET}"
+  tenant_id       = "${var.ARM_TENANT_ID}"
+  #features {}
 }
 
 resource "azurerm_resource_group" "environment" {
