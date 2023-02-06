@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push: 
     paths:
-      - 'infrastructure/stacks'
+      - 'infrastructure/stacks/**'
       - '.github/workflows/test-stacks-only.yaml'
-      - '!infrastructure/images'
+      - '!infrastructure/images/**'
       - '!.github/workflows/test.yaml'
 jobs:
   provision-ad2019_crm:
