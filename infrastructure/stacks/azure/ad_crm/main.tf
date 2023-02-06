@@ -24,14 +24,20 @@ variable "CRM_VSS_WRITER_PASSWORD" {}
 variable "CRM_ASYNC_SERVICE_PASSWORD" {}
 variable "CRM_MONITORING_SERVICE_PASSWORD" {}
 
-# Configure the Microsoft Azure Provider
+terraform {
+  required_providers {
+    azurerm = {
+      version = "=3.42.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version         = "=1.33.0"
-  subscription_id = "${var.ARM_SUBSCRIPTION_ID}"
-  client_id       = "${var.ARM_CLIENT_ID}"
-  client_secret   = "${var.ARM_CLIENT_SECRET}"
-  tenant_id       = "${var.ARM_TENANT_ID}"
-  #features {}
+  subscription_id               = var.ARM_SUBSCRIPTION_ID
+  client_id                     = var.ARM_CLIENT_ID
+  client_secret                 = var.ARM_CLIENT_SECRET
+  tenant_id                     = var.ARM_TENANT_ID
+  features {}
 }
 
 resource "azurerm_resource_group" "environment" {
@@ -53,7 +59,7 @@ resource "azurerm_subnet" "mainterraformsubnet" {
   name                  = "mainSubnet"
   resource_group_name   = "${azurerm_resource_group.environment.name}"
   virtual_network_name  = "${azurerm_virtual_network.mainterraformnetwork.name}"
-  address_prefix        = "10.0.1.0/24"
+  address_prefixes      = ["10.0.1.0/24"]
 }
 
 module "AD00" {

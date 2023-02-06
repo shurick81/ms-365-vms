@@ -85,10 +85,10 @@ MS_365_VMS_DNS_PREFIX=$MS_365_VMS_PROJECT_PREFIX$MS_365_VMS_STACK_TYPE_ID"-00-";
 MS_365_VMS_WIN2022_AD_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_AD_IMAGE_NAME"
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/ad_crm;
 sudo rm -rf terraform.tfstate.d;
-sudo docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:0.11.15 init
-sudo docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:0.11.15 workspace new $MS_365_VMS_STACK_INSTANCE_ID
-sudo docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:0.11.15 workspace select $MS_365_VMS_STACK_INSTANCE_ID
-sudo docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:0.11.15 apply -auto-approve \
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:1.3.7 init
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:1.3.7 workspace new $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:1.3.7 workspace select $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/ad_crm hashicorp/terraform:1.3.7 apply -auto-approve \
     -var "ARM_CLIENT_ID=$ARM_CLIENT_ID" \
     -var "ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET" \
     -var "ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID" \

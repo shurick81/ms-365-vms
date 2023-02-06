@@ -57,7 +57,7 @@ resource "azurerm_subnet" "mainterraformsubnet" {
 }
 
 module "AD00" {
-  source                              = "./../machines/vm-ad2019-crm"
+  source                              = "./../machines/vm-crm-terraform0"
   environmentId                       = "${terraform.workspace}"
   location                            = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"

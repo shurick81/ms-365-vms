@@ -19,7 +19,7 @@ variable "crm_vss_writer_password" {}
 variable "crm_async_service_password" {}
 variable "crm_monitoring_service_password" {}
 variable "dependencies" {
-  type = "list"
+  type = list
 }
 
 # Empty machine for installing any Windows servers
@@ -35,7 +35,7 @@ resource "azurerm_public_ip" "main" {
   name                = "${var.vm_name}-pip"
   location            = "${var.location}"
   resource_group_name = "${var.vm_resource_group_name}"
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
 }
 
 # Create Network Security Group and rule
@@ -99,79 +99,64 @@ resource "azurerm_network_interface" "nic01" {
   name                      = "${var.vm_name}-nic01"
   location                  = "${var.location}"
   resource_group_name       = "${var.vm_resource_group_name}"
-  network_security_group_id = "${azurerm_network_security_group.main.id}"
 
   ip_configuration {
     name                          = "mainNicConfiguration"
     subnet_id                     = "${var.main_subnet_id}"
-    private_ip_address_allocation = "static"
+    private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.1.254"
     public_ip_address_id          = "${azurerm_public_ip.main.id}"
   }
 
 }
 
+resource "azurerm_network_interface_security_group_association" "nic01" {
+    network_interface_id      = azurerm_network_interface.nic01.id
+    network_security_group_id = azurerm_network_security_group.main.id
+}
+
 # Create virtual machine
-resource "azurerm_virtual_machine" "main" {
+resource "azurerm_windows_virtual_machine" "main" {
   name                          = "${var.vm_name}"
   location                      = "${var.location}"
   resource_group_name           = "${var.vm_resource_group_name}"
-  network_interface_ids         = ["${azurerm_network_interface.nic01.id}"]
-  primary_network_interface_id  = "${azurerm_network_interface.nic01.id}"
-  vm_size                       = "${var.vm_size}"
-  delete_os_disk_on_termination = true
+  network_interface_ids         = [azurerm_network_interface.nic01.id]
+  size                          = "${var.vm_size}"
   #license_type                  = "Windows_Server"
+  admin_username                = "${var.vm_admin_username}"
+  admin_password                = "${var.vm_admin_password}"
+  source_image_id               = var.image_id
+  computer_name                 = "${upper(var.vm_name)}"
+  #custom_data                   = "${base64encode("Param($RemoteHostName = \"${self.public_ip_address}\", $ComputerName = \"${var.vm_name}\", $WinRmPort = 5986) ${file("../vm-initiate.ps1")}")}"
+  custom_data                   = "${base64encode("Param($ComputerName = \"${var.vm_name}\", $WinRmPort = 5986) ${file("../vm-initiate.ps1")}")}"
 
-  storage_os_disk {
+  os_disk {
     name              = "${var.vm_name}-disk-os"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
-  storage_image_reference {
-    id = "${var.image_id}"
+  additional_unattend_content {
+    setting = "AutoLogon"
+    content = "<AutoLogon><Password><Value>${var.vm_admin_password}</Value></Password><Enabled>true</Enabled><LogonCount>1</LogonCount><Username>${var.vm_admin_username}</Username></AutoLogon>"
   }
-
-  os_profile {
-    computer_name  = "${upper(var.vm_name)}"
-    admin_username = "${var.vm_admin_username}"
-    admin_password = "${var.vm_admin_password}"
-    custom_data = "${base64encode("Param($RemoteHostName = \"${azurerm_public_ip.main.ip_address}\", $ComputerName = \"${var.vm_name}\", $WinRmPort = 5986) ${file("../vm-initiate.ps1")}")}"
+  #Unattend config is to enable basic auth in WinRM, required for the provisioner stage.
+  additional_unattend_content {
+    setting = "FirstLogonCommands"
+    content = "${file("../FirstLogonCommands.xml")}"
   }
-
-  os_profile_windows_config {
-    provision_vm_agent = true
-
-    enable_automatic_upgrades = true
-
-    additional_unattend_config {
-        pass = "oobeSystem"
-        component = "Microsoft-Windows-Shell-Setup"
-        setting_name = "AutoLogon"
-        content = "<AutoLogon><Password><Value>${var.vm_admin_password}</Value></Password><Enabled>true</Enabled><LogonCount>1</LogonCount><Username>${var.vm_admin_username}</Username></AutoLogon>"
-    }
-    #Unattend config is to enable basic auth in WinRM, required for the provisioner stage.
-    additional_unattend_config {
-        pass = "oobeSystem"
-        component = "Microsoft-Windows-Shell-Setup"
-        setting_name = "FirstLogonCommands"
-        content = "${file("../FirstLogonCommands.xml")}"
-    }
-  }
-  
 
   provisioner "file" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
+      host = azurerm_public_ip.main.ip_address
     }
 
     source      = "./../../domain.ps1"
@@ -180,35 +165,35 @@ resource "azurerm_virtual_machine" "main" {
 
   provisioner "remote-exec" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
+      host = azurerm_public_ip.main.ip_address
     }
 
     inline = [
       "powershell.exe -command \"$env:VMDEVOPSSTARTER_NODSCTEST = 'TRUE'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\domain.ps1; shutdown /r /f /t 5 /c 'forced reboot'; net stop WinRM\"",
     ]
 
-    on_failure = "continue"
+    on_failure = continue
   }
 
   provisioner "remote-exec" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
+      host = azurerm_public_ip.main.ip_address
     }
 
     inline = [
@@ -218,15 +203,15 @@ resource "azurerm_virtual_machine" "main" {
 
   provisioner "file" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
+      host = azurerm_public_ip.main.ip_address
     }
 
     source      = "./../../customizations/crm/crmdomaincustomizations.ps1"
@@ -235,15 +220,15 @@ resource "azurerm_virtual_machine" "main" {
 
   provisioner "remote-exec" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
+      host = azurerm_public_ip.main.ip_address
     }
 
     inline = [
@@ -253,15 +238,15 @@ resource "azurerm_virtual_machine" "main" {
 
   provisioner "remote-exec" {
     connection {
+      type     = "winrm"
       user     = "${var.vm_admin_username}"
       password = "${var.vm_admin_password}"
-      port     = 5986
       https    = true
       timeout  = "10m"
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = azurerm_public_ip.main.ip_address
+      host = azurerm_public_ip.main.ip_address
     }
     inline = [
       "powershell.exe -command \"Write-Host `\"$(Get-Date) Provisioning is done`\"\""
@@ -269,14 +254,14 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   depends_on = [
-    "null_resource.dependency_getter",
+    null_resource.dependency_getter,
   ]
 
 }
 
 resource "null_resource" "dependency_setter" {
   depends_on = [
-    "azurerm_virtual_machine.main"
+    azurerm_windows_virtual_machine.main
   ]
 }
 
