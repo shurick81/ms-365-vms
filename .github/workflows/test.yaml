@@ -109,17 +109,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-soe.json
-name: Test Stacks Only
-
-on:
-  workflow_dispatch:
-  push: 
-    paths:
-      - 'infrastructure/stacks/**'
-      - '.github/workflows/test-stacks-only.yaml'
-      - '!infrastructure/images/**'
-      - '!.github/workflows/test.yaml'
-jobs:
   provision-win2022_ad_crm:
     needs: build-win2022-ad
     runs-on: ubuntu-latest
