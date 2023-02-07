@@ -1,5 +1,18 @@
 Start-Transcript -Path c:\vm-initiate.ps1.Log;
-if ( !$RemoteHostName ) { $RemoteHostName = ( Invoke-RestMethod https://api.ipify.org?format=json ).ip }
+if ( !$RemoteHostName ) { 
+    $sslCacheHostName = 'api.ipify.org';
+    $resource = $null
+    Do {
+        $resource = Resolve-DnsName $sslCacheHostName -ErrorAction Ignore;
+        if ( $resource ) {
+            Write-Host "$( Get-Date ) Successfully reached $sslCacheHostName";
+        } else {
+            Write-Host "$( Get-Date ) Could not reach $sslCacheHostName";
+        }
+        $attemptsLeft--;
+    } until ( $resource -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
+    $RemoteHostName = ( Invoke-RestMethod https://api.ipify.org?format=json ).ip
+}
 Write-Host "Setup WinRM for $RemoteHostName and $ComputerName";
 
 $Cert = New-SelfSignedCertificate -DnsName $RemoteHostName, $ComputerName `
