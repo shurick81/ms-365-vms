@@ -9,7 +9,7 @@ on:
       - '!infrastructure/images/**'
       - '!.github/workflows/test.yaml'
 jobs:
-  provision-ad_crm:
+  provision-win2022_ad_crm:
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:1.3.7
@@ -36,16 +36,16 @@ jobs:
       TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
       TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
       TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-ad_crm-test-00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-ad_crm-test-00-
+      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-test-00
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-00-
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/ad_crm; terraform init
-      - run: cd infrastructure/stacks/azure/ad_crm; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/ad_crm; terraform apply -auto-approve
-  clean-ad_crm:
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform init
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform apply -auto-approve
+  clean-win2022_ad_crm:
     if: ${{ always() }}
-    needs: provision-ad_crm
+    needs: provision-win2022_ad_crm
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/azure-cli:2.16.0
@@ -56,8 +56,8 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-ad_crm-test-00 -y
-  provision-ad2022_crm-terraform0:
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-test-00 -y
+  provision-win2022_ad_crm-terraform0:
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:0.11.15
@@ -84,16 +84,16 @@ jobs:
       TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
       TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
       TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-ad2022_crm-terraform0-test-00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-ad2022_crm-terraform0-test-00-
+      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-terraform0-test-00
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-01-
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/ad2022_crm-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/ad2022_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/ad2022_crm-terraform0; terraform apply -auto-approve
-  clean-ad2022_crm-terraform0:
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform init
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform apply -auto-approve
+  clean-win2022_ad_crm-terraform0:
     if: ${{ always() }}
-    needs: provision-ad2022_crm-terraform0
+    needs: provision-win2022_ad_crm-terraform0
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/azure-cli:2.16.0
@@ -104,8 +104,8 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-ad2022_crm-terraform0-test-00 -y
-  provision-ad2019_crm-terraform0:
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-terraform0-test-00 -y
+  provision-win2019_ad_crm-terraform0:
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:0.11.15
@@ -132,16 +132,16 @@ jobs:
       TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
       TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
       TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-ad2019_crm-terraform0-test-00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-ad2019_crm-terraform0-test-00-
+      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_crm-terraform0-test-00
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-02-
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/ad2019_crm-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/ad2019_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/ad2019_crm-terraform0; terraform apply -auto-approve
-  clean-ad2019_crm-terraform0:
+      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform init
+      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform apply -auto-approve
+  clean-win2019_ad_crm-terraform0:
     if: ${{ always() }}
-    needs: provision-ad2019_crm-terraform0
+    needs: provision-win2019_ad_crm-terraform0
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/azure-cli:2.16.0
@@ -152,4 +152,4 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-ad2019_crm-terraform0-test-00 -y
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_crm-terraform0-test-00 -y
