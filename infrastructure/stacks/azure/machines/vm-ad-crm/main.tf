@@ -127,11 +127,10 @@ resource "azurerm_windows_virtual_machine" "main" {
   admin_password                = "${var.vm_admin_password}"
   source_image_id               = var.image_id
   computer_name                 = "${upper(var.vm_name)}"
-  #custom_data                   = "${base64encode("Param($RemoteHostName = \"${self.public_ip_address}\", $ComputerName = \"${var.vm_name}\", $WinRmPort = 5986) ${file("../vm-initiate.ps1")}")}"
   custom_data                   = "${base64encode("Param($ComputerName = \"${var.vm_name}\", $WinRmPort = 5986) ${file("../vm-initiate.ps1")}")}"
 
   os_disk {
-    name              = "${var.vm_name}-disk-os"
+    name                 = "${var.vm_name}-disk-os"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
@@ -140,6 +139,7 @@ resource "azurerm_windows_virtual_machine" "main" {
     setting = "AutoLogon"
     content = "<AutoLogon><Password><Value>${var.vm_admin_password}</Value></Password><Enabled>true</Enabled><LogonCount>1</LogonCount><Username>${var.vm_admin_username}</Username></AutoLogon>"
   }
+
   #Unattend config is to enable basic auth in WinRM, required for the provisioner stage.
   additional_unattend_content {
     setting = "FirstLogonCommands"
