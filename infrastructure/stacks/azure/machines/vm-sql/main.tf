@@ -106,6 +106,7 @@ resource "azurerm_windows_virtual_machine" "main" {
     setting = "AutoLogon"
     content = "<AutoLogon><Password><Value>${var.vm_admin_password}</Value></Password><Enabled>true</Enabled><LogonCount>1</LogonCount><Username>${var.vm_admin_username}</Username></AutoLogon>"
   }
+
   #Unattend config is to enable basic auth in WinRM, required for the provisioner stage.
   additional_unattend_content {
     setting = "FirstLogonCommands"
