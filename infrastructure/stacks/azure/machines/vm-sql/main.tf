@@ -112,6 +112,10 @@ resource "azurerm_windows_virtual_machine" "main" {
     content = "${file("../FirstLogonCommands.xml")}"
   }
 
+  winrm_listener {
+    protocol = "Http"
+  }
+
   provisioner "file" {
     connection {
       type     = "winrm"
