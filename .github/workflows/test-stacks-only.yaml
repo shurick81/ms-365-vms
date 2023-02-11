@@ -444,6 +444,9 @@ jobs:
       TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
       TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-tf0-test-00
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-03-
     steps:
