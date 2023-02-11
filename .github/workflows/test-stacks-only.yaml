@@ -389,7 +389,7 @@ jobs:
       TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
       TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2016-win2016_web-terraform0-test-00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-00-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-01-
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-terraform0; terraform init
