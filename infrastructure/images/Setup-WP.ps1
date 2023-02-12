@@ -32,11 +32,11 @@ try
                 DependsOn   = "[cChocoInstaller]ChocoInstalled"
             }
 
-            cChocoPackageInstaller googlechrome
-            {
-                Name        = "googlechrome"
-                DependsOn   = "[cChocoInstaller]ChocoInstalled"
-            }
+            #cChocoPackageInstaller googlechrome
+            #{
+            #    Name        = "googlechrome"
+            #    DependsOn   = "[cChocoInstaller]ChocoInstalled"
+            #}
 
             cChocoPackageInstaller firefox
             {
@@ -50,11 +50,11 @@ try
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
 
-            cChocoPackageInstaller Office365businessInstalled
-            {
-                Name                    = "office365business"
-                DependsOn               = "[cChocoInstaller]ChocoInstalled"
-            }
+            #cChocoPackageInstaller Office365businessInstalled
+            #{
+            #    Name                    = "office365business"
+            #    DependsOn               = "[cChocoInstaller]ChocoInstalled"
+            #}
 
             IEEnhancedSecurityConfiguration 'DisableForAdministrators'
             {
