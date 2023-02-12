@@ -5,7 +5,7 @@ Review variable values in `.\shared.variables.ps1`.
 # Build images
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0\shared-variables-ignore-soft.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -22,7 +22,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0/shared-variables-ignore-soft.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -39,7 +39,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0\shared-variables-ignore-soft.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -56,7 +56,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0/shared-variables-ignore-soft.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -73,7 +73,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0\shared-variables-ignore-soft.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -90,7 +90,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0/shared-variables-ignore-soft.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -143,21 +143,21 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 # Provisioning stacks
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0\shared-variables-ignore-soft.ps1
-$env:MS_365_VMS_STACK_TYPE_ID = "win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0";
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0\shared-variables-ignore-soft.ps1
+$env:MS_365_VMS_STACK_TYPE_ID = "win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0";
 $env:MS_365_VMS_STACK_INSTANCE_ID = $env:MS_365_VMS_PROJECT_PREFIX + $env:MS_365_VMS_STACK_TYPE_ID + "-dev-00";
 $env:MS_365_VMS_DNS_PREFIX = $env:MS_365_VMS_PROJECT_PREFIX + $env:MS_365_VMS_STACK_TYPE_ID + "-00-";
 $env:MS_365_VMS_WIN2022_AD_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/resourceGroups/$env:MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$env:MS_365_VMS_WIN2022_AD_IMAGE_NAME"
 $env:MS_365_VMS_WIN2022_SQL2016_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/resourceGroups/$env:MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$env:MS_365_VMS_WIN2022_SQL2016_IMAGE_NAME"
 $env:MS_365_VMS_WIN2016_WEB_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/resourceGroups/$env:MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$env:MS_365_VMS_WIN2016_WEB_IMAGE_NAME"
 $env:MS_365_VMS_WIN2022_FILES_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/resourceGroups/$env:MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$env:MS_365_VMS_WIN2022_SOE_IMAGE_NAME"
-cd c:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0;
+cd c:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0;
 Remove-Item terraform.tfstate.d -Recurse
 Start-Sleep 5;
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 init
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 workspace new $env:MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 workspace select $env:MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 apply -auto-approve `
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 init
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 workspace new $env:MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 workspace select $env:MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 apply -auto-approve `
     -var "ARM_CLIENT_ID=$env:ARM_CLIENT_ID" `
     -var "ARM_CLIENT_SECRET=$env:ARM_CLIENT_SECRET" `
     -var "ARM_SUBSCRIPTION_ID=$env:ARM_SUBSCRIPTION_ID" `
@@ -197,20 +197,20 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0/shared-variables-ignore-soft.sh
-MS_365_VMS_STACK_TYPE_ID="win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-tf0";
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0/shared-variables-ignore-soft.sh
+MS_365_VMS_STACK_TYPE_ID="win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-tf0";
 MS_365_VMS_STACK_INSTANCE_ID=$MS_365_VMS_PROJECT_PREFIX$MS_365_VMS_STACK_TYPE_ID"-dev-00";
 MS_365_VMS_DNS_PREFIX=$MS_365_VMS_PROJECT_PREFIX"dev-03-";
 MS_365_VMS_WIN2022_AD_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_AD_IMAGE_NAME"
 MS_365_VMS_WIN2022_SQL2016_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_SQL2016_IMAGE_NAME"
 MS_365_VMS_WIN2016_WEB_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2016_WEB_IMAGE_NAME"
 MS_365_VMS_WIN2022_FILES_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_SOE_IMAGE_NAME"
-cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0;
+cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0;
 sudo rm -rf terraform.tfstate.d;
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 init
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 workspace new $MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 workspace select $MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_file-terraform0 hashicorp/terraform:0.11.15 apply -auto-approve \
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 init
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 workspace new $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 workspace select $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-terraform0 hashicorp/terraform:0.11.15 apply -auto-approve \
     -var "ARM_CLIENT_ID=$ARM_CLIENT_ID" \
     -var "ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET" \
     -var "ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID" \
