@@ -79,6 +79,19 @@ try
                 Description = "Firewall rule to allow SQL communication"
             }
             
+            FireWall AllowSQL2022Service
+            {
+                Name        = "AllowSQL2022Service"
+                DisplayName = "Allow SQL 2022 Service"
+                Ensure      = "Present"
+                Enabled     = "True"
+                Profile     = 'Domain', 'Private', 'Public'
+                Direction   = "InBound"
+                Program     = 'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLInstance01\MSSQL\Binn\sqlservr.exe'
+                Protocol    = "TCP"
+                Description = "Firewall rule to allow SQL communication"
+            }
+
             FireWall AllowSQLBrowser
             {
                 Name        = "AllowSQLBrowser"
