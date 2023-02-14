@@ -120,6 +120,7 @@
             "only": ["azure-arm"]
         },
         {
+            "pause_before": "600s",
             "type": "powershell",
             "script": "sql2022-media.ps1",
             "only": ["azure-arm"]
