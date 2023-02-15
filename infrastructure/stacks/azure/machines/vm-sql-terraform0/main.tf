@@ -209,7 +209,7 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"Start-Sleep 200\""
+      "powershell.exe -command \"Start-Sleep 120\""
     ]
     on_failure = "continue"
   }
