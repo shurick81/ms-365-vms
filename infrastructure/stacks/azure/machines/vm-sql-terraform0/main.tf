@@ -196,6 +196,24 @@ resource "azurerm_virtual_machine" "main" {
     on_failure = "continue"
   }
 
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"Start-Sleep 600\""
+    ]
+    on_failure = "continue"
+  }
+
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -229,6 +247,42 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; .\\common\\dbservernamefix.ps1\"",
     ]
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"Uninstall-Module -Name SqlServerDsc -Force -RequiredVersion 14.2.1\""
+    ]
+    on_failure = "continue"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"Get-Module -Name SqlServerDsc -ListAvailable\""
+    ]
+    on_failure = "continue"
   }
 
   provisioner "file" {

@@ -1,3 +1,4 @@
+Install-Module -Name SqlServer -Force -RequiredVersion 22.0.49-preview -AllowPrerelease
 $configName = "SQLConfig";
 Write-Host "$(Get-Date) Defining DSC";
 try
@@ -7,7 +8,7 @@ try
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 14.2.1
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0 #v16.1.0 to allow preview version for SQL 2022 configuration
 
         Node $AllNodes.NodeName
         {
