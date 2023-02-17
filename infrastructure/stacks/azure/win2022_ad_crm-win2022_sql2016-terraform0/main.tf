@@ -12,7 +12,6 @@ variable "MS_365_VMS_VM_NAME_SPEC" {}
 variable "VM_ADMIN_USERNAME" {
   default = "custom3094857"
 }
-variable "MS_365_VMS_DNS_PREFIX" {}
 variable "MS_365_VMS_DOMAIN_NAME" {}
 variable "MS_365_VMS_VM_ADMIN_PASSWORD" {}
 variable "MS_365_VMS_DOMAIN_ADMIN_PASSWORD" {}
