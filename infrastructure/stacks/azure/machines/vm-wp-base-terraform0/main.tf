@@ -15,7 +15,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# Empty machine for installing any Windows servers
+# Base workplace
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {

@@ -21,7 +21,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# Empty machine for installing any Windows servers
+# Web server
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
