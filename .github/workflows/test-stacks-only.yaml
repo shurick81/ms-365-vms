@@ -38,11 +38,11 @@ jobs:
   test-win2022_wp-terraform0:
     runs-on:
       - self-hosted
-      - 'ms-365-vms-win2022_wp-terraform0-test-00-wp00'
+      - 'ms-365-vms-win2022_wp-terraform0-test-00'
+      - 'wp00'
     needs: provision-win2022_wp-terraform0
     steps:
-      - run: $env:COMPUTERNAME
-        shell: pwsh
+      - run: Write-Host $env:COMPUTERNAME
   clean-win2022_wp-terraform0:
     if: ${{ always() }}
     needs: test-win2022_wp-terraform0
