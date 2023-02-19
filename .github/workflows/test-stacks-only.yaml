@@ -37,7 +37,8 @@ jobs:
       - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform apply -auto-approve
   test-win2022_wp-terraform0:
     runs-on:
-      labels: ms-365-vms-win2022_wp-terraform0-test-00-wp00"
+      - self-hosted
+      - 'ms-365-vms-win2022_wp-terraform0-test-00-wp00'
     needs: provision-win2022_wp-terraform0
     steps:
       - run: $env:COMPUTERNAME
