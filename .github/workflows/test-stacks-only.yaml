@@ -32,17 +32,17 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_wp_terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_wp_terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_wp_terraform0; terraform apply -auto-approve
+      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform init
+      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform apply -auto-approve
   test-win2022_wp-terraform0:
     runs-on:
       labels: ms-365-vms-win2022_wp-terraform0-test-00, wp00
-    needs: provision-win2022_wp_terraform0
+    needs: provision-win2022_wp-terraform0
     steps:
       - run: $env:COMPUTERNAME
         shell: pwsh
-  clean-win2022_wp_terraform0:
+  clean-win2022_wp-terraform0:
     if: ${{ always() }}
     needs: test-win2022_wp-terraform0
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_wp_terraform0-test-00 -y
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_wp-terraform0-test-00 -y
   provision-win2022_ad_crm:
     runs-on: ubuntu-latest
     container:
