@@ -61,7 +61,7 @@ module "WP00" {
   ms_365_vms_pipeline_provider        = "${var.MS_365_VMS_PIPELINE_PROVIDER}"
   ms_365_vms_pipeline_url             = "${var.MS_365_VMS_PIPELINE_URL}"
   ms_365_vms_pipeline_token           = "${var.MS_365_VMS_PIPELINE_TOKEN}"
-  ms_365_vms_pipeline_labels          = "${var.MS_365_VMS_PIPELINE_STACK_LABEL},wp00"
+  ms_365_vms_pipeline_labels          = "${var.MS_365_VMS_PIPELINE_STACK_LABEL},${var.MS_365_VMS_PIPELINE_STACK_LABEL}-wp00,wp00"
   dependencies = [
   ]
 }
