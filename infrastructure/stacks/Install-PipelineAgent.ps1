@@ -4,7 +4,6 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
         {
             Write-Host "Provisioning Github actions agent";
             mkdir c:\actions-runner; cd c:\actions-runner
-            $ProgressPreference = 'SilentlyContinue';
             $attemptsLeft = 100;
             $resourceUrl = "https://github.com/actions/runner/releases/download/v2.294.0/actions-runner-win-x64-2.294.0.zip"
             $resource = $null
@@ -21,7 +20,10 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
                 }
                 $attemptsLeft--;
             } until ( $resource -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
+            $currentProgressPreference = $ProgressPreference;
+            $ProgressPreference = 'SilentlyContinue';
             Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.294.0/actions-runner-win-x64-2.294.0.zip -OutFile actions-runner-win-x64-2.294.0.zip
+            $ProgressPreference = $currentProgressPreference;
             if((Get-FileHash -Path actions-runner-win-x64-2.294.0.zip -Algorithm SHA256).Hash.ToUpper() -ne '22295b3078f7303ffb5ded4894188d85747b1b1a3d88a3eac4d0d076a2f62caa'.ToUpper()){ throw 'Computed checksum did not match' }
             Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.294.0.zip", "$PWD")
             ./config.cmd --url $env:MS_365_VMS_PIPELINE_URL --token $env:MS_365_VMS_PIPELINE_TOKEN --name (New-Guid).Guid --labels $env:MS_365_VMS_PIPELINE_LABELS --unattended --runasservice
