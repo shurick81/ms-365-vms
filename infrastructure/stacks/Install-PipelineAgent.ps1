@@ -36,7 +36,49 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
             Exit 1
         }
     }
-    "Other" {
+    "Bitbucket" {
+        #choco install -y git 2.39.2 --version=2.39.1
+        #choco install -y dotnetfx --pre --version=4.8.1.0-rtw
+        choco install -y nssm --version=2.24.101.20180116
+        cd c:\
+        $attemptsLeft = 100;
+        $resourceUrl = "https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-1.413.zip"
+        $resource = $null
+        Do {
+            Try {
+                $resource = Invoke-WebRequest -Uri $resourceUrl -UseBasicParsing -Method Head;
+            } Catch {
+                $_.Exception.Message;
+            }
+            if ( $resource ) {
+                Write-Host "$( Get-Date ) Successfully reached $resourceUrl";
+            } else {
+                Write-Host "$( Get-Date ) Could not reach $resourceUrl";
+            }
+            $attemptsLeft--;
+        } until ( $resource -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
+
+        # download the runner zip
+        $currentProgressPreference = $ProgressPreference;
+        $ProgressPreference = 'SilentlyContinue';
+        Invoke-WebRequest -Uri https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-1.413.zip -OutFile .\atlassian-bitbucket-pipelines-runner.zip
+        $ProgressPreference = $currentProgressPreference;
+
+        # unzip the file
+        Expand-Archive .\atlassian-bitbucket-pipelines-runner.zip
+
+        # launch the runner
+        $serviceBatContent = @"
+cd c:\atlassian-bitbucket-pipelines-runner\bin
+PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -Arguments '-accountUuid "{$env:MS_365_VMS_PIPELINE_ACCOUNT_UIID}" -repositoryUuid "{$env:MS_365_VMS_PIPELINE_REPOSITORY_UIID}" -runnerUuid "{$env:MS_365_VMS_PIPELINE_RUNNER_UIID}" -OAuthClientId $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID -OAuthClientSecret $env:MS_365_VMS_PIPELINE_TOKEN -workingDirectory "..\temp"'
+"@
+        Set-Content -Value $serviceBatContent -Path c:\atlassian-bitbucket-pipelines-runner\bin\start.bat
+        Get-Content c:\atlassian-bitbucket-pipelines-runner\bin\start.bat
+        nssm install bitbucket-runner-service c:\atlassian-bitbucket-pipelines-runner\bin\start.bat
+        Set-Service -Name bitbucket-runner-service -StartupType "Automatic";
+        Start-Service bitbucket-runner-service;
+    }
+    "Drafts" {
         $resourceUrl = "https://vstsagentpackage.azureedge.net/agent/2.179.0/vsts-agent-win-x64-2.179.0.zip";
         $tempFileName = [guid]::NewGuid().Guid + ".zip";
         $tempFilePath = "$env:TEMP\$tempFileName";
