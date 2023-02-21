@@ -27,7 +27,7 @@ jobs:
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_PIPELINE_PROVIDER: Github
       TF_VAR_MS_365_VMS_PIPELINE_URL: https://github.com/shurick81/ms-365-vms
-      TF_VAR_MS_365_VMS_PIPELINE_TOKEN: ${{ secrets.TF_VAR_MS_365_VMS_PIPELINE_TOKEN }}
+      TF_VAR_MS_365_VMS_PIPELINE_TOKEN: ${{ secrets.MS_365_VMS_PIPELINE_TOKEN }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
       TF_VAR_MS_365_VMS_PIPELINE_STACK_LABEL: ms-365-vms-win2022_wp-terraform0-test-00
     steps:
