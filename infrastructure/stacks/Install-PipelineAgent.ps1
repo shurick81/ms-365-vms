@@ -37,9 +37,6 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
         }
     }
     "Bitbucket" {
-        #choco install -y git 2.39.2 --version=2.39.1
-        #choco install -y dotnetfx --pre --version=4.8.1.0-rtw
-        choco install -y nssm --version=2.24.101.20180116
         cd c:\
         $attemptsLeft = 100;
         $resourceUrl = "https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-1.413.zip"

@@ -96,7 +96,6 @@ resource "azurerm_virtual_machine" "main" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
-    disk_size_gb      = "40"
   }
 
   storage_image_reference {
@@ -129,44 +128,25 @@ resource "azurerm_virtual_machine" "main" {
     }
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Resize-Partition -DriveLetter C -Size (Get-PartitionSupportedSize -DriveLetter C).SizeMax;\"",
-    ]
-
-    on_failure = "continue"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"if ('${var.ms_365_vms_pipeline_provider}' -eq 'Bitbucket') { choco install -y openjdk11 --version=11.0.16.20220913 };\"",
-    ]
-
-  }
+#  provisioner "remote-exec" {
+#    connection {
+#      user     = "${var.vm_admin_username}"
+#      password = "${var.vm_admin_password}"
+#      port     = 5986
+#      https    = true
+#      timeout  = "10m"
+#
+#      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+#      insecure = true
+#      #host = "${azurerm_public_ip.main.ip_address}"
+#    }
+#
+#    inline = [
+#      "powershell.exe -command \"Resize-Partition -DriveLetter C -Size (Get-PartitionSupportedSize -DriveLetter C).SizeMax;\"",
+#    ]
+#
+#    on_failure = "continue"
+#  }
 
   provisioner "file" {
     connection {
