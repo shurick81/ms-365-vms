@@ -56,6 +56,20 @@ try
             #    DependsOn               = "[cChocoInstaller]ChocoInstalled"
             #}
 
+            cChocoPackageInstaller nssmInstalled
+            {
+                Name                    = "nssm"
+                Version                 = "2.24.101.20180116"
+                DependsOn               = "[cChocoInstaller]ChocoInstalled"
+            }
+
+            cChocoPackageInstaller openjdk11Installed
+            {
+                Name                    = "openjdk11"
+                Version                 = "11.0.16.20220913"
+                DependsOn               = "[cChocoInstaller]ChocoInstalled"
+            }
+
             IEEnhancedSecurityConfiguration 'DisableForAdministrators'
             {
                 Role    = 'Administrators'

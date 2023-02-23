@@ -60,7 +60,7 @@
             "os_type": "Windows",
             "image_publisher": "MicrosoftWindowsServer",
             "image_offer": "WindowsServer",
-            "image_sku": "2022-Datacenter-smalldisk",
+            "image_sku": "2022-Datacenter",
             "image_version": "latest",
         
             "communicator": "winrm",
