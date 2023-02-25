@@ -109,6 +109,7 @@
             ]
         },
         { "type": "windows-restart" },
+        { "type": "powershell", "inline": "Start-Sleep 300" },
         { "type": "powershell", "script": "dev-bin-1.ps1" },
         { "type": "windows-restart" },
         { "type": "powershell", "script": "dev-media-clean.ps1" },
