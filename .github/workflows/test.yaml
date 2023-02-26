@@ -92,6 +92,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-sql2016.json
+  build-win2016-sql2016:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/packer:1.8.5
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2016-westeurope-000000
+      MS_365_VMS_LOCATION: westeurope
+      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+      MS_365_VMS_PACKER_VM_NAME: swaz04${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2016.json
   build-win2022-web:
     runs-on: ubuntu-latest
     container:
