@@ -104,6 +104,16 @@
         { "type": "powershell", "script": "nodefender.ps1" },
         { "type": "windows-restart" },
         { "type": "powershell", "script": "sql2016-media.ps1" },
+        {
+            "type": "powershell",
+            "script": "sql2016-bin.ps1",
+            "environment_vars": [
+                "VMDEVOPSSTARTER_NODSCTEST=TRUE"
+            ]
+        },
+        { "type": "windows-restart" },
+        { "type": "powershell", "script": "waitforcpucalm.ps1" },
+        { "type": "powershell", "script": "sql2016-media.ps1" },
         { "type": "powershell", "script": "sql2016-bin.ps1" },
         {
             "type": "powershell",
