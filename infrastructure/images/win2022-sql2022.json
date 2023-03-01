@@ -102,7 +102,6 @@
         { "type": "powershell", "script": "sqlpsmodules.ps1" },
         { "type": "powershell", "inline": "Install-Module PowerShellGet -Force" },
         { "type": "powershell", "inline": "Uninstall-Module -Name SqlServerDsc -Force" },
-        { "type": "powershell", "inline": "Install-Module -Name SqlServerDsc -Force -RequiredVersion 16.1.0-preview0017 -AllowPrerelease" },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         { "type": "powershell", "script": "nodefender.ps1" },
         { "type": "windows-restart" },

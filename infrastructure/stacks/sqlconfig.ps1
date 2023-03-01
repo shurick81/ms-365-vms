@@ -8,7 +8,7 @@ try
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0 #v16.1.0 to allow preview version for SQL 2022 configuration
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
 
         Node $AllNodes.NodeName
         {
