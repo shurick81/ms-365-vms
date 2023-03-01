@@ -100,8 +100,6 @@
         { "type": "powershell", "script": "basepsmodules.ps1" },
         { "type": "powershell", "script": "domainclientpsmodules.ps1" },
         { "type": "powershell", "script": "sqlpsmodules.ps1" },
-        { "type": "powershell", "inline": "Install-Module PowerShellGet -Force" },
-        { "type": "powershell", "inline": "Uninstall-Module -Name SqlServerDsc -Force" },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         { "type": "powershell", "script": "nodefender.ps1" },
         { "type": "windows-restart" },
