@@ -175,7 +175,10 @@
         { "type": "powershell", "script": "dev-bin-2.ps1" },
         { "type": "powershell", "script": "Setup-WP.ps1"},
         { "type": "powershell", "script": "xcred-server.ps1" },
-        { "type": "windows-restart" },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "30m"
+        },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         {
             "type": "powershell",
