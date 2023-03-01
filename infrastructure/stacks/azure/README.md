@@ -49,7 +49,8 @@ az ad sp create-for-rbac --name RND-DEV-KOLLO_FORV-infrastructure-scripts-00 --s
 Alternatively, you can update existing identity instead of creating a new one:
 
 ```
-az ad sp credential reset --id 39268b63-ad3e-46b9-8913-842c98cc6b99
+az ad sp credential reset --id 868e996c-4d0f-4af2-9f48-6a2db84a5326
+az ad sp credential reset --name SPT-Software-ServiceApp
 ```
 
 ## Compose variable files
