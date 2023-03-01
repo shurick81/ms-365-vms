@@ -22,7 +22,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# Empty machine for installing any Windows servers
+# Active directory domain with CRM prerequisites
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {

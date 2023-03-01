@@ -1,4 +1,4 @@
-$configName = "DevMediaClean";
+$configName = "XCredServer";
 Write-Host "$(Get-Date) Defining DSC";
 try
 {
@@ -6,38 +6,16 @@ try
     {
         param(
         )
-
         Import-DscResource -ModuleName PSDesiredStateConfiguration
+        Import-DscResource -ModuleName xCredssp -ModuleVersion 1.3.0.0
 
         Node $AllNodes.NodeName
         {
 
-            File VSNoLocalMediaEnsure {
-                DestinationPath = "C:\Install\VSInstall"
-                Recurse         = $true
-                Type            = "Directory"
-                Ensure          = "Absent"
-                Force           = $true
-            }
-
-            File VS2019NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2019.zip"
-                Ensure          = "Absent"
-            }
-
-            File VS2022NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2022.zip"
-                Ensure          = "Absent"
-            }
-
-            File SSMSNoMediaArchiveEnsure {
-                DestinationPath = "C:\Install\SSMS-Setup-ENU.exe"
-                Ensure          = "Absent"
-            }
-
-            File PowerBIDesktopRSNoFileEnsure {
-                DestinationPath = "C:\Install\PowerBI\PBIDesktopRS_x64.msi"
-                Ensure          = "Absent"
+            xCredssp CredsspServer
+            {
+                Ensure  = "Present"
+                Role    = "Server"
             }
 
         }

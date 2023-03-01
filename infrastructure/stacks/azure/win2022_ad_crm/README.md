@@ -17,7 +17,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:light `
+    hashicorp/packer:1.8.5 `
     build -only azure-arm win2022-ad.json
 ```
 
@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:light \
+    hashicorp/packer:1.8.5 \
     build -only azure-arm win2022-ad.json
 ```
 
@@ -44,7 +44,6 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm\shared-variables-ignore-soft.ps1
 $env:MS_365_VMS_STACK_TYPE_ID = "win2022_ad_crm";
 $env:MS_365_VMS_STACK_INSTANCE_ID = $env:MS_365_VMS_PROJECT_PREFIX + $env:MS_365_VMS_STACK_TYPE_ID + "-dev-00";
-$env:MS_365_VMS_DNS_PREFIX = $env:MS_365_VMS_PROJECT_PREFIX + $env:MS_365_VMS_STACK_TYPE_ID + "-00-";
 $env:MS_365_VMS_WIN2022_AD_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/resourceGroups/$env:MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$env:MS_365_VMS_WIN2022_AD_IMAGE_NAME"
 cd c:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm;
 Remove-Item terraform.tfstate.d -Recurse
@@ -62,7 +61,6 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
     -var "MS_365_VMS_WIN2022_AD_IMAGE_ID=$env:MS_365_VMS_WIN2022_AD_IMAGE_ID" `
     -var "MS_365_VMS_WIN2022_AD_VM_SIZE=$env:MS_365_VMS_WIN2022_AD_VM_SIZE" `
     -var "MS_365_VMS_VM_NAME_SPEC=$env:MS_365_VMS_VM_NAME_SPEC" `
-    -var "MS_365_VMS_DNS_PREFIX=$env:MS_365_VMS_DNS_PREFIX" `
     -var "MS_365_VMS_DOMAIN_NAME=$env:MS_365_VMS_DOMAIN_NAME" `
     -var "MS_365_VMS_DOMAIN_ADMIN_PASSWORD=$env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD" `
     -var "RS_SERVICE_PASSWORD=$env:RS_SERVICE_PASSWORD" `
@@ -81,7 +79,6 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm/shared-variables-ignore-soft.sh
 MS_365_VMS_STACK_TYPE_ID="win2022_ad_crm";
 MS_365_VMS_STACK_INSTANCE_ID=$MS_365_VMS_PROJECT_PREFIX$MS_365_VMS_STACK_TYPE_ID"-dev-01";
-MS_365_VMS_DNS_PREFIX=$MS_365_VMS_PROJECT_PREFIX$MS_365_VMS_STACK_TYPE_ID"-01-";
 MS_365_VMS_WIN2022_AD_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_AD_IMAGE_NAME"
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm;
 sudo rm -rf terraform.tfstate.d;
@@ -98,7 +95,6 @@ docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/st
     -var "MS_365_VMS_WIN2022_AD_IMAGE_ID=$MS_365_VMS_WIN2022_AD_IMAGE_ID" \
     -var "MS_365_VMS_WIN2022_AD_VM_SIZE=$MS_365_VMS_WIN2022_AD_VM_SIZE" \
     -var "MS_365_VMS_VM_NAME_SPEC=$MS_365_VMS_VM_NAME_SPEC" \
-    -var "MS_365_VMS_DNS_PREFIX=$MS_365_VMS_DNS_PREFIX" \
     -var "MS_365_VMS_DOMAIN_NAME=$MS_365_VMS_DOMAIN_NAME" \
     -var "MS_365_VMS_DOMAIN_ADMIN_PASSWORD=$MS_365_VMS_DOMAIN_ADMIN_PASSWORD" \
     -var "RS_SERVICE_PASSWORD=$RS_SERVICE_PASSWORD" \

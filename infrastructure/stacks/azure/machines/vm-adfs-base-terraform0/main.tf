@@ -7,21 +7,19 @@ variable "main_subnet_id" {}
 variable "image_id" {}
 variable "vm_name" {}
 variable "vm_size" {}
-variable "os_disk_size_gb" {}
 variable "ms_365_vms_domain_name" {}
 variable "vm_domain_name_label" {}
 variable "domain_admin_password" {}
+variable "adfs_service_password" {}
 variable "ms_365_vms_ssl_cache_unc" {}
 variable "ms_365_vms_ssl_cache_username" {}
 variable "ms_365_vms_ssl_cache_password" {}
 variable "ms_365_vms_ssl_pfx_password" {}
-variable "local_admins" {}
-variable "https_ports" {}
 variable "dependencies" {
   type = "list"
 }
 
-# Web server
+# Empty machine for installing any Windows servers
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
@@ -88,7 +86,7 @@ resource "azurerm_network_security_group" "main" {
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "${var.https_ports}"
+    destination_port_range     = "443"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -127,7 +125,6 @@ resource "azurerm_virtual_machine" "main" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
-    disk_size_gb      = "${var.os_disk_size_gb}"
   }
 
   storage_image_reference {
@@ -207,40 +204,6 @@ resource "azurerm_virtual_machine" "main" {
       insecure = true
       #host = azurerm_public_ip.main.ip_address
     }
-    source      = "./../../Add-LocalAdmin.ps1"
-    destination = ".\\common\\Add-LocalAdmin.ps1"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $MembersToInclude = '${var.local_admins}'; .\\common\\Add-LocalAdmin.ps1;\""
-    ]
-    on_failure = "continue"
-  }
-
-  provisioner "file" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
     source      = "./../../Update-SSLCertificate.ps1"
     destination = ".\\common\\Update-SSLCertificate.ps1"
   }
@@ -258,7 +221,59 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:MS_365_VMS_SSL_CACHE_UNC = '${var.ms_365_vms_ssl_cache_unc}'; $env:MS_365_VMS_SSL_CACHE_USERNAME = '${var.ms_365_vms_ssl_cache_username}'; $env:MS_365_VMS_SSL_CACHE_PASSWORD = '${var.ms_365_vms_ssl_cache_password}'; $env:MS_365_VMS_SSL_PFX_PASSWORD = '${var.ms_365_vms_ssl_pfx_password}'; if (Get-Service W3SVC -ErrorAction Ignore) {Stop-Service W3SVC}; .\\common\\Update-SSLCertificate.ps1; if (Get-Service W3SVC -ErrorAction Ignore) {Start-Service W3SVC}\""
+      "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:MS_365_VMS_SSL_CACHE_UNC = '${var.ms_365_vms_ssl_cache_unc}'; $env:MS_365_VMS_SSL_CACHE_USERNAME = '${var.ms_365_vms_ssl_cache_username}'; $env:MS_365_VMS_SSL_CACHE_PASSWORD = '${var.ms_365_vms_ssl_cache_password}'; $env:MS_365_VMS_SSL_PFX_PASSWORD = '${var.ms_365_vms_ssl_pfx_password}'; .\\common\\Update-SSLCertificate.ps1;\""
+    ]
+    on_failure = "continue"
+  }
+
+  provisioner "file" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    source      = "./../../customizations/adfs/adfs-farm.ps1"
+    destination = ".\\common\\adfs-farm.ps1"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:VMDEVOPSSTARTER_NODSCTEST = $true; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $env:ADFS_SERVICE_PASSWORD = '${var.adfs_service_password}'; .\\common\\adfs-farm.ps1; shutdown /r /f /t 5 /c 'forced reboot'; net stop WinRM\""
+    ]
+    on_failure = "continue"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $env:ADFS_SERVICE_PASSWORD = '${var.adfs_service_password}'; .\\common\\adfs-farm.ps1;\""
     ]
     on_failure = "continue"
   }

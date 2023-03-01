@@ -6,10 +6,14 @@ variable "MS_365_VMS_LOCATION" {}
 variable "MS_365_VMS_IMAGE_RG_NAME" {}
 variable "MS_365_VMS_WIN2022_AD_IMAGE_ID" {}
 variable "MS_365_VMS_WIN2022_AD_VM_SIZE" {}
-variable "MS_365_VMS_WIN2022_SQL2016_IMAGE_ID" {}
-variable "MS_365_VMS_WIN2022_SQL2016_VM_SIZE" {}
+variable "MS_365_VMS_WIN2016_SQL2016_IMAGE_ID" {}
+variable "MS_365_VMS_WIN2016_SQL2016_VM_SIZE" {}
 variable "MS_365_VMS_WIN2016_WEB_IMAGE_ID" {}
 variable "MS_365_VMS_WIN2016_WEB_VM_SIZE" {}
+variable "MS_365_VMS_WIN2022_FILES_IMAGE_ID" {}
+variable "MS_365_VMS_WIN2022_FILES_VM_SIZE" {}
+variable "MS_365_VMS_WIN2022_WP_IMAGE_ID" {}
+variable "MS_365_VMS_WIN2022_WP_VM_SIZE" {}
 variable "MS_365_VMS_VM_NAME_SPEC" {}
 variable "VM_ADMIN_USERNAME" {
   default = "custom3094857"
@@ -32,21 +36,18 @@ variable "MS_365_VMS_SSL_CACHE_UNC" {}
 variable "MS_365_VMS_SSL_CACHE_USERNAME" {}
 variable "MS_365_VMS_SSL_CACHE_PASSWORD" {}
 variable "MS_365_VMS_SSL_PFX_PASSWORD" {}
+variable "MS_365_VMS_SHARED_SOURCE_UNC" {}
+variable "MS_365_VMS_SHARED_SOURCE_USERNAME" {}
+variable "MS_365_VMS_SHARED_SOURCE_PASSWORD" {}
 
-terraform {
-  required_providers {
-    azurerm = {
-      version = "=3.42.0"
-    }
-  }
-}
-
+# Configure the Microsoft Azure Provider
 provider "azurerm" {
-  subscription_id               = var.ARM_SUBSCRIPTION_ID
-  client_id                     = var.ARM_CLIENT_ID
-  client_secret                 = var.ARM_CLIENT_SECRET
-  tenant_id                     = var.ARM_TENANT_ID
-  features {}
+  version         = "=1.33.0"
+  subscription_id = "${var.ARM_SUBSCRIPTION_ID}"
+  client_id       = "${var.ARM_CLIENT_ID}"
+  client_secret   = "${var.ARM_CLIENT_SECRET}"
+  tenant_id       = "${var.ARM_TENANT_ID}"
+  #features {}
 }
 
 resource "azurerm_resource_group" "environment" {
@@ -68,11 +69,11 @@ resource "azurerm_subnet" "mainterraformsubnet" {
   name                  = "mainSubnet"
   resource_group_name   = "${azurerm_resource_group.environment.name}"
   virtual_network_name  = "${azurerm_virtual_network.mainterraformnetwork.name}"
-  address_prefixes      = ["10.0.1.0/24"]
+  address_prefix        = "10.0.1.0/24"
 }
 
 module "AD00" {
-  source                              = "./../machines/vm-ad-crm"
+  source                              = "./../machines/vm-ad-crm-terraform0"
   environmentId                       = "${terraform.workspace}"
   location                            = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
@@ -97,7 +98,7 @@ module "AD00" {
 }
 
 module "DB00" {
-  source                              = "./../machines/vm-sql"
+  source                              = "./../machines/vm-sql-terraform0"
   environmentId                       = "${terraform.workspace}"
   location                            = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
@@ -105,18 +106,18 @@ module "DB00" {
   domain_admin_password               = "${var.MS_365_VMS_DOMAIN_ADMIN_PASSWORD}"
   vm_resource_group_name              = "${azurerm_resource_group.environment.name}"
   main_subnet_id                      = "${azurerm_subnet.mainterraformsubnet.id}"
-  image_id                            = "${var.MS_365_VMS_WIN2022_SQL2016_IMAGE_ID}"
+  image_id                            = "${var.MS_365_VMS_WIN2016_SQL2016_IMAGE_ID}"
   vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "db00")}"
-  vm_size                             = "${var.MS_365_VMS_WIN2022_SQL2016_VM_SIZE}"
+  vm_size                             = "${var.MS_365_VMS_WIN2016_SQL2016_VM_SIZE}"
   ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
-  local_admins                        = ""
+  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00,${var.MS_365_VMS_DOMAIN_NAME}\\_crmdplsrv"
   dependencies = [
     "${module.AD00.depended_on}"
   ]
 }
 
 module "SERVER00" {
-  source                              = "./../machines/vm-web-base"
+  source                              = "./../machines/vm-web-base-terraform0"
   environmentId                       = "${terraform.workspace}"
   location                            = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
@@ -136,6 +137,50 @@ module "SERVER00" {
   ms_365_vms_ssl_pfx_password         = "${var.MS_365_VMS_SSL_PFX_PASSWORD}"
   local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00"
   https_ports                         = "443"
+  dependencies = [
+    "${module.AD00.depended_on}"
+  ]
+}
+
+module "FILES00" {
+  source                              = "./../machines/vm-files-base-terraform0"
+  environmentId                       = "${terraform.workspace}"
+  location                            = "${var.MS_365_VMS_LOCATION}"
+  vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
+  vm_admin_password                   = "${var.MS_365_VMS_VM_ADMIN_PASSWORD}"
+  domain_admin_password               = "${var.MS_365_VMS_DOMAIN_ADMIN_PASSWORD}"
+  vm_resource_group_name              = "${azurerm_resource_group.environment.name}"
+  main_subnet_id                      = "${azurerm_subnet.mainterraformsubnet.id}"
+  image_id                            = "${var.MS_365_VMS_WIN2022_FILES_IMAGE_ID}"
+  vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "files00")}"
+  vm_size                             = "${var.MS_365_VMS_WIN2022_FILES_VM_SIZE}"
+  ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
+  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00"
+  file_share_full_access_identities   = "BUILTIN\\Administrators,${element( split( ".", var.MS_365_VMS_DOMAIN_NAME), 0)}\\${format(var.MS_365_VMS_VM_NAME_SPEC, "db00")}$"
+  ms_365_vms_shared_source_unc         = "${var.MS_365_VMS_SHARED_SOURCE_UNC}"
+  ms_365_vms_shared_source_username    = "${var.MS_365_VMS_SHARED_SOURCE_USERNAME}"
+  target_files_path                   = "f:\\common-files\\Shared_Files"
+  ms_365_vms_shared_source_password   = "${var.MS_365_VMS_SHARED_SOURCE_PASSWORD}"
+  dependencies = [
+    "${module.DB00.depended_on}"
+  ]
+}
+
+module "WP00" {
+  source                              = "./../machines/vm-wp-base-terraform0"
+  environmentId                       = "${terraform.workspace}"
+  location                            = "${var.MS_365_VMS_LOCATION}"
+  vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
+  vm_admin_password                   = "${var.MS_365_VMS_VM_ADMIN_PASSWORD}"
+  domain_admin_password               = "${var.MS_365_VMS_DOMAIN_ADMIN_PASSWORD}"
+  vm_resource_group_name              = "${azurerm_resource_group.environment.name}"
+  main_subnet_id                      = "${azurerm_subnet.mainterraformsubnet.id}"
+  image_id                            = "${var.MS_365_VMS_WIN2022_WP_IMAGE_ID}"
+  vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "wp00")}"
+  vm_size                             = "${var.MS_365_VMS_WIN2022_WP_VM_SIZE}"
+  vm_domain_name_label                = "${var.MS_365_VMS_DNS_PREFIX}${format(var.MS_365_VMS_VM_NAME_SPEC, "wp00")}"
+  ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
+  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00"
   dependencies = [
     "${module.AD00.depended_on}"
   ]

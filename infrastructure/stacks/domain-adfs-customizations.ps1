@@ -1,43 +1,34 @@
-$configName = "DevMediaClean";
+$configName = "ADFSDomainCustomizations";
 Write-Host "$(Get-Date) Defining DSC";
 try
 {
     Configuration $configName
     {
         param(
+            [Parameter(Mandatory=$true)]
+            [ValidateNotNullorEmpty()]
+            [PSCredential]
+            $ADFSServiceCredential
         )
-
         Import-DscResource -ModuleName PSDesiredStateConfiguration
+        Import-DscResource -ModuleName ActiveDirectoryDsc -ModuleVersion 6.0.1
 
         Node $AllNodes.NodeName
         {
 
-            File VSNoLocalMediaEnsure {
-                DestinationPath = "C:\Install\VSInstall"
-                Recurse         = $true
-                Type            = "Directory"
-                Ensure          = "Absent"
-                Force           = $true
+            ADUser DomainAdminAccountUser
+            {
+                DomainName              = $env:MS_365_VMS_DOMAIN_NAME
+                UserName                = "custom3094857"
+                PasswordNeverExpires    = $true
             }
 
-            File VS2019NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2019.zip"
-                Ensure          = "Absent"
-            }
-
-            File VS2022NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2022.zip"
-                Ensure          = "Absent"
-            }
-
-            File SSMSNoMediaArchiveEnsure {
-                DestinationPath = "C:\Install\SSMS-Setup-ENU.exe"
-                Ensure          = "Absent"
-            }
-
-            File PowerBIDesktopRSNoFileEnsure {
-                DestinationPath = "C:\Install\PowerBI\PBIDesktopRS_x64.msi"
-                Ensure          = "Absent"
+            ADUser ADFSServiceAccountUser
+            {
+                DomainName              = $env:MS_365_VMS_DOMAIN_NAME
+                UserName                = $ADFSServiceCredential.GetNetworkCredential().UserName
+                Password                = $ADFSServiceCredential
+                PasswordNeverExpires    = $true
             }
 
         }
@@ -50,13 +41,16 @@ catch
     Exit 1;
 }
 $configurationData = @{ AllNodes = @(
-    @{ NodeName = $env:COMPUTERNAME; PSDscAllowPlainTextPassword = $True; PsDscAllowDomainUser = $True }
+    @{ NodeName = $env:COMPUTERNAME; PSDscAllowPlainTextPassword = $true; PsDscAllowDomainUser = $true }
 ) }
+$securedPassword = ConvertTo-SecureString $env:ADFS_SERVICE_PASSWORD -AsPlainText -Force
+$ADFSServiceCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_adfssrv", $securedPassword );
 Write-Host "$(Get-Date) Compiling DSC";
 try
 {
     &$configName `
-        -ConfigurationData $configurationData;
+        -ConfigurationData $configurationData `
+        -ADFSServiceCredential $ADFSServiceCredential;
 }
 catch
 {

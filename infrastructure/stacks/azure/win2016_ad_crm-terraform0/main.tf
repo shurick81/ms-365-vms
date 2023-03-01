@@ -4,17 +4,13 @@ variable "ARM_SUBSCRIPTION_ID" {}
 variable "ARM_TENANT_ID" {}
 variable "MS_365_VMS_LOCATION" {}
 variable "MS_365_VMS_IMAGE_RG_NAME" {}
-variable "MS_365_VMS_WIN2022_AD_IMAGE_ID" {}
-variable "MS_365_VMS_WIN2022_AD_VM_SIZE" {}
-variable "MS_365_VMS_WIN2022_SQL2016_IMAGE_ID" {}
-variable "MS_365_VMS_WIN2022_SQL2016_VM_SIZE" {}
+variable "MS_365_VMS_WIN2016_AD_IMAGE_ID" {}
+variable "MS_365_VMS_WIN2016_AD_VM_SIZE" {}
 variable "MS_365_VMS_VM_NAME_SPEC" {}
 variable "VM_ADMIN_USERNAME" {
   default = "custom3094857"
 }
-variable "MS_365_VMS_DNS_PREFIX" {}
 variable "MS_365_VMS_DOMAIN_NAME" {}
-variable "MS_365_VMS_VM_ADMIN_PASSWORD" {}
 variable "MS_365_VMS_DOMAIN_ADMIN_PASSWORD" {}
 variable "RS_SERVICE_PASSWORD" {}
 variable "CRM_TEST_1_PASSWORD" {}
@@ -77,28 +73,9 @@ module "AD00" {
   crm_monitoring_service_password     = "${var.CRM_MONITORING_SERVICE_PASSWORD}"
   vm_resource_group_name              = "${azurerm_resource_group.environment.name}"
   main_subnet_id                      = "${azurerm_subnet.mainterraformsubnet.id}"
-  image_id                            = "${var.MS_365_VMS_WIN2022_AD_IMAGE_ID}"
+  image_id                            = "${var.MS_365_VMS_WIN2016_AD_IMAGE_ID}"
   vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "ad00")}"
-  vm_size                             = "${var.MS_365_VMS_WIN2022_AD_VM_SIZE}"
+  vm_size                             = "${var.MS_365_VMS_WIN2016_AD_VM_SIZE}"
   ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
   dependencies                        = []
-}
-
-module "DB00" {
-  source                              = "./../machines/vm-sql-terraform0"
-  environmentId                       = "${terraform.workspace}"
-  location                            = "${var.MS_365_VMS_LOCATION}"
-  vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
-  vm_admin_password                   = "${var.MS_365_VMS_VM_ADMIN_PASSWORD}"
-  domain_admin_password               = "${var.MS_365_VMS_DOMAIN_ADMIN_PASSWORD}"
-  vm_resource_group_name              = "${azurerm_resource_group.environment.name}"
-  main_subnet_id                      = "${azurerm_subnet.mainterraformsubnet.id}"
-  image_id                            = "${var.MS_365_VMS_WIN2022_SQL2016_IMAGE_ID}"
-  vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "db00")}"
-  vm_size                             = "${var.MS_365_VMS_WIN2022_SQL2016_VM_SIZE}"
-  ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
-  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00,${var.MS_365_VMS_DOMAIN_NAME}\\_crmdplsrv"
-  dependencies = [
-    "${module.AD00.depended_on}"
-  ]
 }

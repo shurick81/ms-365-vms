@@ -49,7 +49,8 @@ az ad sp create-for-rbac --name RND-DEV-KOLLO_FORV-infrastructure-scripts-00 --s
 Alternatively, you can update existing identity instead of creating a new one:
 
 ```
-az ad sp credential reset --id 39268b63-ad3e-46b9-8913-842c98cc6b99
+az ad sp credential reset --id 868e996c-4d0f-4af2-9f48-6a2db84a5326
+az ad sp credential reset --name SPT-Software-ServiceApp
 ```
 
 ## Compose variable files
@@ -71,7 +72,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az account show --subscription $ARM_SUBSCRIPTION_ID"
 ```
 
@@ -86,7 +87,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az group create --subscription $ARM_SUBSCRIPTION_ID -n CommonRGWestEurope -l westeurope"
 ```
 
@@ -100,10 +101,10 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-    az storage account create --subscription $ARM_SUBSCRIPTION_ID -n softwestdlrsv20 -g CommonRGWestEurope -l westeurope --sku Standard_LRS --kind StorageV2;
-    az storage account keys list --subscription $ARM_SUBSCRIPTION_ID --account-name softwestdlrsv20;
-    az storage share create --subscription $ARM_SUBSCRIPTION_ID --account-name softwestdlrsv20 --name common-00"
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+    az storage account create --subscription $ARM_SUBSCRIPTION_ID -n ms365vmswestdlrsv20 -g CommonRGWestEurope -l westeurope --sku Standard_LRS --kind StorageV2;
+    az storage account keys list --subscription $ARM_SUBSCRIPTION_ID --account-name ms365vmswestdlrsv20;
+    az storage share create --subscription $ARM_SUBSCRIPTION_ID --account-name ms365vmswestdlrsv20 --name common-00"
 ```
 
 save key value to env variables
@@ -120,7 +121,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
     az group delete --subscription $ARM_SUBSCRIPTION_ID -n $MS_365_VMS_STACK_INSTANCE_ID -y"
 ```
 
@@ -160,7 +161,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
     az group delete --subscription $ARM_SUBSCRIPTION_ID -n pkr-Resource-Group-byd9he88e5 -y"
 ```
 
@@ -192,7 +193,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ARM_CLIENT_
 ```
 
 ```bash
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID';
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID';
     az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az vm deallocate --ids \$(az vm list --query '[].id' -o tsv -g \$ENVIRONMENTID);
     VMNames=\$(az vm list --query '[].[name]' -o tsv -g \$ENVIRONMENTID);
@@ -202,7 +203,7 @@ sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ENVIRO
     done"
 ```
 
-sudo docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "echo '$ARM_CLIENT_ID'; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "echo '$ARM_CLIENT_ID'; \
 az"
 
 ## Rollback to snapshots
@@ -214,6 +215,6 @@ docker run -it --rm -v ${pwd}/../azure-cli:/root -w /root mcr.microsoft.com/azur
 
 ```bash
 sudo chmod +x ./../azure-cli/snapshotRollback.sh
-sudo docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "export ARM_CLIENT_ID='$ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$ARM_TENANT_ID'; export ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$ARM_SUBSCRIPTION_ID'; \
+docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "export ARM_CLIENT_ID='$ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$ARM_TENANT_ID'; export ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$ARM_SUBSCRIPTION_ID'; \
     ./snapshotRollback.sh"
 ```

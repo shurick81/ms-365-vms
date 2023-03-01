@@ -1,4 +1,4 @@
-$configName = "DevMediaClean";
+$configName = "ADFSPSModules";
 Write-Host "$(Get-Date) Defining DSC";
 try
 {
@@ -8,36 +8,27 @@ try
         )
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
+        Import-DscResource -ModuleName PackageManagementProviderResource -ModuleVersion 1.0.3
 
         Node $AllNodes.NodeName
         {
-
-            File VSNoLocalMediaEnsure {
-                DestinationPath = "C:\Install\VSInstall"
-                Recurse         = $true
-                Type            = "Directory"
-                Ensure          = "Absent"
-                Force           = $true
+            
+            PSModule "PSModule_AdfsDsc"
+            {
+                Ensure              = "Present"
+                Name                = "AdfsDsc"
+                Repository          = "PSGallery"
+                InstallationPolicy  = "Trusted"
+                RequiredVersion     = "1.0.0"
             }
 
-            File VS2019NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2019.zip"
-                Ensure          = "Absent"
-            }
-
-            File VS2022NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2022.zip"
-                Ensure          = "Absent"
-            }
-
-            File SSMSNoMediaArchiveEnsure {
-                DestinationPath = "C:\Install\SSMS-Setup-ENU.exe"
-                Ensure          = "Absent"
-            }
-
-            File PowerBIDesktopRSNoFileEnsure {
-                DestinationPath = "C:\Install\PowerBI\PBIDesktopRS_x64.msi"
-                Ensure          = "Absent"
+            PSModule "PSModule_ADFSToolbox"
+            {
+                Ensure              = "Present"
+                Name                = "ADFSToolbox"
+                Repository          = "PSGallery"
+                InstallationPolicy  = "Trusted"
+                RequiredVersion     = "2.0.17.0"
             }
 
         }
@@ -50,7 +41,7 @@ catch
     Exit 1;
 }
 $configurationData = @{ AllNodes = @(
-    @{ NodeName = $env:COMPUTERNAME; PSDscAllowPlainTextPassword = $True; PsDscAllowDomainUser = $True }
+    @{ NodeName = $env:COMPUTERNAME; PSDscAllowPlainTextPassword = $true; PsDscAllowDomainUser = $true }
 ) }
 Write-Host "$(Get-Date) Compiling DSC";
 try

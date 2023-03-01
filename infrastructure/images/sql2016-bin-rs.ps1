@@ -1,45 +1,31 @@
-$configName = "DevMediaClean";
+$configName = "SQLBin";
 Write-Host "$(Get-Date) Defining DSC";
 try
 {
     Configuration $configName
     {
-        param(
-        )
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 14.2.1
 
         Node $AllNodes.NodeName
         {
-
-            File VSNoLocalMediaEnsure {
-                DestinationPath = "C:\Install\VSInstall"
-                Recurse         = $true
-                Type            = "Directory"
-                Ensure          = "Absent"
-                Force           = $true
+            
+            SQLSetup SQLSetup
+            {
+                InstanceName            = "RSInstance01"
+                SourcePath              = "F:\"
+                Features                = "RS"
+                ProductKey              = "22222-00000-00000-00000-00000"
+                InstallSharedDir        = "C:\Program Files\Microsoft SQL Server\RSInstance01"
+                SQLSysAdminAccounts     = "BUILTIN\Administrators"
+                UpdateEnabled           = "True"
+                UpdateSource            = "C:\Install\SQLUpdates"
+                SQMReporting            = "False"
+                ErrorReporting          = "True"
+                BrowserSvcStartupType   = "Automatic"
             }
-
-            File VS2019NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2019.zip"
-                Ensure          = "Absent"
-            }
-
-            File VS2022NoLocalMediaArchiveEnsure {
-                DestinationPath = "C:\Install\VS2022.zip"
-                Ensure          = "Absent"
-            }
-
-            File SSMSNoMediaArchiveEnsure {
-                DestinationPath = "C:\Install\SSMS-Setup-ENU.exe"
-                Ensure          = "Absent"
-            }
-
-            File PowerBIDesktopRSNoFileEnsure {
-                DestinationPath = "C:\Install\PowerBI\PBIDesktopRS_x64.msi"
-                Ensure          = "Absent"
-            }
-
+            
         }
     }
 }

@@ -7,21 +7,13 @@ variable "main_subnet_id" {}
 variable "image_id" {}
 variable "vm_name" {}
 variable "vm_size" {}
-variable "os_disk_size_gb" {}
 variable "ms_365_vms_domain_name" {}
-variable "vm_domain_name_label" {}
-variable "domain_admin_password" {}
-variable "ms_365_vms_ssl_cache_unc" {}
-variable "ms_365_vms_ssl_cache_username" {}
-variable "ms_365_vms_ssl_cache_password" {}
-variable "ms_365_vms_ssl_pfx_password" {}
-variable "local_admins" {}
-variable "https_ports" {}
+variable "adfs_service_password" {}
 variable "dependencies" {
   type = "list"
 }
 
-# Web server
+# AD machine
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
@@ -35,8 +27,6 @@ resource "azurerm_public_ip" "main" {
   location            = "${var.location}"
   resource_group_name = "${var.vm_resource_group_name}"
   allocation_method   = "Dynamic"
-  domain_name_label   = "${lower(var.vm_domain_name_label)}"
-
 }
 
 # Create Network Security Group and rule
@@ -68,35 +58,10 @@ resource "azurerm_network_security_group" "main" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
-  security_rule {
-    name                       = "HTTP"
-    priority                   = 315
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "80"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "HTTPS"
-    priority                   = 320
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "${var.https_ports}"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
 }
 
 # Create network interface
-resource "azurerm_network_interface" "nic01" {
+resource "azurerm_network_interface" "main" {
   name                      = "${var.vm_name}-nic01"
   location                  = "${var.location}"
   resource_group_name       = "${var.vm_resource_group_name}"
@@ -105,19 +70,23 @@ resource "azurerm_network_interface" "nic01" {
   ip_configuration {
     name                          = "mainNicConfiguration"
     subnet_id                     = "${var.main_subnet_id}"
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "10.0.1.254"
     public_ip_address_id          = "${azurerm_public_ip.main.id}"
   }
-
 }
+
+#resource "azurerm_network_interface_security_group_association" "main" {
+#  network_interface_id      = "${azurerm_network_interface.main.id}"
+#  network_security_group_id = "${azurerm_network_security_group.main.id}"
+#}
 
 # Create virtual machine
 resource "azurerm_virtual_machine" "main" {
   name                          = "${var.vm_name}"
   location                      = "${var.location}"
   resource_group_name           = "${var.vm_resource_group_name}"
-  network_interface_ids         = ["${azurerm_network_interface.nic01.id}"]
-  primary_network_interface_id  = "${azurerm_network_interface.nic01.id}"
+  network_interface_ids         = ["${azurerm_network_interface.main.id}"]
   vm_size                       = "${var.vm_size}"
   delete_os_disk_on_termination = true
   #license_type                  = "Windows_Server"
@@ -127,7 +96,6 @@ resource "azurerm_virtual_machine" "main" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
-    disk_size_gb      = "${var.os_disk_size_gb}"
   }
 
   storage_image_reference {
@@ -143,7 +111,6 @@ resource "azurerm_virtual_machine" "main" {
 
   os_profile_windows_config {
     provision_vm_agent = true
-
     enable_automatic_upgrades = true
 
     additional_unattend_config {
@@ -160,40 +127,6 @@ resource "azurerm_virtual_machine" "main" {
         content = "${file("../FirstLogonCommands.xml")}"
     }
   }
-  
-  provisioner "file" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    source      = "./../../domainclient-dsc.ps1"
-    destination = ".\\common\\domainclient-dsc.ps1"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; .\\common\\domainclient-dsc.ps1; shutdown /r /f /t 5 /c 'forced reboot'; net stop WinRM\""
-    ]
-    on_failure = "continue"
-  }
 
   provisioner "file" {
     connection {
@@ -205,10 +138,11 @@ resource "azurerm_virtual_machine" "main" {
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = azurerm_public_ip.main.ip_address
+      #host = "${azurerm_public_ip.main.ip_address}"
     }
-    source      = "./../../Add-LocalAdmin.ps1"
-    destination = ".\\common\\Add-LocalAdmin.ps1"
+
+    source      = "./../../domain.ps1"
+    destination = ".\\common\\domain.ps1"
   }
 
   provisioner "remote-exec" {
@@ -221,62 +155,84 @@ resource "azurerm_virtual_machine" "main" {
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = azurerm_public_ip.main.ip_address
+      #host = "${azurerm_public_ip.main.ip_address}"
     }
-    inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $MembersToInclude = '${var.local_admins}'; .\\common\\Add-LocalAdmin.ps1;\""
-    ]
-    on_failure = "continue"
-  }
 
-  provisioner "file" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    source      = "./../../Update-SSLCertificate.ps1"
-    destination = ".\\common\\Update-SSLCertificate.ps1"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline     = [
-      "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:MS_365_VMS_SSL_CACHE_UNC = '${var.ms_365_vms_ssl_cache_unc}'; $env:MS_365_VMS_SSL_CACHE_USERNAME = '${var.ms_365_vms_ssl_cache_username}'; $env:MS_365_VMS_SSL_CACHE_PASSWORD = '${var.ms_365_vms_ssl_cache_password}'; $env:MS_365_VMS_SSL_PFX_PASSWORD = '${var.ms_365_vms_ssl_pfx_password}'; if (Get-Service W3SVC -ErrorAction Ignore) {Stop-Service W3SVC}; .\\common\\Update-SSLCertificate.ps1; if (Get-Service W3SVC -ErrorAction Ignore) {Start-Service W3SVC}\""
-    ]
-    on_failure = "continue"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
     inline = [
-      "powershell.exe -command \"Write-Host `\"$(Get-Date) Provisioning is done`\"\""
+      "powershell.exe -command \"$env:VMDEVOPSSTARTER_NODSCTEST = 'TRUE'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\domain.ps1; shutdown /r /f /t 5 /c 'forced reboot'; net stop WinRM\"",
+    ]
+
+    on_failure = "continue"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    inline = [
+      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\domain.ps1\"",
+    ]
+  }
+
+  provisioner "file" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    source      = "./../../domain-adfs-customizations.ps1"
+    destination = ".\\common\\domain-adfs-customizations.ps1"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    inline = [
+      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:ADFS_SERVICE_PASSWORD = '${var.adfs_service_password}'; .\\common\\domain-adfs-customizations.ps1\"",
+    ]
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    inline = [
+      "powershell.exe -command \"Write-Host `\"$(Get-Date) Provisioning is done`\"\"",
     ]
   }
 

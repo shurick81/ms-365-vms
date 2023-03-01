@@ -7,15 +7,19 @@ variable "main_subnet_id" {}
 variable "image_id" {}
 variable "vm_name" {}
 variable "vm_size" {}
-variable "ms_365_vms_domain_name" {}
-variable "vm_domain_name_label" {}
-variable "domain_admin_password" {}
-variable "local_admins" {}
+variable "ms_365_vms_pipeline_provider" {}
+variable "ms_365_vms_pipeline_url" {}
+variable "ms_365_vms_pipeline_token" {}
+variable "ms_365_vms_pipeline_labels" {}
+variable "ms_365_vms_pipeline_accountUuid" {}
+variable "ms_365_vms_pipeline_repositoryUuid" {}
+variable "ms_365_vms_pipeline_runnerUuid" {}
+variable "ms_365_vms_pipeline_OAuthClientId" {}
 variable "dependencies" {
   type = "list"
 }
 
-# Base workplace
+# Workplace that is not a member of Windows domain
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
@@ -29,8 +33,6 @@ resource "azurerm_public_ip" "main" {
   location            = "${var.location}"
   resource_group_name = "${var.vm_resource_group_name}"
   allocation_method   = "Dynamic"
-  domain_name_label   = "${lower(var.vm_domain_name_label)}"
-
 }
 
 # Create Network Security Group and rule
@@ -62,7 +64,6 @@ resource "azurerm_network_security_group" "main" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
 }
 
 # Create network interface
@@ -78,7 +79,6 @@ resource "azurerm_network_interface" "nic01" {
     private_ip_address_allocation = "dynamic"
     public_ip_address_id          = "${azurerm_public_ip.main.id}"
   }
-
 }
 
 # Create virtual machine
@@ -87,7 +87,6 @@ resource "azurerm_virtual_machine" "main" {
   location                      = "${var.location}"
   resource_group_name           = "${var.vm_resource_group_name}"
   network_interface_ids         = ["${azurerm_network_interface.nic01.id}"]
-  primary_network_interface_id  = "${azurerm_network_interface.nic01.id}"
   vm_size                       = "${var.vm_size}"
   delete_os_disk_on_termination = true
   #license_type                  = "Windows_Server"
@@ -112,7 +111,6 @@ resource "azurerm_virtual_machine" "main" {
 
   os_profile_windows_config {
     provision_vm_agent = true
-
     enable_automatic_upgrades = true
 
     additional_unattend_config {
@@ -129,74 +127,26 @@ resource "azurerm_virtual_machine" "main" {
         content = "${file("../FirstLogonCommands.xml")}"
     }
   }
-  
-  provisioner "file" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
 
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    source      = "./../../domainclient-dsc.ps1"
-    destination = ".\\common\\domainclient-dsc.ps1"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; .\\common\\domainclient-dsc.ps1; shutdown /r /f /t 5 /c 'forced reboot'; net stop WinRM\""
-    ]
-    on_failure = "continue"
-  }
-
-  provisioner "file" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    source      = "./../../Add-LocalAdmin.ps1"
-    destination = ".\\common\\Add-LocalAdmin.ps1"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $MembersToInclude = '${var.local_admins}'; .\\common\\Add-LocalAdmin.ps1;\""
-    ]
-    on_failure = "continue"
-  }
+#  provisioner "remote-exec" {
+#    connection {
+#      user     = "${var.vm_admin_username}"
+#      password = "${var.vm_admin_password}"
+#      port     = 5986
+#      https    = true
+#      timeout  = "10m"
+#
+#      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+#      insecure = true
+#      #host = "${azurerm_public_ip.main.ip_address}"
+#    }
+#
+#    inline = [
+#      "powershell.exe -command \"Resize-Partition -DriveLetter C -Size (Get-PartitionSupportedSize -DriveLetter C).SizeMax;\"",
+#    ]
+#
+#    on_failure = "continue"
+#  }
 
   provisioner "file" {
     connection {
@@ -211,8 +161,8 @@ resource "azurerm_virtual_machine" "main" {
       #host = "${azurerm_public_ip.main.ip_address}"
     }
 
-    source      = "./../../xcredclient.ps1"
-    destination = ".\\common\\xcredclient.ps1"
+    source      = "./../../Install-PipelineAgent.ps1"
+    destination = ".\\common\\Install-PipelineAgent.ps1"
   }
 
   provisioner "remote-exec" {
@@ -229,25 +179,9 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; .\\common\\xcredclient.ps1\"",
+      "powershell.exe -command \"$env:MS_365_VMS_PIPELINE_PROVIDER = '${var.ms_365_vms_pipeline_provider}'; $env:MS_365_VMS_PIPELINE_URL = '${var.ms_365_vms_pipeline_url}'; $env:MS_365_VMS_PIPELINE_TOKEN = '${var.ms_365_vms_pipeline_token}'; $env:MS_365_VMS_PIPELINE_LABELS = '${var.ms_365_vms_pipeline_labels}'; $env:MS_365_VMS_PIPELINE_ACCOUNT_UIID = '${var.ms_365_vms_pipeline_accountUuid}'; $env:MS_365_VMS_PIPELINE_REPOSITORY_UIID = '${var.ms_365_vms_pipeline_repositoryUuid}'; $env:MS_365_VMS_PIPELINE_RUNNER_UIID = '${var.ms_365_vms_pipeline_runnerUuid}'; $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID = '${var.ms_365_vms_pipeline_OAuthClientId}'; .\\common\\Install-PipelineAgent.ps1;\"",
     ]
-  }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = azurerm_public_ip.main.ip_address
-    }
-    inline = [
-      "powershell.exe -command \"Write-Host `\"$(Get-Date) Provisioning is done`\"\""
-    ]
   }
 
   depends_on = [
