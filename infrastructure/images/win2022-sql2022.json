@@ -114,7 +114,6 @@
                 "VMDEVOPSSTARTER_NODSCTEST=TRUE"
             ]
         },
-        { "type": "powershell", "inline": "Install-Module -Name SqlServerDsc -Force -RequiredVersion 14.2.1" },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         {
             "type": "powershell",
