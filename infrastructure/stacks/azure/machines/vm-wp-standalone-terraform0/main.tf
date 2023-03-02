@@ -145,7 +145,6 @@ resource "azurerm_virtual_machine" "main" {
 #      "powershell.exe -command \"Resize-Partition -DriveLetter C -Size (Get-PartitionSupportedSize -DriveLetter C).SizeMax;\"",
 #    ]
 #
-#    on_failure = "continue"
 #  }
 
   provisioner "file" {

@@ -17,7 +17,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:light `
+    hashicorp/packer:1.8.5 `
     build -only azure-arm win2022-wp.json
 ```
 
@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:light \
+    hashicorp/packer:1.8.5 \
     build -only azure-arm win2022-wp.json
 ```
 

@@ -6,7 +6,7 @@ try
     {
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 14.2.1
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
 
         Node $AllNodes.NodeName
         {

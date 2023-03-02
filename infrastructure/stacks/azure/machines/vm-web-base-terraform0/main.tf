@@ -195,6 +195,23 @@ resource "azurerm_virtual_machine" "main" {
     on_failure = "continue"
   }
 
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = azurerm_public_ip.main.ip_address
+    }
+    inline     = [
+      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; .\\common\\domainclient-dsc.ps1;\""
+    ]
+  }
+
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -224,9 +241,8 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $MembersToInclude = '${var.local_admins}'; .\\common\\Add-LocalAdmin.ps1;\""
+      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; $MembersToInclude = '${var.local_admins}'; if ($MembersToInclude) { .\\common\\Add-LocalAdmin.ps1 };\""
     ]
-    on_failure = "continue"
   }
 
   provisioner "file" {
@@ -260,7 +276,6 @@ resource "azurerm_virtual_machine" "main" {
     inline     = [
       "powershell.exe -command \"$env:PublicHostName = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; $env:MS_365_VMS_SSL_CACHE_UNC = '${var.ms_365_vms_ssl_cache_unc}'; $env:MS_365_VMS_SSL_CACHE_USERNAME = '${var.ms_365_vms_ssl_cache_username}'; $env:MS_365_VMS_SSL_CACHE_PASSWORD = '${var.ms_365_vms_ssl_cache_password}'; $env:MS_365_VMS_SSL_PFX_PASSWORD = '${var.ms_365_vms_ssl_pfx_password}'; if (Get-Service W3SVC -ErrorAction Ignore) {Stop-Service W3SVC}; .\\common\\Update-SSLCertificate.ps1; if (Get-Service W3SVC -ErrorAction Ignore) {Start-Service W3SVC}\""
     ]
-    on_failure = "continue"
   }
 
   provisioner "remote-exec" {
