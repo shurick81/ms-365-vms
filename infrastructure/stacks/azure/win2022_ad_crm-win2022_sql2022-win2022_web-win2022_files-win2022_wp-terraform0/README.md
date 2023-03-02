@@ -288,3 +288,7 @@ docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/st
     -var "MS_365_VMS_SHARED_SOURCE_USERNAME=$MS_365_VMS_SHARED_SOURCE_USERNAME" \
     -var "MS_365_VMS_SHARED_SOURCE_PASSWORD=$MS_365_VMS_SHARED_SOURCE_PASSWORD";
 ```
+
+```bash
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=DB00 azurerm_virtual_machine.main
+```
