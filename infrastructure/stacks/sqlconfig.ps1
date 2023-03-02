@@ -1,4 +1,3 @@
-Install-Module -Name SqlServer -Force -RequiredVersion 22.0.49-preview -AllowPrerelease
 $configName = "SQLConfig";
 Write-Host "$(Get-Date) Defining DSC";
 try
