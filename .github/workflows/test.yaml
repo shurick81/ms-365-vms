@@ -612,7 +612,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2016-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
@@ -660,7 +660,7 @@ jobs:
       TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
       TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-07-
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform init
@@ -724,7 +724,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-08-
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
