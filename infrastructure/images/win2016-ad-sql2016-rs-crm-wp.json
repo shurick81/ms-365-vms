@@ -190,8 +190,7 @@
             "type": "powershell",
             "script": "azure/sysprep.ps1",
             "only": ["azure-arm"]
-        },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" }
+        }
     ],
     "post-processors": [
         {
