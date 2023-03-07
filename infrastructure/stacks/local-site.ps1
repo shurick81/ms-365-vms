@@ -1,31 +1,32 @@
-$configName = "SQLBin";
+$configName = "ClientConfiguration";
 Write-Host "$(Get-Date) Defining DSC";
 try
 {
     Configuration $configName
     {
-
+        param(
+            [Parameter(Mandatory=$true)]
+            [ValidateNotNullorEmpty()]
+            [PSCredential]
+            $Credential
+        )
         Import-DscResource -ModuleName PSDesiredStateConfiguration
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+
+        $domainName = "contos00.local";
 
         Node $AllNodes.NodeName
         {
-            
-            SQLSetup SQLSetup
+
+            Registry CRMHost
             {
-                InstanceName            = "RSInstance01"
-                SourcePath              = "F:\"
-                Features                = "RS"
-                ProductKey              = "22222-00000-00000-00000-00000"
-                InstallSharedDir        = "C:\Program Files\Microsoft SQL Server\RSInstance01"
-                SQLSysAdminAccounts     = "BUILTIN\Administrators"
-                UpdateEnabled           = "True"
-                UpdateSource            = "C:\Install\SQLUpdates"
-                SQMReporting            = "False"
-                ErrorReporting          = "True"
-                BrowserSvcStartupType   = "Automatic"
+                Ensure                  = "Present"
+                Key                     = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains\$env:HOST_NAME"
+                ValueName               = "https"
+                ValueType               = "DWORD"
+                ValueData               = "1"
+                PsDscRunAsCredential    = $Credential
             }
-            
+
         }
     }
 }
@@ -38,11 +39,15 @@ catch
 $configurationData = @{ AllNodes = @(
     @{ NodeName = $env:COMPUTERNAME; PSDscAllowPlainTextPassword = $True; PsDscAllowDomainUser = $True }
 ) }
+
+$securedPassword = ConvertTo-SecureString $env:PASSWORD -AsPlainText -Force;
+$Credential = New-Object System.Management.Automation.PSCredential( $env:USERNAME, $securedPassword );
 Write-Host "$(Get-Date) Compiling DSC";
 try
 {
     &$configName `
-        -ConfigurationData $configurationData;
+        -ConfigurationData $configurationData `
+        -Credential $Credential;
 }
 catch
 {
@@ -61,8 +66,6 @@ catch
     $_.Exception.Message;
     Exit 1;
 }
-#Write-Host "Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';"
-#Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';
 if ( $env:VMDEVOPSSTARTER_NODSCTEST -ne "TRUE" )
 {
     Write-Host "$(Get-Date) Testing DSC";

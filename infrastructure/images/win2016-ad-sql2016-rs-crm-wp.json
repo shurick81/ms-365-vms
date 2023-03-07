@@ -138,7 +138,8 @@
         },
         {
             "type": "windows-restart",
-            "only": ["azure-arm"]
+            "only": ["azure-arm"],
+            "restart_timeout": "30m"
         },
         {
             "type": "powershell",
@@ -155,9 +156,7 @@
         },
         { "type": "powershell", "script": "dynamicsprebin.ps1" },
         { "type": "powershell", "inline": "Install-Dynamics365Prerequisite;" },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         { "type": "powershell", "script": "Install-SSLTools.ps1" },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         { "type": "powershell", "script": "dev-media-2022.ps1" },
         {
             "type": "powershell",
@@ -167,19 +166,15 @@
             ]
         },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         {
             "type": "windows-restart",
             "restart_timeout": "30m"
         },
         { "type": "powershell", "script": "dev-bin-1.ps1" },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         { "type": "windows-restart" },
         { "type": "powershell", "script": "dev-media-clean.ps1" },
         { "type": "powershell", "script": "dev-bin-2.ps1" },
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         { "type": "powershell", "script": "Setup-WP.ps1"},
-        { "type": "powershell", "inline": "Get-Service IISADMIN" },
         { "type": "powershell", "script": "xcred-server.ps1" },
         {
             "type": "windows-restart",
@@ -188,7 +183,7 @@
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         {
             "type": "powershell",
-            "script": "azure/sysprep.ps1",
+            "script": "azure/sysprep_full.ps1",
             "only": ["azure-arm"]
         }
     ],
