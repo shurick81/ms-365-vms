@@ -174,25 +174,6 @@ resource "azurerm_virtual_machine" "main" {
     }
   }
   
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -248,25 +229,6 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -300,25 +262,6 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $env:CRM_TEST_1_PASSWORD = '${var.crm_test_1_password}'; $env:CRM_TEST_2_PASSWORD = '${var.crm_test_2_password}'; $env:CRM_INSTALL_PASSWORD = '${var.crm_install_password}'; $env:CRM_SERVICE_PASSWORD = '${var.crm_service_password}'; $env:CRM_DEPLOYMENT_SERVICE_PASSWORD = '${var.crm_deployment_service_password}'; $env:CRM_SANDBOX_SERVICE_PASSWORD = '${var.crm_sandbox_service_password}'; $env:CRM_VSS_WRITER_PASSWORD = '${var.crm_vss_writer_password}'; $env:CRM_ASYNC_SERVICE_PASSWORD = '${var.crm_async_service_password}'; $env:CRM_MONITORING_SERVICE_PASSWORD = '${var.crm_monitoring_service_password}'; .\\common\\crmdomaincustomizations.ps1\"",
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
@@ -356,25 +299,6 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -408,25 +332,6 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; .\\common\\dbservernamefix.ps1\"",
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
@@ -474,49 +379,11 @@ resource "azurerm_virtual_machine" "main" {
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
       "powershell.exe -command \"Stop-Service ReportServer`$RSInstance01; Stop-Service W3SVC\""
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
@@ -562,49 +429,11 @@ resource "azurerm_virtual_machine" "main" {
 
       # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
       insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
       "powershell.exe -command \"Start-Service ReportServer`$RSInstance01; Start-Service W3SVC\""
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
@@ -640,25 +469,6 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:SERVICE_NAME = 'ReportServer$RSInstance01'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\rs-serviceaccount-update.ps1\"",
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "remote-exec" {
@@ -714,25 +524,6 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -768,25 +559,6 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
-  }
-
   provisioner "local-exec" {
     command = "sleep 60"
   }
@@ -812,25 +584,6 @@ resource "azurerm_virtual_machine" "main" {
 
   provisioner "local-exec" {
     command = "sleep 60"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
@@ -866,25 +619,6 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; .\\common\\xcredclient.ps1;\"",
     ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Get-Service IISADMIN; Get-ChildItem C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys\\c23*\"",
-    ]
-
   }
 
   provisioner "file" {
