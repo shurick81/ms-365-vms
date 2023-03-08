@@ -99,6 +99,8 @@ catch
     $_.Exception.Message;
     Exit 1;
 }
+#Write-Host "Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';"
+#Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';
 if ( $env:VMDEVOPSSTARTER_NODSCTEST -ne "TRUE" )
 {
     Write-Host "$(Get-Date) Testing DSC";
@@ -109,8 +111,6 @@ if ( $env:VMDEVOPSSTARTER_NODSCTEST -ne "TRUE" )
         $inDesiredState | % {
             if ( !$_ ) {
                 Write-Host "$(Get-Date) Test failed";
-                #Write-Host "Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';"
-                #Get-Content 'C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\Summary.txt';
                 Exit 1;
             }
         }

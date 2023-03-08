@@ -55,7 +55,7 @@ try
                 Name                = "Dynamics365Configuration"
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
-                RequiredVersion     = "2.24.0"
+                RequiredVersion     = "2.25.0"
             }
 
             PSModule "PSModule_SecurityPolicyDsc"
