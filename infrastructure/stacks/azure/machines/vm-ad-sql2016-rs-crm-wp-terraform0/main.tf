@@ -429,24 +429,6 @@ resource "azurerm_virtual_machine" "main" {
 
   }
 
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Install-Module -Name SqlServerDsc -Force -RequiredVersion 16.1.0\"",
-    ]
-  }
-
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
