@@ -218,3 +218,12 @@ sudo chmod +x ./../azure-cli/snapshotRollback.sh
 docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "export ARM_CLIENT_ID='$ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$ARM_TENANT_ID'; export ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$ARM_SUBSCRIPTION_ID'; \
     ./snapshotRollback.sh"
 ```
+
+## Remove all temporary Packer groups
+
+```
+az group list --query "[?starts_with(name, 'pkr-Resource-Group-')].name" --output tsv |
+while read -r resourceGroup; do
+    az group delete --name $resourceGroup --no-wait -y
+done
+```
