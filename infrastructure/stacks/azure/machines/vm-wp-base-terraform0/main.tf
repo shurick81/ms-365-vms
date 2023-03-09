@@ -11,6 +11,14 @@ variable "ms_365_vms_domain_name" {}
 variable "vm_domain_name_label" {}
 variable "domain_admin_password" {}
 variable "local_admins" {}
+variable "ms_365_vms_pipeline_provider" {}
+variable "ms_365_vms_pipeline_url" {}
+variable "ms_365_vms_pipeline_token" {}
+variable "ms_365_vms_pipeline_labels" {}
+variable "ms_365_vms_pipeline_accountUuid" {}
+variable "ms_365_vms_pipeline_repositoryUuid" {}
+variable "ms_365_vms_pipeline_runnerUuid" {}
+variable "ms_365_vms_pipeline_OAuthClientId" {}
 variable "dependencies" {
   type = "list"
 }
@@ -247,6 +255,42 @@ resource "azurerm_virtual_machine" "main" {
     inline = [
       "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; .\\common\\xcredclient.ps1\"",
     ]
+  }
+
+  provisioner "file" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    source      = "./../../Install-PipelineAgent.ps1"
+    destination = ".\\common\\Install-PipelineAgent.ps1"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    inline = [
+      "powershell.exe -command \"$env:MS_365_VMS_PIPELINE_PROVIDER = '${var.ms_365_vms_pipeline_provider}'; $env:MS_365_VMS_PIPELINE_URL = '${var.ms_365_vms_pipeline_url}'; $env:MS_365_VMS_PIPELINE_TOKEN = '${var.ms_365_vms_pipeline_token}'; $env:MS_365_VMS_PIPELINE_LABELS = '${var.ms_365_vms_pipeline_labels}'; $env:MS_365_VMS_PIPELINE_ACCOUNT_UIID = '${var.ms_365_vms_pipeline_accountUuid}'; $env:MS_365_VMS_PIPELINE_REPOSITORY_UIID = '${var.ms_365_vms_pipeline_repositoryUuid}'; $env:MS_365_VMS_PIPELINE_RUNNER_UIID = '${var.ms_365_vms_pipeline_runnerUuid}'; $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID = '${var.ms_365_vms_pipeline_OAuthClientId}'; .\\common\\Install-PipelineAgent.ps1;\"",
+    ]
+
   }
 
   provisioner "remote-exec" {
