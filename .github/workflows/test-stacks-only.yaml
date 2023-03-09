@@ -23,11 +23,7 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_PIPELINE_PROVIDER: Github
-      TF_VAR_MS_365_VMS_PIPELINE_URL: https://github.com/shurick81/ms-365-vms
-      TF_VAR_MS_365_VMS_PIPELINE_TOKEN: ${{ secrets.MS_365_VMS_PIPELINE_TOKEN }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
-      TF_VAR_MS_365_VMS_PIPELINE_STACK_LABEL: ms-365-vms-win2022_wp-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform init
