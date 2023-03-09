@@ -5,7 +5,7 @@ on:
   push: 
     paths:
       - 'infrastructure/stacks/azure/win2016_ad_sql2016_rs_crm_wp-terraform0/**'
-      - 'infrastructure/stacks/customizations/crm/**''
+      - 'infrastructure/stacks/customizations/crm/**'
       - '.github/workflows/test-crm-stacks-only.yaml'
 jobs:
   provision-win2016_ad_sql2016_rs_crm_wp-terraform0:
