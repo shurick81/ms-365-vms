@@ -23,6 +23,30 @@ variable "MS_365_VMS_SSL_CACHE_UNC" {}
 variable "MS_365_VMS_SSL_CACHE_USERNAME" {}
 variable "MS_365_VMS_SSL_CACHE_PASSWORD" {}
 variable "MS_365_VMS_SSL_PFX_PASSWORD" {}
+variable "MS_365_VMS_PIPELINE_PROVIDER" {
+  default = "None"
+}
+variable "MS_365_VMS_PIPELINE_URL" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_TOKEN" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_STACK_LABEL" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_ACCOUNT_UIID" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_REPOSITORY_UIID" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_RUNNER_UIID" {
+  default = ""
+}
+variable "MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID" {
+  default = ""
+}
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
@@ -111,6 +135,14 @@ module "WP00" {
   vm_domain_name_label                = "${replace(var.MS_365_VMS_DNS_PREFIX,"_","-")}${format(var.MS_365_VMS_VM_NAME_SPEC, "wp00")}"
   ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
   local_admins                        = ""
+  ms_365_vms_pipeline_provider        = "${var.MS_365_VMS_PIPELINE_PROVIDER}"
+  ms_365_vms_pipeline_url             = "${var.MS_365_VMS_PIPELINE_URL}"
+  ms_365_vms_pipeline_token           = "${var.MS_365_VMS_PIPELINE_TOKEN}"
+  ms_365_vms_pipeline_labels          = "${var.MS_365_VMS_PIPELINE_STACK_LABEL},${var.MS_365_VMS_PIPELINE_STACK_LABEL}-wp00,wp00"
+  ms_365_vms_pipeline_accountUuid     = "${var.MS_365_VMS_PIPELINE_ACCOUNT_UIID}"
+  ms_365_vms_pipeline_repositoryUuid  = "${var.MS_365_VMS_PIPELINE_REPOSITORY_UIID}"
+  ms_365_vms_pipeline_runnerUuid      = "${var.MS_365_VMS_PIPELINE_RUNNER_UIID}"
+  ms_365_vms_pipeline_OAuthClientId   = "${var.MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID}"
   dependencies = [
     "${module.AD00.depended_on}"
   ]
