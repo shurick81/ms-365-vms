@@ -1,4 +1,4 @@
-name: Test Stacks Only
+name: Runner Tests
 
 on:
   workflow_dispatch:
