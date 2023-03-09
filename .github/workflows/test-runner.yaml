@@ -2,6 +2,9 @@ name: Runner Tests
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/test-runner.yaml'
 
 jobs:
   provision-win2022_wp-terraform0:
