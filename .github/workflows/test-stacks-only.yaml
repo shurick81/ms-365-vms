@@ -6,8 +6,6 @@ on:
     paths:
       - 'infrastructure/stacks/**'
       - '.github/workflows/test-stacks-only.yaml'
-      - '!infrastructure/images/**'
-      - '!.github/workflows/test.yaml'
 jobs:
   provision-win2022_wp-terraform0:
     runs-on: ubuntu-latest
