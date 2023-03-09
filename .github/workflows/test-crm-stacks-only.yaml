@@ -1,4 +1,4 @@
-name: Test Stacks Only
+name: Test CRM Stacks Only
 
 on:
   workflow_dispatch:
