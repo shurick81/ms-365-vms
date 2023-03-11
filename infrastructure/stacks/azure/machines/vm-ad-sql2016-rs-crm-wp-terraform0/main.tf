@@ -471,6 +471,7 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
+  # Workaround for provisioining reporting services. A newest module version fails, see https://github.com/dsccommunity/SqlServerDsc/issues/1868
   provisioner "remote-exec" {
     connection {
       user     = "${var.vm_admin_username}"
