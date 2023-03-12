@@ -314,7 +314,7 @@ Invoke-Command $env:REPORT_SERVER_HOST_NAME -Credential $CRMInstallAccountCreden
 
 if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
     Write-Host "$(Get-Date) Starting New-CrmOrganization";
-    Invoke-Command $env:COMPUTERNAME`.$env:MS_365_VMS_DOMAIN_NAME -Credential $CRMInstallAccountCredential -Authentication Credssp {
+    $operationState = Invoke-Command $env:COMPUTERNAME`.$env:MS_365_VMS_DOMAIN_NAME -Credential $CRMInstallAccountCredential -Authentication Credssp {
         param(
             [Parameter(Mandatory=$true)]
             [ValidateNotNullorEmpty()]
@@ -359,10 +359,18 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
         do {
             $operationStatus = Get-CrmOperationStatus -OperationId $crmJobId;
             Write-Host "$(Get-Date) operationStatus.State is $($operationStatus.State). Waiting until CRM installation job is done";
-            Sleep 60;
+            if ( $operationStatus.State -ne "Failed" ) {
+                Sleep 60;
+            }
         } while ( $crmJobId -and $operationStatus -and ( $operationStatus.State -ne "Completed" ) -and ( $operationStatus.State -ne "Failed" ) )
-        if ( $operationStatus.State -eq "Completed" ) {
-            Write-Host "Test OK";
-        }
+        Write-Host '$operationStatus.State:';
+        Write-Host $operationStatus.State;
+        Write-Output $operationStatus.State;
     } -ArgumentList $env:SQL_SERVER, $env:REPORT_SERVER_HOST_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION, $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
+    if ( $operationStatus.State -eq "Completed" ) {
+        Write-Host "Test OK";
+    } else {
+        Write-Host "Exiting 1";
+        Exit 1;
+    }
 }
