@@ -26,6 +26,7 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform apply -auto-approve
@@ -72,6 +73,7 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform apply -auto-approve
@@ -118,6 +120,7 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_crm-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform apply -auto-approve
@@ -164,6 +167,7 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2016_ad_crm-terraform0-test-00
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform apply -auto-approve
@@ -227,6 +231,7 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-04-
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
@@ -290,6 +295,7 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
@@ -353,6 +359,7 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
@@ -400,6 +407,7 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-07-
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform apply -auto-approve
@@ -463,6 +471,7 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-08-
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
