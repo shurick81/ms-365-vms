@@ -471,7 +471,7 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-  # Workaround for provisioining reporting services. A newest module version fails, see https://github.com/dsccommunity/SqlServerDsc/issues/1868
+  # Workaround for provisioining reporting services. The newest module version 16.1.0 fails, see https://github.com/dsccommunity/SqlServerDsc/issues/1868
   provisioner "remote-exec" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -486,7 +486,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"Install-Module -Name SqlServerDsc -Force -RequiredVersion 15.2.0\"",
+      "powershell.exe -command \"Invoke-WebRequest https://raw.githubusercontent.com/shurick81/SqlServerDsc/ec8759397612127ca83630b0a7672dfcd1c555b0/source/DSCResources/DSC_SqlRS/DSC_SqlRS.psm1 -UseBasicParsing -OutFile 'C:\\Program Files\\WindowsPowerShell\\Modules\\SqlServerDsc\\16.1.0\\DSCResources\\DSC_SqlRS\\DSC_SqlRS.psm1'\"",
     ]
   }
 
