@@ -345,7 +345,7 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             [string]
             $MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
         )
-        Add-PSSnapin Microsoft.Crm.PowerShell;
+        Add-PSSnapin Microsoft.Crm.PowerShell | Out-Null;
         $crmJobId = New-CrmOrganization `
             -Name Contoso `
             -DisplayName "Contoso Ltd." `
@@ -367,11 +367,12 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
         Write-Host '$operationStatus.State:';
         Write-Host $operationStatus.State;
         if ( $operationStatus.State -eq 'Failed' ) {
-            $diagOperationStatus = Get-CrmOperationStatus -OperationId $crmJobId -Diag
+            $diagOperationStatus = Get-CrmOperationStatus -OperationId $crmJobId -Diag;
             Write-Host $diagOperationStatus.ProcessingError.Message;
         }
         Write-Output $operationStatus.State;
     } -ArgumentList $env:SQL_SERVER, $env:REPORT_SERVER_HOST_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION, $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
+    Write-Host "`$operationState: $operationState";
     if ( $operationState -eq "Completed" ) {
         Write-Host "Test OK";
     } else {
