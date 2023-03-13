@@ -67,7 +67,7 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
         # launch the runner
         $serviceBatContent = @"
 cd c:\atlassian-bitbucket-pipelines-runner\bin
-PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -Arguments '-accountUuid "{$env:MS_365_VMS_PIPELINE_ACCOUNT_UIID}" -repositoryUuid "{$env:MS_365_VMS_PIPELINE_REPOSITORY_UIID}" -runnerUuid "{$env:MS_365_VMS_PIPELINE_RUNNER_UIID}" -OAuthClientId $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID -OAuthClientSecret $env:MS_365_VMS_PIPELINE_TOKEN -workingDirectory "..\temp"'
+PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -accountUuid "{$env:MS_365_VMS_PIPELINE_ACCOUNT_UIID}" -repositoryUuid "{$env:MS_365_VMS_PIPELINE_REPOSITORY_UIID}" -runnerUuid "{$env:MS_365_VMS_PIPELINE_RUNNER_UIID}" -OAuthClientId $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID -OAuthClientSecret $env:MS_365_VMS_PIPELINE_TOKEN -workingDirectory "..\temp"
 "@
         Set-Content -Value $serviceBatContent -Path c:\atlassian-bitbucket-pipelines-runner\bin\start.bat
         Get-Content c:\atlassian-bitbucket-pipelines-runner\bin\start.bat
