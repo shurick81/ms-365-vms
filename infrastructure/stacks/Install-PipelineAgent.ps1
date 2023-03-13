@@ -39,7 +39,7 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
     "Bitbucket" {
         cd c:\
         $attemptsLeft = 100;
-        $resourceUrl = "https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-1.413.zip"
+        $resourceUrl = "https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-$env:MS_365_VMS_PIPELINE_RUNNER_VERSION.zip"
         $resource = $null
         Do {
             Try {
@@ -58,7 +58,7 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
         # download the runner zip
         $currentProgressPreference = $ProgressPreference;
         $ProgressPreference = 'SilentlyContinue';
-        Invoke-WebRequest -Uri https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-1.413.zip -OutFile .\atlassian-bitbucket-pipelines-runner.zip
+        Invoke-WebRequest -Uri https://product-downloads.atlassian.com/software/bitbucket/pipelines/atlassian-bitbucket-pipelines-runner-$env:MS_365_VMS_PIPELINE_RUNNER_VERSION.zip -OutFile .\atlassian-bitbucket-pipelines-runner.zip
         $ProgressPreference = $currentProgressPreference;
 
         # unzip the file

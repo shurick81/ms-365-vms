@@ -19,6 +19,7 @@ variable "ms_365_vms_pipeline_accountUuid" {}
 variable "ms_365_vms_pipeline_repositoryUuid" {}
 variable "ms_365_vms_pipeline_runnerUuid" {}
 variable "ms_365_vms_pipeline_OAuthClientId" {}
+variable "ms_365_vms_pipeline_runner_version" {}
 variable "dependencies" {
   type = "list"
 }
@@ -288,7 +289,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"$env:MS_365_VMS_PIPELINE_PROVIDER = '${var.ms_365_vms_pipeline_provider}'; $env:MS_365_VMS_PIPELINE_URL = '${var.ms_365_vms_pipeline_url}'; $env:MS_365_VMS_PIPELINE_TOKEN = '${var.ms_365_vms_pipeline_token}'; $env:MS_365_VMS_PIPELINE_LABELS = '${var.ms_365_vms_pipeline_labels}'; $env:MS_365_VMS_PIPELINE_ACCOUNT_UIID = '${var.ms_365_vms_pipeline_accountUuid}'; $env:MS_365_VMS_PIPELINE_REPOSITORY_UIID = '${var.ms_365_vms_pipeline_repositoryUuid}'; $env:MS_365_VMS_PIPELINE_RUNNER_UIID = '${var.ms_365_vms_pipeline_runnerUuid}'; $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID = '${var.ms_365_vms_pipeline_OAuthClientId}'; .\\common\\Install-PipelineAgent.ps1;\"",
+      "powershell.exe -command \"$env:MS_365_VMS_PIPELINE_PROVIDER = '${var.ms_365_vms_pipeline_provider}'; $env:MS_365_VMS_PIPELINE_URL = '${var.ms_365_vms_pipeline_url}'; $env:MS_365_VMS_PIPELINE_TOKEN = '${var.ms_365_vms_pipeline_token}'; $env:MS_365_VMS_PIPELINE_LABELS = '${var.ms_365_vms_pipeline_labels}'; $env:MS_365_VMS_PIPELINE_ACCOUNT_UIID = '${var.ms_365_vms_pipeline_accountUuid}'; $env:MS_365_VMS_PIPELINE_REPOSITORY_UIID = '${var.ms_365_vms_pipeline_repositoryUuid}'; $env:MS_365_VMS_PIPELINE_RUNNER_UIID = '${var.ms_365_vms_pipeline_runnerUuid}'; $env:MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID = '${var.ms_365_vms_pipeline_OAuthClientId}'; $env:MS_365_VMS_PIPELINE_RUNNER_VERSION = '${var.ms_365_vms_pipeline_runner_version}'; .\\common\\Install-PipelineAgent.ps1;\"",
     ]
 
   }

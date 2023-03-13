@@ -47,6 +47,9 @@ variable "MS_365_VMS_PIPELINE_RUNNER_UIID" {
 variable "MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID" {
   default = ""
 }
+variable "MS_365_VMS_PIPELINE_RUNNER_VERSION" {
+  default = ""
+}
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
@@ -143,6 +146,7 @@ module "WP00" {
   ms_365_vms_pipeline_repositoryUuid  = "${var.MS_365_VMS_PIPELINE_REPOSITORY_UIID}"
   ms_365_vms_pipeline_runnerUuid      = "${var.MS_365_VMS_PIPELINE_RUNNER_UIID}"
   ms_365_vms_pipeline_OAuthClientId   = "${var.MS_365_VMS_PIPELINE_OAUTH_CLIENT_ID}"
+  ms_365_vms_pipeline_runner_version  = "${var.MS_365_VMS_PIPELINE_RUNNER_VERSION}"
   dependencies = [
     "${module.AD00.depended_on}"
   ]
