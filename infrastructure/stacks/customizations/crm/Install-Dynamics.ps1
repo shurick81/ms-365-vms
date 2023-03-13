@@ -356,6 +356,7 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             -SqlCollation $MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION `
             -SqlServerName $SQL_SERVER `
             -SrsUrl http://$REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01;
+        Write-Host "`$crmJobId: $crmJobId";
         do {
             $operationStatus = Get-CrmOperationStatus -OperationId $crmJobId;
             Write-Host "$(Get-Date) operationStatus.State is $($operationStatus.State). Waiting until CRM installation job is done";
@@ -365,6 +366,10 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
         } while ( $crmJobId -and $operationStatus -and ( $operationStatus.State -ne "Completed" ) -and ( $operationStatus.State -ne "Failed" ) )
         Write-Host '$operationStatus.State:';
         Write-Host $operationStatus.State;
+        if ( $operationState.State -eq 'Failed' ) {
+            $diagOperationStatus = Get-CrmOperationStatus -OperationId $crmJobId -Diag
+            Write-Host $diagOperationStatus.ProcessingError.Message;
+        }
         Write-Output $operationStatus.State;
     } -ArgumentList $env:SQL_SERVER, $env:REPORT_SERVER_HOST_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION, $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
     if ( $operationStatus.State -eq "Completed" ) {
