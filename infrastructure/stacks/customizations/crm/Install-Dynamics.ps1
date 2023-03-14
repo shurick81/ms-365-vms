@@ -353,7 +353,7 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             -BaseCurrencyName $MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME `
             -BaseCurrencySymbol $MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL `
             -BaseCurrencyPrecision $MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION `
-            -SqlCollation Finnish_Swedish_CI_AS `
+            -SqlCollation $MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION `
             -SqlServerName $SQL_SERVER `
             -SrsUrl http://$REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01;
         Write-Host "`$crmJobId: $crmJobId";
