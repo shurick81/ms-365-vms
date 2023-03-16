@@ -39,12 +39,12 @@ try
                     MatchSource     = $false
                 }
 
-                #xRemoteFile SQLServerCUFilePresent
-                #{
-                #    Uri             = "https://download.microsoft.com/download/6/e/7/6e72dddf-dfa4-4889-bc3d-e5d3a0fd11ce/SQLServer2019-KB5011644-x64.exe"
-                #    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5011644-x64.exe"
-                #    MatchSource     = $false
-                #}
+                xRemoteFile SQLServerCUFilePresent
+                {
+                    Uri             = "https://download.microsoft.com/download/9/6/8/96819b0c-c8fb-4b44-91b5-c97015bbda9f/SQLServer2022-KB5023127-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5023127-x64.exe"
+                    MatchSource     = $false
+                }
 
                 xRemoteFile SQLServerRSFilePresent
                 {
@@ -69,12 +69,12 @@ try
                     MatchSource     = $false
                 }
 
-                #xRemoteFile SQLServerCUFilePresent
-                #{
-                #    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2019-KB5011644-x64.exe"
-                #    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5011644-x64.exe"
-                #    MatchSource     = $false
-                #}
+                xRemoteFile SQLServerCUFilePresent
+                {
+                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2022-KB5023127-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5023127-x64.exe"
+                    MatchSource     = $false
+                }
 
                 xRemoteFile SQLServerRSFilePresent
                 {

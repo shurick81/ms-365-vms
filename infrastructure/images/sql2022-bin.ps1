@@ -45,8 +45,8 @@ try
                 Features                = "SQLENGINE,FULLTEXT"
                 InstallSharedDir        = "C:\Program Files\Microsoft SQL Server\SQLInstance01"
                 SQLSysAdminAccounts     = @('Administrators')
-                #UpdateEnabled           = "True"
-                #UpdateSource            = "C:\Install\SQLUpdates"
+                UpdateEnabled           = "True"
+                UpdateSource            = "C:\Install\SQLUpdates"
                 SQMReporting            = "False"
                 ErrorReporting          = "True"
                 AgtSvcStartupType       = "Automatic"
