@@ -502,7 +502,7 @@ jobs:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00 -y
   provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2016-sql2016, build-win2022-web, build-win2022-soe, build-win2022-wp]
+    needs: [build-win2022-ad, build-win2016-sql2016, build-win2016-web, build-win2022-soe, build-win2022-wp]
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:0.11.15
