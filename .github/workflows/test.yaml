@@ -483,7 +483,6 @@ jobs:
       TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-09-
     steps:
       - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
