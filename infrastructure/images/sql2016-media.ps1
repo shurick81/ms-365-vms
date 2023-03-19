@@ -41,17 +41,17 @@ try
                 DependsOn           = "[MountImage]SQLServerImageMounted"
             }
 
-            xRemoteFile SQLServerSP2FilePresent
+            xRemoteFile SQLServerSPFilePresent
             {
-                Uri             = "https://download.microsoft.com/download/9/2/B/92BAD988-00C5-4F68-811E-B7FFBE009B00/SQLServer2016SP2-KB4052908-x64-ENU.exe"
-                DestinationPath = "C:\Install\SQLUpdates\SQLServer2016SP2-KB4052908-x64-ENU.exe"
+                Uri             = "https://download.microsoft.com/download/a/7/7/a77b5753-8fe7-4804-bfc5-591d9a626c98/SQLServer2016SP3-KB5003279-x64-ENU.exe"
+                DestinationPath = "C:\Install\SQLUpdates\SQLServer2016SP3-KB5003279-x64-ENU.exe"
                 MatchSource     = $false
             }
     
             xRemoteFile CUFilePresent
             {
-                Uri             = "https://download.microsoft.com/download/6/0/6/606B3A2E-0EAE-4DCD-930D-178686370921/SQLServer2016-KB5001092-x64.exe"
-                DestinationPath = "C:\Install\SQLUpdates\SQLServer2016-KB5001092-x64.exe"
+                Uri             = "https://download.microsoft.com/download/4/1/d/41d10f6a-58dd-43ee-ad2a-cb2c3a6148ff/SQLServer2016-KB5021129-x64.exe"
+                DestinationPath = "C:\Install\SQLUpdates\SQLServer2016-KB5021129-x64.exe"
                 MatchSource     = $false
             }
 
