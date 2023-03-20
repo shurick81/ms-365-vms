@@ -230,7 +230,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-04-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-00-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
@@ -294,7 +294,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-09-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-01-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
@@ -358,7 +358,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-02-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
@@ -406,7 +406,7 @@ jobs:
       TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
       TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-07-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-03-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
@@ -427,6 +427,66 @@ jobs:
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00 -y
+  provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:0.11.15
+    env:
+      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+      TF_VAR_MS_365_VMS_LOCATION: westeurope
+      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
+      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
+      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2022-Datacenter
+      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-04-
+    steps:
+      - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform init
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+  clean-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
+    if: ${{ always() }}
+    needs: provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/azure-cli:2.16.0
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+    steps:
+      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00 -y
   provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0:
     runs-on: ubuntu-latest
     container:
@@ -466,7 +526,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-10-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
