@@ -2,7 +2,7 @@ $retries = 60;
 while ((Get-Service 'MSSQL$SQLINSTANCE01').Status -ne "Running") {
     Write-Host 'MSSQL$SQLINSTANCE01 is not running. Waiting.';
     Write-Host "Will retry more $retries times.";
-    Sleep 2;
+    Sleep 5;
     $retries--;
 }
 if ((Get-Service 'MSSQL$SQLINSTANCE01').Status -ne "Running") {
