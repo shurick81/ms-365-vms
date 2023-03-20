@@ -486,7 +486,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"Invoke-WebRequest https://raw.githubusercontent.com/shurick81/SqlServerDsc/ec8759397612127ca83630b0a7672dfcd1c555b0/source/DSCResources/DSC_SqlRS/DSC_SqlRS.psm1 -UseBasicParsing -OutFile 'C:\\Program Files\\WindowsPowerShell\\Modules\\SqlServerDsc\\16.1.0\\DSCResources\\DSC_SqlRS\\DSC_SqlRS.psm1'\"",
+      "powershell.exe -command \"Invoke-WebRequest https://raw.githubusercontent.com/dsccommunity/SqlServerDsc/5efa82dac1e5811b795512f1961a4c9dedd2e9d2/source/DSCResources/DSC_SqlRS/DSC_SqlRS.psm1 -UseBasicParsing -OutFile 'C:\\Program Files\\WindowsPowerShell\\Modules\\SqlServerDsc\\16.1.0\\DSCResources\\DSC_SqlRS\\DSC_SqlRS.psm1'\"",
     ]
   }
 
