@@ -140,7 +140,7 @@ module "DB00" {
 }
 
 module "SERVER00" {
-  source                              = "./../machines/vm-win"
+  source                              = "./../machines/vm-win-terraform0"
   environmentId                       = "${terraform.workspace}"
   location                            = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                   = "${var.VM_ADMIN_USERNAME}"
