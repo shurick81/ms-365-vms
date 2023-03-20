@@ -470,7 +470,7 @@ jobs:
       TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
       TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-09-
+      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-10-
     steps:
       - uses: actions/checkout@v3
       - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
