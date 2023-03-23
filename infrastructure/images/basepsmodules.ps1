@@ -19,7 +19,7 @@ try
                 Name                = "xPSDesiredStateConfiguration"
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
-                RequiredVersion     = "8.4.0.0"
+                RequiredVersion     = "9.1.0"
             }
 
             PSModule "PSModule_xWindowsUpdate"

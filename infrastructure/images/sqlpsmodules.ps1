@@ -49,6 +49,15 @@ try
                 RequiredVersion     = "0.0.5.6"
             }
 
+            PSModule "PSModule_SecurityPolicyDsc"
+            {
+                Ensure              = "Present"
+                Name                = "SecurityPolicyDsc"
+                Repository          = "PSGallery"
+                InstallationPolicy  = "Trusted"
+                RequiredVersion     = "2.10.0.0"
+            }
+
         }
     }
 }

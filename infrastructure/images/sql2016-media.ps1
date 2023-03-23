@@ -8,7 +8,7 @@ try
         )
     
         Import-DscResource -ModuleName PSDesiredStateConfiguration
-        Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 8.4.0.0
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 9.1.0
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
     
         Node $AllNodes.NodeName
