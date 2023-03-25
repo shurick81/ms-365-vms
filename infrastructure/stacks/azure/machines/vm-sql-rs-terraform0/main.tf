@@ -328,41 +328,6 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
-#  provisioner "file" {
-#    connection {
-#      user     = "${var.vm_admin_username}"
-#      password = "${var.vm_admin_password}"
-#      port     = 5986
-#      https    = true
-#      timeout  = "10m"
-#
-#      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-#      insecure = true
-#      #host = "${azurerm_public_ip.main.ip_address}"
-#    }
-#
-#    source      = "./../../rs-serviceaccount-update.ps1"
-#    destination = ".\\common\\rs-serviceaccount-update.ps1"
-#  }
-#
-#  provisioner "remote-exec" {
-#    connection {
-#      user     = "${var.vm_admin_username}"
-#      password = "${var.vm_admin_password}"
-#      port     = 5986
-#      https    = true
-#      timeout  = "10m"
-#
-#      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-#      insecure = true
-#      #host = "${azurerm_public_ip.main.ip_address}"
-#    }
-#
-#    inline = [
-#      "powershell.exe -command \"$env:SERVICE_NAME = 'SQLServerReportingServices'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.domain_admin_password}'; .\\common\\rs-serviceaccount-update.ps1\"",
-#    ]
-#  }
-#
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
