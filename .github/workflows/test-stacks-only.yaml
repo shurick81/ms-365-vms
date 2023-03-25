@@ -648,4 +648,4 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2016_sql2016-win-win2022_files-wp-tf0-tst00 -y
+      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00 -y
