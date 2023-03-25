@@ -35,7 +35,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# Empty machine for installing any Windows servers
+# one-boxer with AD, CRM and dev tools installed
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
