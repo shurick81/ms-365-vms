@@ -19,7 +19,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# Empty machine for installing any Windows servers
+# AD FS server
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
