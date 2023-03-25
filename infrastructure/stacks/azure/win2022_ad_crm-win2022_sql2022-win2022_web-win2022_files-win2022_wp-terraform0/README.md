@@ -244,14 +244,6 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 
 ```bash
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0/shared-variables-ignore-soft.sh
-MS_365_VMS_STACK_TYPE_ID="win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0";
-MS_365_VMS_STACK_INSTANCE_ID=$MS_365_VMS_PROJECT_PREFIX$MS_365_VMS_STACK_TYPE_ID"-dev00";
-MS_365_VMS_DNS_PREFIX=$MS_365_VMS_PROJECT_PREFIX"dev-06-";
-MS_365_VMS_WIN2022_AD_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_AD_IMAGE_NAME"
-MS_365_VMS_WIN2022_SQL2022_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_SQL2022_IMAGE_NAME"
-MS_365_VMS_WIN2022_WEB_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_WEB_IMAGE_NAME"
-MS_365_VMS_WIN2022_FILES_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_SOE_IMAGE_NAME"
-MS_365_VMS_WIN2022_WP_IMAGE_ID="/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_IMAGE_RG_NAME/providers/Microsoft.Compute/images/$MS_365_VMS_WIN2022_WP_IMAGE_NAME"
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0;
 sudo rm -rf terraform.tfstate.d;
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 init
