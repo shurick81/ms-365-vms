@@ -13,7 +13,7 @@ variable "dependencies" {
   type = "list"
 }
 
-# AD machine
+# AD machine with ADFS objects
 
 resource "null_resource" "dependency_getter" {
   provisioner "local-exec" {
