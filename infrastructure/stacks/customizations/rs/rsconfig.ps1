@@ -1,9 +1,3 @@
-#Install-WindowsFeature Net-Framework-Core
-#$rsDatabaseInstance = "SWAZDB00\SQLInstance01"
-#& 'C:\Program Files\Microsoft SQL Server Reporting Services\Shared Tools\Rsconfig.exe' "-c", "-s", $rsDatabaseInstance, "-i", "SSRS", "-d", "ReportServer", "-u", "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_ssrs", "-p", $env:RS_SERVICE_PASSWORD, "-a", "Windows"
-#& 'C:\Program Files\Microsoft SQL Server Reporting Services\Shared Tools\Rsconfig.exe' "-c", "-s", $rsDatabaseInstance, "-i", "SSRS", "-d", "ReportServer", "-a", "Windows"
-#& 'C:\Program Files\Microsoft SQL Server Reporting Services\Shared Tools\Rsconfig.exe' "-e", "-i", "SSRS", "-u", "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_ssrs", "-p", $env:RS_SERVICE_PASSWORD
-
 $configName = "RSConfig";
 Write-Host "$(Get-Date) Defining DSC";
 try
@@ -42,17 +36,11 @@ try
                 DependsOn   = "[UserRightsAssignment]LogonAsAService"
             }
 
-            if ( $rsDatabaseInstance.Split( "\" )[0] -eq $env:COMPUTERNAME ) {
-                $encrypt = "Mandatory"
-            } else {
-                $encrypt = "Optional"
-            }
             SqlRS ReportingServicesConfig
             {
                 InstanceName            = 'SSRS'
                 DatabaseServerName      = $rsDatabaseInstance.Split( "\" )[0]
                 DatabaseInstanceName    = $rsDatabaseInstance.Split( "\" )[1]
-                Encrypt                 = $encrypt #Encrypt parameter is not available in SqlServerDsc -ModuleVersion 15.2.0
                 PsDscRunAsCredential    = $InstallAccountCredential
                 DependsOn               = "[xService]RSService"
             }
@@ -81,14 +69,6 @@ try
                 Name        = "WMI-RPCSS-In-TCP"
                 Enabled     = "True"
             }
-
-            #SqlServiceAccount RSServiceAccount
-            #{
-            #    InstanceName    = 'SSRS'
-            #    ServiceType     = 'ReportingServices'
-            #    ServiceAccount  = $SqlRSAccountCredential
-            #    RestartService  = $true
-            #}
 
         }
     }
@@ -154,8 +134,4 @@ if ( $env:VMDEVOPSSTARTER_NODSCTEST -ne "TRUE" )
 } else {
     Write-Host "$(Get-Date) Skipping tests";
 }
-
-Sleep 10
-Test-NetConnection localhost -Port 8082
-
 Exit 0;
