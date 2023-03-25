@@ -300,8 +300,8 @@ docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/st
 ```
 
 ```bash
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=DB00 azurerm_virtual_machine.main
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=SERVER00 azurerm_virtual_machine.main
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=FILES00 azurerm_virtual_machine.main
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=DB00 azurerm_virtual_machine.main
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 taint -module=WP00 azurerm_virtual_machine.main
 ```
