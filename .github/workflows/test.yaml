@@ -75,6 +75,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-sql2022.json
+  build-win2022-rs2022:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/packer:1.8.5
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-rs2022-westeurope-000000
+      MS_365_VMS_LOCATION: westeurope
+      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+      MS_365_VMS_PACKER_VM_NAME: swaz04${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-rs2022.json
   build-win2019-sql2019:
     runs-on: ubuntu-latest
     container:
@@ -88,7 +105,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-sql2019-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz04${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz05${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2019-sql2019.json
@@ -105,7 +122,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-rs-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz05${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz06${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017-rs.json
@@ -122,7 +139,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz06${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz07${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017.json
@@ -139,7 +156,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-rs2017-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz07${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz08${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-rs2017.json
@@ -156,7 +173,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2016-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz08${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz09${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2016.json
@@ -173,7 +190,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-web-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz09${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz10${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-web.json
@@ -190,7 +207,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-web-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz10${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz11${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-web.json
@@ -207,7 +224,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-soe-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz11${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz12${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-soe.json
@@ -224,7 +241,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-wp-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz12${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz13${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2022-wp.json
@@ -241,7 +258,7 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-adfs-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz13${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz14${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - run: cd infrastructure/images; packer build -only azure-arm -force win2016-adfs.json
@@ -875,7 +892,6 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00
     steps:
       - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform apply -auto-approve
@@ -920,7 +936,6 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0-tst00
     steps:
       - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform apply -auto-approve
