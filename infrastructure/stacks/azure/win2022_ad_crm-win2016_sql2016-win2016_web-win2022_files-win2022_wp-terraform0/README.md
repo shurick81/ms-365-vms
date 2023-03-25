@@ -107,7 +107,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2022_web-win2022_file\shared-variables-ignore-soft.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -124,7 +124,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_file/shared-variables-ignore-soft.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
@@ -141,7 +141,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
 ```
 
 ```PowerShell
-C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2022_sql2016-win2022_web-win2022_file\shared-variables-ignore-soft.ps1
+C:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0\shared-variables-ignore-soft.ps1
 cd C:\projects\ms-365-vms\infrastructure\images
 docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e ARM_CLIENT_ID=$env:ARM_CLIENT_ID `
@@ -158,7 +158,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
 ```
 
 ```bash
-~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2016-win2022_web-win2022_file/shared-variables-ignore-soft.sh
+~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/images
 docker run --rm -v $(pwd):/workplace -w /workplace \
     -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
