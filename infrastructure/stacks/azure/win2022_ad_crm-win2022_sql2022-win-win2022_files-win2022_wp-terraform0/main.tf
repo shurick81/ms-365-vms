@@ -133,8 +133,7 @@ module "DB00" {
   vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "db00")}"
   vm_size                             = "${var.MS_365_VMS_WIN2022_SQL2022_VM_SIZE}"
   ms_365_vms_domain_name              = "${var.MS_365_VMS_DOMAIN_NAME}"
-  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00"
-  dependencies = [
+  local_admins                        = "${var.MS_365_VMS_DOMAIN_NAME}\\CRM Administrators 00,${var.MS_365_VMS_DOMAIN_NAME}\\_crmdplsrv"
     "${module.AD00.depended_on}"
   ]
 }
