@@ -17,8 +17,6 @@ Do {
 
 
 #Reporting Services Content Managers
-$securedPassword = ConvertTo-SecureString $env:CRM_INSTALL_PASSWORD -AsPlainText -Force
-$CRMInstallAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmadmin", $securedPassword );
 $attemptsLeft = 100;
 $resourceUrl = "http://swazsrv00/ReportServer_RSInstance01/ReportService2010.asmx"
 $resource = $null
@@ -37,7 +35,8 @@ Do {
     $attemptsLeft--;
 } until ( $statusCode -eq "Unauthorized" -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
 
-
+$securedPassword = ConvertTo-SecureString $env:CRM_INSTALL_PASSWORD -AsPlainText -Force
+$CRMInstallAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmadmin", $securedPassword );
 Grant-RsCatalogItemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01 -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "Content Manager" -Path "/" -Credential $CRMInstallAccountCredential;
 Grant-RsSystemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01 -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "System Administrator" -Credential $CRMInstallAccountCredential;
 
