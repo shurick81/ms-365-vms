@@ -894,7 +894,6 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0-tst00
     steps:
       - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform apply -auto-approve
