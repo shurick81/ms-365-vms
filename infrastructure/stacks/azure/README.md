@@ -6,7 +6,7 @@ Feel free to login to Azure using Docker or using Azure Cloud Shell.
 1. Start an Azure CLI container
 
 ```
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0
 ```
 
 2. Run the following command in the container:
@@ -67,12 +67,12 @@ $env:ARM_TENANT_ID = "8b87af7d-8647-4dc7-8df4-5f69a2011bb5";
 ## Verify connection
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az account show --subscription $env:ARM_SUBSCRIPTION_ID"
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az account show --subscription $ARM_SUBSCRIPTION_ID"
 ```
 
@@ -82,26 +82,26 @@ Image resource group is CommonRGWestEurope by default if not altered in variable
 
 Create it if not done:
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group create --subscription $env:ARM_SUBSCRIPTION_ID -n CommonRGWestEurope -l westeurope"
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az group create --subscription $ARM_SUBSCRIPTION_ID -n CommonRGWestEurope -l westeurope"
 ```
 
 # If file share is not ready, create it (needed for some stacks)
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az storage account create --subscription $env:ARM_SUBSCRIPTION_ID -n softwestdlrsv20 -g CommonRGWestEurope -l westeurope --sku Standard_LRS --kind StorageV2 `
     az storage account keys list --subscription $env:ARM_SUBSCRIPTION_ID --account-name softwestdlrsv20 `
     az storage share create --subscription $env:ARM_SUBSCRIPTION_ID --account-name softwestdlrsv20 --name common-00"
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az storage account create --subscription $ARM_SUBSCRIPTION_ID -n ms365vmswestdlrsv20 -g CommonRGWestEurope -l westeurope --sku Standard_LRS --kind StorageV2;
     az storage account keys list --subscription $ARM_SUBSCRIPTION_ID --account-name ms365vmswestdlrsv20;
     az storage share create --subscription $ARM_SUBSCRIPTION_ID --account-name ms365vmswestdlrsv20 --name common-00"
@@ -116,73 +116,73 @@ before using, set up `$env:MS_365_VMS_STACK_INSTANCE_ID`
 ## Destroy the stack
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group delete --subscription $env:ARM_SUBSCRIPTION_ID -n $env:MS_365_VMS_STACK_INSTANCE_ID -y"
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
     az group delete --subscription $ARM_SUBSCRIPTION_ID -n $MS_365_VMS_STACK_INSTANCE_ID -y"
 ```
 
 ## List VMs with status
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az vm list -d --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_STACK_INSTANCE_ID -o table"
 ```
 
 ## Start machines
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az vm start --ids `$( az vm list --query '[].id' -o tsv --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_STACK_INSTANCE_ID )"
 ```
 
 ## Stop machines
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az vm deallocate --ids `$( az vm list --query '[].id' -o tsv --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_STACK_INSTANCE_ID )"
 ```
 
 ## List RGs
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group list --query '[].name' -o tsv --subscription $env:ARM_SUBSCRIPTION_ID"
 ```
 
 ## Destroy an RG
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group delete --subscription $env:ARM_SUBSCRIPTION_ID -n pkr-Resource-Group-byd9he88e5 -y"
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
     az group delete --subscription $ARM_SUBSCRIPTION_ID -n pkr-Resource-Group-byd9he88e5 -y"
 ```
 
 ## List images
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az image list --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_IMAGE_RG_NAME -o table"
 ```
 
 ## Delete an image
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az image delete --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_IMAGE_RG_NAME -n win2019-sql2019-rs-20201029..99"
 ```
 
 ## Create snapshots
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ARM_CLIENT_ID='$env:ARM_CLIENT_ID'; ARM_CLIENT_SECRET='$env:ARM_CLIENT_SECRET'; ARM_TENANT_ID='$env:ARM_TENANT_ID'; ENVIRONMENTID='$env:MS_365_VMS_STACK_INSTANCE_ID'; ARM_SUBSCRIPTION_ID='$env:ARM_SUBSCRIPTION_ID'; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "ARM_CLIENT_ID='$env:ARM_CLIENT_ID'; ARM_CLIENT_SECRET='$env:ARM_CLIENT_SECRET'; ARM_TENANT_ID='$env:ARM_TENANT_ID'; ENVIRONMENTID='$env:MS_365_VMS_STACK_INSTANCE_ID'; ARM_SUBSCRIPTION_ID='$env:ARM_SUBSCRIPTION_ID'; `
     az login --service-principal -u `$ARM_CLIENT_ID -p `$ARM_CLIENT_SECRET --tenant `$ARM_TENANT_ID; `
     az vm deallocate --ids `$(az vm list --query '[].id' -o tsv -g `$ENVIRONMENTID); `
     VMNames=`$(az vm list --query '[].[name]' -o tsv -g `$ENVIRONMENTID); `
@@ -193,7 +193,7 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ARM_CLIENT_
 ```
 
 ```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID';
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID';
     az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
     az vm deallocate --ids \$(az vm list --query '[].id' -o tsv -g \$ENVIRONMENTID);
     VMNames=\$(az vm list --query '[].[name]' -o tsv -g \$ENVIRONMENTID);
@@ -203,19 +203,19 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "ENVIRONMENT
     done"
 ```
 
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "echo '$ARM_CLIENT_ID'; \
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "echo '$ARM_CLIENT_ID'; \
 az"
 
 ## Rollback to snapshots
 
 ```PowerShell
-docker run -it --rm -v ${pwd}/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "export ARM_CLIENT_ID='$env:ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$env:ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$env:ARM_TENANT_ID'; export ENVIRONMENTID='$env:MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$env:ARM_SUBSCRIPTION_ID'; `
+docker run -it --rm -v ${pwd}/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "export ARM_CLIENT_ID='$env:ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$env:ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$env:ARM_TENANT_ID'; export ENVIRONMENTID='$env:MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$env:ARM_SUBSCRIPTION_ID'; `
     ./snapshotRollback.sh"
 ```
 
 ```bash
 sudo chmod +x ./../azure-cli/snapshotRollback.sh
-docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "export ARM_CLIENT_ID='$ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$ARM_TENANT_ID'; export ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$ARM_SUBSCRIPTION_ID'; \
+docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "export ARM_CLIENT_ID='$ARM_CLIENT_ID'; export ARM_CLIENT_SECRET='$ARM_CLIENT_SECRET'; export ARM_TENANT_ID='$ARM_TENANT_ID'; export ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID'; export ARM_SUBSCRIPTION_ID='$ARM_SUBSCRIPTION_ID'; \
     ./snapshotRollback.sh"
 ```
 
