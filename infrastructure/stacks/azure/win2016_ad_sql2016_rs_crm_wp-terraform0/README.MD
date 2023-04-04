@@ -176,7 +176,7 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ```
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.16.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group delete --subscription $env:ARM_SUBSCRIPTION_ID -n $env:MS_365_VMS_STACK_INSTANCE_ID -y"
 ```
 
