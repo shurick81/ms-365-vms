@@ -16,7 +16,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-ad-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -33,7 +33,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-ad-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -50,7 +50,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -67,7 +67,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-sql2022-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -84,7 +84,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-rs2022-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -101,7 +101,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-sql2019-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -118,7 +118,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-rs-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -135,7 +135,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -152,7 +152,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-rs2017-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -169,7 +169,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2016-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -186,7 +186,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-web-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -203,7 +203,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-web-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -220,7 +220,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-soe-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -237,7 +237,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D4s_v3
+      MS_365_VMS_VM_SIZE: Standard_D4s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-wp-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -254,7 +254,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v3
+      MS_365_VMS_VM_SIZE: Standard_D2s_v5
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-adfs-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
@@ -460,9 +460,9 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -525,9 +525,9 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -590,9 +590,9 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2016_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-web-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2016_WEB_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -653,7 +653,7 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2016_ADFS_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-adfs-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2016_ADFS_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -702,11 +702,11 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2022-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -763,11 +763,11 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2019_SQL2019_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-sql2019-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2019_SQL2019_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2019-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
@@ -824,11 +824,11 @@ jobs:
       TF_VAR_MS_365_VMS_WIN2016_SQL2016_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2016-westeurope-000000
       TF_VAR_MS_365_VMS_WIN2016_SQL2016_VM_SIZE: Standard_B2s
       TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2016-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D4s_v3
+      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v3
+      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
       TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
       TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
       TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
