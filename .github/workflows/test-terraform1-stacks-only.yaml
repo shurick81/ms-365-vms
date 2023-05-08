@@ -12,7 +12,7 @@ jobs:
   provision-win2022_ad_crm:
     runs-on: ubuntu-latest
     container:
-      image: hashicorp/terraform:1.4.2
+      image: hashicorp/terraform:1.4.6
     env:
       TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -38,6 +38,7 @@ jobs:
       TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-test-00
     steps:
       - uses: actions/checkout@v3
+      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
       - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform init
       - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
       - run: cd infrastructure/stacks/azure/win2022_ad_crm; terraform apply -auto-approve
@@ -46,7 +47,7 @@ jobs:
     needs: provision-win2022_ad_crm
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
