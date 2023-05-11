@@ -37,7 +37,7 @@ jobs:
     needs: provision-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -84,7 +84,7 @@ jobs:
     needs: provision-win2022_ad_crm-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -131,7 +131,7 @@ jobs:
     needs: provision-win2019_ad_crm-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -178,7 +178,7 @@ jobs:
     needs: provision-win2016_ad_crm-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -242,7 +242,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -306,7 +306,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -370,7 +370,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -418,7 +418,7 @@ jobs:
     needs: provision-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -478,7 +478,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -538,7 +538,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -598,7 +598,7 @@ jobs:
     needs: provision-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -642,7 +642,7 @@ jobs:
     needs: provision-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -684,7 +684,7 @@ jobs:
     needs: provision-win2022_ad_rs-win2016_sql2017_rs-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -728,7 +728,7 @@ jobs:
     needs: provision-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}

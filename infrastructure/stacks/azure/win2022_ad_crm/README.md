@@ -17,7 +17,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2022-ad.json
 ```
 
@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2022-ad.json
 ```
 
@@ -48,10 +48,10 @@ $env:MS_365_VMS_WIN2022_AD_IMAGE_ID = "/subscriptions/$env:ARM_SUBSCRIPTION_ID/r
 cd c:\projects\ms-365-vms\infrastructure\stacks\azure\win2022_ad_crm;
 Remove-Item terraform.tfstate.d -Recurse
 Start-Sleep 5;
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 init
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 workspace new $env:MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 workspace select $env:MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 apply -auto-approve `
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 init
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 workspace new $env:MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 workspace select $env:MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 apply -auto-approve `
     -var "ARM_CLIENT_ID=$env:ARM_CLIENT_ID" `
     -var "ARM_CLIENT_SECRET=$env:ARM_CLIENT_SECRET" `
     -var "ARM_SUBSCRIPTION_ID=$env:ARM_SUBSCRIPTION_ID" `
@@ -79,10 +79,10 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm;
 sudo rm -rf terraform.tfstate.d;
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 init
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 workspace new $MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 workspace select $MS_365_VMS_STACK_INSTANCE_ID
-docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.2 apply -auto-approve \
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 init
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 workspace new $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 workspace select $MS_365_VMS_STACK_INSTANCE_ID
+docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm hashicorp/terraform:1.4.6 apply -auto-approve \
     -var "ARM_CLIENT_ID=$ARM_CLIENT_ID" \
     -var "ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET" \
     -var "ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID" \
