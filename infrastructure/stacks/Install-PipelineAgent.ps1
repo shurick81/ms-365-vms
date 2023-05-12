@@ -84,22 +84,22 @@ PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -accountU
         $ProgressPreference = 'SilentlyContinue';
         Invoke-WebRequest -Uri $resourceUrl -OutFile $tempFilePath;
         $ProgressPreference = $currentProgressPreference;
-        
+
         $dirPath = "c:\AzurePipelineAgent";
         New-Item $dirPath -ItemType Directory -Force | Out-Null;
         Add-Type -AssemblyName System.IO.Compression.FileSystem;
         Write-Host "Unpacking $tempFilePath to $dirPath";
         [System.IO.Compression.ZipFile]::ExtractToDirectory( $tempFilePath, $dirPath );
-        
+
         $agentUniqueSuffix = "ad_crm-win-file-wp-ci-00";
         cd $dirPath
         .\config.cmd remove --auth pat --token $env:AZURE_DEVOPS_PERSONAL_ACCESS_TOKEN
         .\config.cmd --unattended --url https://dev.azure.com/Unionen --auth pat --token $env:AZURE_DEVOPS_PERSONAL_ACCESS_TOKEN --projectName 'Primus' --acceptTeeEula --runAsService --agent "Primus-Platform-$agentUniqueSuffix" --pool Default --replace
-        
-        
-        
-        
-        
+
+
+
+
+
         # Download the gitlab runner binary
         New-Item -Path 'C:\GitLab-Runner' -ItemType Directory
         Set-Location 'C:\GitLab-Runner'
@@ -107,7 +107,7 @@ PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -accountU
         $ProgressPreference = 'SilentlyContinue';
         Invoke-WebRequest -UseBasicParsing -Uri https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-amd64.exe -OutFile gitlab-runner.exe
         $ProgressPreference = $currentProgressPreference;
-        
+
         # Register a new runner
         .\gitlab-runner.exe register `
           --non-interactive `
@@ -119,17 +119,17 @@ PowerShell -File c:\atlassian-bitbucket-pipelines-runner\bin\start.ps1 -accountU
           --run-untagged="false" `
           --locked="false" `
           --docker-privileged
-        
+
         # Install as service
         .\gitlab-runner.exe install
          # Run it
         .\gitlab-runner.exe start
-        
+
         Set-ExecutionPolicy Bypass -Force;
         iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
         choco install -y git
         choco install -y powershell-core
-        
+
         Get-Date;
     }
     Default {}

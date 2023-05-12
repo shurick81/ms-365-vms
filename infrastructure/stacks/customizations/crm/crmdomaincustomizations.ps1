@@ -66,7 +66,7 @@ try {
                 Password             = $SqlRSAccountCredential
                 PasswordNeverExpires = $true
             }
-            
+
             ADUser TestUser
             {
                 DomainName           = $env:MS_365_VMS_DOMAIN_NAME
@@ -90,7 +90,7 @@ try {
                 Password             = $CRMInstallAccountCredential
                 PasswordNeverExpires = $true
             }
-            
+
             ADUser CRMServiceAccountUser
             {
                 DomainName           = $env:MS_365_VMS_DOMAIN_NAME
@@ -98,7 +98,7 @@ try {
                 Password             = $CRMServiceAccountCredential
                 PasswordNeverExpires = $true
             }
-            
+
             ADUser DeploymentServiceAccountUser
             {
                 DomainName           = $env:MS_365_VMS_DOMAIN_NAME
