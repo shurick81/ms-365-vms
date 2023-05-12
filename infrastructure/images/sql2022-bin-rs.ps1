@@ -10,7 +10,7 @@ try
 
         Node $AllNodes.NodeName
         {
-            
+
             SQLRSSetup SQLRSSetup
             {
                 InstanceName        = "SSRS"
@@ -18,7 +18,7 @@ try
                 Edition             = 'Development'
                 IAcceptLicenseTerms = 'Yes'
             }
-            
+
         }
     }
 }

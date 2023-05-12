@@ -10,7 +10,7 @@ try
 
         Node $AllNodes.NodeName
         {
-            
+
             SQLSetup SQLSetup
             {
                 InstanceName            = "RSInstance01"
@@ -25,7 +25,7 @@ try
                 ErrorReporting          = "True"
                 BrowserSvcStartupType   = "Automatic"
             }
-            
+
         }
     }
 }
