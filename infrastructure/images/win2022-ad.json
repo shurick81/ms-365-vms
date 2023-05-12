@@ -55,10 +55,6 @@
             "managed_image_name": "{{user `box_name`}}",
             "polling_duration_timeout": "40m",
 
-            "virtual_network_resource_group_name": "workplace-00",
-            "virtual_network_name": "workplace-00-vm-dev-vnet",
-            "virtual_network_subnet_name": "mainSubnet",
-
             "os_type": "Windows",
             "image_publisher": "MicrosoftWindowsServer",
             "image_offer": "WindowsServer",
