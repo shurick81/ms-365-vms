@@ -1087,7 +1087,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          if (Get-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000) {
+          if (Get-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore) {
             Remove-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -Recurse
           }
   build-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
