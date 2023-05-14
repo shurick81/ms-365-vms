@@ -1033,7 +1033,6 @@ jobs:
       - 'wp00'
     needs: start-ms-365-vms-win2022_hyperv-ci-01
     steps:
-      - uses: actions/checkout@v3
       - run: |
           if (!(Get-VMSwitch -Name NATSwitch00 -ErrorAction Ignore)) {
             New-VMSwitch -SwitchName NATSwitch00 -SwitchType Internal;
@@ -1050,11 +1049,29 @@ jobs:
     needs: hyperv-prereqs-ms-365-vms-win2022_hyperv-ci-01
     steps:
       - uses: actions/checkout@v3
-      - run: Get-ChildItem
+      - run: |
+          if (Get-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000) {
+            Remove-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -Recurse
+          }
+  build-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-01'
+      - 'wp00'
+    needs: remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    env:
+      MS_365_VMS_PROJECT_PREFIX: ms-365-vms-
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-sql2016-rs-crm-wp-000000
+      MS_365_VMS_HYPERV_SWITCH: NATSwitch00
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          cd infrastructure\images
+          packer build -only hyperv-iso.* .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    needs: build-win2016-ad-sql2016-rs-crm-wp-image-hyperv
     container:
       image: mcr.microsoft.com/azure-cli:2.46.0
     env:

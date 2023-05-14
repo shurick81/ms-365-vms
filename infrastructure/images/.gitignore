@@ -1,2 +1,7 @@
 *.box
 packer_cache/**
+*/Virtual Machines/box.xml
+*/Virtual Machines/*.vmcx
+*/Virtual Machines/*.vmgs
+*/Virtual Machines/*.VMRS
+*/Virtual Hard Disks/*.vhdx
