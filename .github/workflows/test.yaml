@@ -7,1050 +7,1050 @@ on:
       - 'infrastructure/images/**'
       - '.github/workflows/test.yaml'
 jobs:
-  build-win2022-ad:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-ad-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz00${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-ad.json
-  build-win2019-ad:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-ad-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz01${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2019-ad.json
-  build-win2016-ad:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz02${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-ad.json
-  build-win2022-sql2022:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-sql2022-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz03${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-sql2022.json
-  build-win2022-rs2022:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-rs2022-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz04${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-rs2022.json
-  build-win2019-sql2019:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-sql2019-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz05${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2019-sql2019.json
-  build-win2016-sql2017-rs:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-rs-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz06${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017-rs.json
-  build-win2016-sql2017:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz07${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017.json
-  build-win2016-rs2017:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-rs2017-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz08${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-rs2017.json
-  build-win2016-sql2016:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2016-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz09${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2016.json
-  build-win2022-web:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-web-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz10${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-web.json
-  build-win2016-web:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-web-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz11${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-web.json
-  build-win2022-soe:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-soe-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz12${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-soe.json
-  build-win2022-wp:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D4s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-wp-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz13${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-wp.json
-  build-win2016-adfs:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-adfs-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz14${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-adfs.json
-  build-win2022-hyperv:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/packer:1.8.7
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      MS_365_VMS_VM_SIZE: Standard_D2s_v5
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-hyperv-westeurope-000000
-      MS_365_VMS_LOCATION: westeurope
-      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz15${{ github.run_number }}
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm.* -force win2022-hyperv.pkr.hcl
-  provision-win2022_wp-terraform0:
-    needs: build-win2022-wp
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_wp-terraform0-test-00 -y
-  provision-win2022_ad_crm-terraform0:
-    needs: build-win2022-ad
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-terraform0-test-00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-terraform0-test-00 -y
-  provision-win2019_ad_crm-terraform0:
-    needs: build-win2019-ad
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2019_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2019_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_crm-terraform0-test-00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform apply -auto-approve
-  clean-win2019_ad_crm-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2019_ad_crm-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_crm-terraform0-test-00 -y
-  provision-win2016_ad_crm-terraform0:
-    needs: build-win2016-ad
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2016_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2016_ad_crm-terraform0-test-00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform apply -auto-approve
-  clean-win2016_ad_crm-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2016_ad_crm-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2016_ad_crm-terraform0-test-00 -y
-  provision-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-web, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
-      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-00-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00 -y
-  provision-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2019-sql2019, build-win2022-web, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2019_SQL2019_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-sql2019-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2019_SQL2019_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
-      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-01-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00 -y
-  provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2016-sql2016, build-win2016-web, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_SQL2016_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2016-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_SQL2016_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-web-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_WEB_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
-      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-02-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-wp-tf0-tst00 -y
-  provision-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0:
-    needs: [build-win2019-ad, build-win2016-adfs, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2019_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2019_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_ADFS_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-adfs-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_ADFS_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_ADFS_SERVICE_PASSWORD: ${{ secrets.ADFS_SERVICE_PASSWORD }};
-      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
-      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-03-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00 -y
-  provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2022-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-04-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00 -y
-  provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2019-sql2019, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2019_SQL2019_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-sql2019-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2019_SQL2019_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2019-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00 -y
-  provision-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0:
-    needs: [build-win2022-ad, build-win2016-sql2016, build-win2022-soe, build-win2022-wp]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_SQL2016_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2016-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_SQL2016_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2016-Datacenter
-      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
-      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
-      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
-      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
-      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
-      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
-      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
-      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
-      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
-      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2016_sql2016-win-win2022_files-wp-tf0-tst00
-      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
-    steps:
-      - uses: actions/checkout@v3
-      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2016_sql2016-win-win2022_files-wp-tf0-tst00 -y
-  provision-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0:
-    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-rs2022]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_RS2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-rs2022-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_RS2022_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0-tst00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0-tst00 -y
-  provision-win2022_ad_rs-win2016_sql2017_rs-terraform0:
-    needs: [build-win2022-ad, build-win2016-sql2017-rs]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_SQL2017_RS_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2017-rs-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_SQL2017_RS_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_rs-win2016_sql2017_rs-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_rs-win2016_sql2017_rs-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00 -y
-  provision-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0:
-    needs: [build-win2022-ad, build-win2016-sql2017, build-win2016-rs2017]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:0.11.15
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_SQL2017_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2017-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_SQL2017_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2016_RS2017_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-rs2017-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2016_RS2017_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
-      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
-      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0-tst00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform apply -auto-approve
-  clean-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0:
-    if: ${{ always() }}
-    needs: provision-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0-tst00 -y
-  provision-win2022_hyperv:
-    needs: [build-win2022-hyperv]
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:1.4.6
-    env:
-      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-      TF_VAR_MS_365_VMS_LOCATION: westeurope
-      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
-      TF_VAR_MS_365_VMS_WIN2022_HYPERV_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-hyperv-westeurope-000000
-      TF_VAR_MS_365_VMS_WIN2022_HYPERV_VM_SIZE: Standard_B2s
-      TF_VAR_MS_365_VMS_WIN2022_HYPERV_DISK_TYPE: Standard_LRS
-      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
-      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_hyperv-tst00
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform init
-      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
-      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform apply -auto-approve
-  clean-win2022_hyperv:
-    if: ${{ always() }}
-    needs: provision-win2022_hyperv
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/azure-cli:2.48.1
-    env:
-      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
-      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
-    steps:
-      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_hyperv-tst00 -y
+#  build-win2022-ad:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-ad-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz00${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-ad.json
+#  build-win2019-ad:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-ad-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz01${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2019-ad.json
+#  build-win2016-ad:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz02${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-ad.json
+#  build-win2022-sql2022:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-sql2022-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz03${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-sql2022.json
+#  build-win2022-rs2022:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-rs2022-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz04${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-rs2022.json
+#  build-win2019-sql2019:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2019-sql2019-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz05${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2019-sql2019.json
+#  build-win2016-sql2017-rs:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-rs-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz06${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017-rs.json
+#  build-win2016-sql2017:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2017-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz07${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2017.json
+#  build-win2016-rs2017:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-rs2017-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz08${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-rs2017.json
+#  build-win2016-sql2016:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-sql2016-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz09${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-sql2016.json
+#  build-win2022-web:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-web-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz10${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-web.json
+#  build-win2016-web:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-web-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz11${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-web.json
+#  build-win2022-soe:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-soe-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz12${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-soe.json
+#  build-win2022-wp:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D4s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-wp-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz13${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2022-wp.json
+#  build-win2016-adfs:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-adfs-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz14${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-adfs.json
+#  build-win2022-hyperv:
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/packer:1.8.7
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      MS_365_VMS_VM_SIZE: Standard_D2s_v5
+#      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-hyperv-westeurope-000000
+#      MS_365_VMS_LOCATION: westeurope
+#      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      MS_365_VMS_PACKER_VM_NAME: swaz15${{ github.run_number }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/images; packer build -only azure-arm.* -force win2022-hyperv.pkr.hcl
+#  provision-win2022_wp-terraform0:
+#    needs: build-win2022-wp
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_wp-terraform0-test-00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_wp-terraform0-test-00 -y
+#  provision-win2022_ad_crm-terraform0:
+#    needs: build-win2022-ad
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-terraform0-test-00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-terraform0-test-00 -y
+#  provision-win2019_ad_crm-terraform0:
+#    needs: build-win2019-ad
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2019_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2019_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_crm-terraform0-test-00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2019_ad_crm-terraform0; terraform apply -auto-approve
+#  clean-win2019_ad_crm-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2019_ad_crm-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_crm-terraform0-test-00 -y
+#  provision-win2016_ad_crm-terraform0:
+#    needs: build-win2016-ad
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2016_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2016_ad_crm-terraform0-test-00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2016_ad_crm-terraform0; terraform apply -auto-approve
+#  clean-win2016_ad_crm-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2016_ad_crm-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2016_ad_crm-terraform0-test-00 -y
+#  provision-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-web, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
+#      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-00-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2022_sql2022-win2022_web-win2022_files-wp-tf0-tst00 -y
+#  provision-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2019-sql2019, build-win2022-web, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2019_SQL2019_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-sql2019-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2019_SQL2019_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-web-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WEB_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
+#      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-01-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2019_sql2019-win2022_web-win2022_files-wp-tf0-tst00 -y
+#  provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2016-sql2016, build-win2016-web, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2016_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2016-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2016_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_WEB_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-web-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_WEB_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
+#      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-02-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2016_sql2016-win2016_web-win2022_files-wp-tf0-tst00 -y
+#  provision-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0:
+#    needs: [build-win2019-ad, build-win2016-adfs, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2019_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2019_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_ADFS_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-adfs-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_ADFS_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_ADFS_SERVICE_PASSWORD: ${{ secrets.ADFS_SERVICE_PASSWORD }};
+#      TF_VAR_MS_365_VMS_SSL_CACHE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\certs-00
+#      TF_VAR_MS_365_VMS_SSL_CACHE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SSL_CACHE_PASSWORD: ${{ secrets.MS_365_VMS_SSL_CACHE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SSL_PFX_PASSWORD: ${{ secrets.MS_365_VMS_SSL_PFX_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-03-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2019_ad_adfs-win2016_adfs-win2022_wp-terraform0-tst00 -y
+#  provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2022-Datacenter
+#      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-04-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2022_sql2022-win-win2022_files-wp-tf0-tst00 -y
+#  provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2019-sql2019, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2019_SQL2019_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2019-sql2019-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2019_SQL2019_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2019-Datacenter
+#      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-05-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2019_sql2019-win-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2019_sql2019-win-win2022_files-wp-tf0-tst00 -y
+#  provision-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0:
+#    needs: [build-win2022-ad, build-win2016-sql2016, build-win2022-soe, build-win2022-wp]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2016_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2016-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2016_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WINSERVER_IMAGE_SKU: 2016-Datacenter
+#      TF_VAR_MS_365_VMS_WINSERVER_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-soe-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_FILES_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_WIN2022_WP_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-wp-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_WP_VM_SIZE: Standard_D2s_v5
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_TEST_1_PASSWORD: ${{ secrets.CRM_TEST_1_PASSWORD }}
+#      TF_VAR_CRM_TEST_2_PASSWORD: ${{ secrets.CRM_TEST_2_PASSWORD }}
+#      TF_VAR_CRM_INSTALL_PASSWORD: ${{ secrets.CRM_INSTALL_PASSWORD }}
+#      TF_VAR_CRM_SERVICE_PASSWORD: ${{ secrets.CRM_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_DEPLOYMENT_SERVICE_PASSWORD: ${{ secrets.CRM_DEPLOYMENT_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_SANDBOX_SERVICE_PASSWORD: ${{ secrets.CRM_SANDBOX_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_VSS_WRITER_PASSWORD: ${{ secrets.CRM_VSS_WRITER_PASSWORD }}
+#      TF_VAR_CRM_ASYNC_SERVICE_PASSWORD: ${{ secrets.CRM_ASYNC_SERVICE_PASSWORD }}
+#      TF_VAR_CRM_MONITORING_SERVICE_PASSWORD: ${{ secrets.CRM_MONITORING_SERVICE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_UNC: \\ms365vmswestdlrsv20.file.core.windows.net\common-00\Shared_Files
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_USERNAME: Azure\ms365vmswestdlrsv20
+#      TF_VAR_MS_365_VMS_SHARED_SOURCE_PASSWORD: ${{ secrets.MS_365_VMS_SHARED_SOURCE_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_crm-win2016_sql2016-win-win2022_files-wp-tf0-tst00
+#      TF_VAR_MS_365_VMS_DNS_PREFIX: ms-365-vms-test-06-
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: sleep $((RANDOM % 300)) # avoiding throttling in the terraform web servers
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_crm-win2016_sql2016-win-win2022_files-win2022_wp-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_crm-win2016_sql2016-win-win2022_files-wp-tf0-tst00 -y
+#  provision-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0:
+#    needs: [build-win2022-ad, build-win2022-sql2022, build-win2022-rs2022]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-sql2022-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_SQL2022_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_RS2022_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-rs2022-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_RS2022_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0-tst00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2022_sql2022-win2022_rs2022-terraform0-tst00 -y
+#  provision-win2022_ad_rs-win2016_sql2017_rs-terraform0:
+#    needs: [build-win2022-ad, build-win2016-sql2017-rs]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2017_RS_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2017-rs-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2017_RS_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017_rs-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_rs-win2016_sql2017_rs-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_rs-win2016_sql2017_rs-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2016_sql2017_rs-terraform0-tst00 -y
+#  provision-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0:
+#    needs: [build-win2022-ad, build-win2016-sql2017, build-win2016-rs2017]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:0.11.15
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_AD_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-ad-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_AD_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2017_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-sql2017-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_SQL2017_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2016_RS2017_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2016-rs2017-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2016_RS2017_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_DOMAIN_NAME: c0nt0s00.local
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_DOMAIN_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_DOMAIN_ADMIN_PASSWORD }}
+#      TF_VAR_RS_SERVICE_PASSWORD: ${{ secrets.RS_SERVICE_PASSWORD }}
+#      TF_VAR_INSTALL_PASSWORD: ${{ secrets.INSTALL_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0-tst00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0; terraform apply -auto-approve
+#  clean-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0:
+#    if: ${{ always() }}
+#    needs: provision-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_ad_rs-win2016_sql2017-win2016_rs2017-terraform0-tst00 -y
+#  provision-win2022_hyperv:
+#    needs: [build-win2022-hyperv]
+#    runs-on: ubuntu-latest
+#    container:
+#      image: hashicorp/terraform:1.4.6
+#    env:
+#      TF_VAR_ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      TF_VAR_ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      TF_VAR_ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#      TF_VAR_MS_365_VMS_LOCATION: westeurope
+#      TF_VAR_MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+#      TF_VAR_MS_365_VMS_VM_NAME_SPEC: swaz%s
+#      TF_VAR_MS_365_VMS_WIN2022_HYPERV_IMAGE_ID: /subscriptions/86fab581-914f-4c91-be92-9a5d70691d54/resourceGroups/CommonRGWestEurope/providers/Microsoft.Compute/images/ms-365-vms-win2022-hyperv-westeurope-000000
+#      TF_VAR_MS_365_VMS_WIN2022_HYPERV_VM_SIZE: Standard_B2s
+#      TF_VAR_MS_365_VMS_WIN2022_HYPERV_DISK_TYPE: Standard_LRS
+#      TF_VAR_MS_365_VMS_VM_ADMIN_PASSWORD: ${{ secrets.MS_365_VMS_VM_ADMIN_PASSWORD }}
+#      TF_VAR_MS_365_VMS_STACK_INSTANCE_ID: ms-365-vms-win2022_hyperv-tst00
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform init
+#      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform workspace new $TF_VAR_MS_365_VMS_STACK_INSTANCE_ID
+#      - run: cd infrastructure/stacks/azure/win2022_hyperv; terraform apply -auto-approve
+#  clean-win2022_hyperv:
+#    if: ${{ always() }}
+#    needs: provision-win2022_hyperv
+#    runs-on: ubuntu-latest
+#    container:
+#      image: mcr.microsoft.com/azure-cli:2.48.1
+#    env:
+#      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+#      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+#    steps:
+#      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+#      - run: az group delete --subscription $ARM_SUBSCRIPTION_ID -n ms-365-vms-win2022_hyperv-tst00 -y
   start-ms-365-vms-win2022_hyperv-ci-01:
     runs-on: ubuntu-latest
     container:
