@@ -1078,6 +1078,8 @@ jobs:
           if (!(Get-NetNat -Name NATNetwork00 -ErrorAction Ignore)) {
             New-NetNAT -Name NATNetwork00 -InternalIPInterfaceAddressPrefix 169.254.0.0/16;
           }
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
+          choco install packer --version=1.8.7;
   remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
     runs-on:
       - self-hosted
