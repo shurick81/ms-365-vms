@@ -1026,12 +1026,28 @@ jobs:
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az vm start --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-01/providers/Microsoft.Compute/virtualMachines/swazserver00
-  remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+  hyperv-prereqs-ms-365-vms-win2022_hyperv-ci-01:
     runs-on:
       - self-hosted
       - 'ms-365-vms-win2022_hyperv-ci-01'
       - 'wp00'
     needs: start-ms-365-vms-win2022_hyperv-ci-01
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          if (!(Get-VMSwitch -Name NATSwitch00 -ErrorAction Ignore)) {
+            New-VMSwitch -SwitchName NATSwitch00 -SwitchType Internal;
+            New-NetIPAddress -IPAddress 169.254.0.1 -PrefixLength 16 -InterfaceAlias "vEthernet (NATSwitch00)";
+          }
+          if (!(Get-NetNat -Name NATNetwork00 -ErrorAction Ignore)) {
+            New-NetNAT -Name NATNetwork00 -InternalIPInterfaceAddressPrefix 169.254.0.0/16;
+          }
+  remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-01'
+      - 'wp00'
+    needs: hyperv-prereqs-ms-365-vms-win2022_hyperv-ci-01
     steps:
       - uses: actions/checkout@v3
       - run: Get-ChildItem
