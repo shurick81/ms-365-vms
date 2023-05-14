@@ -1025,7 +1025,7 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az vm start --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-dev-00/providers/Microsoft.Compute/virtualMachines/swazserver00
+      - run: az vm start --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-01/providers/Microsoft.Compute/virtualMachines/swazserver00
   remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
     runs-on:
       - self-hosted
@@ -1035,6 +1035,7 @@ jobs:
     steps:
       - run: Get-ChildItem infrastructure\images
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     needs: remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv
     container:
@@ -1046,4 +1047,4 @@ jobs:
       ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-      - run: az vm deallocate --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-dev-00/providers/Microsoft.Compute/virtualMachines/swazserver00
+      - run: az vm deallocate --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-01/providers/Microsoft.Compute/virtualMachines/swazserver00
