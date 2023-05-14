@@ -1033,7 +1033,7 @@ jobs:
       - 'wp00'
     needs: start-ms-365-vms-win2022_hyperv-ci-01
     steps:
-      - run: Get-ChildItem infrastructure\images
+      - run: Get-ChildItem
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
     if: ${{ always() }}
     runs-on: ubuntu-latest
