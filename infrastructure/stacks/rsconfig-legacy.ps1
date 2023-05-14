@@ -41,13 +41,13 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow web sites publishing"
             }
-            
+
             FireWall WMI-WINMGMT-In-TCP
             {
                 Name        = "WMI-WINMGMT-In-TCP"
                 Enabled     = "True"
             }
-            
+
             FireWall WMI-RPCSS-In-TCP
             {
                 Name        = "WMI-RPCSS-In-TCP"

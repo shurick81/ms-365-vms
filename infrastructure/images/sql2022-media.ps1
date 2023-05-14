@@ -6,11 +6,11 @@ try
     {
         param(
         )
-    
+
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 9.1.0
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
-    
+
         Node $AllNodes.NodeName
         {
             $provider = $null
@@ -91,14 +91,14 @@ try
                 }
 
             }
-    
+
             MountImage SQLServerImageMounted
             {
                 ImagePath   = "C:\Install\SQLRTMImage\SQLServer2022-x64-ENU-Dev.iso"
                 DriveLetter = 'F'
                 DependsOn   = "[xRemoteFile]SQLServerImageFilePresent"
             }
-    
+
             WaitForVolume SQLServerImageMounted
             {
                 DriveLetter         = 'F'
@@ -106,7 +106,7 @@ try
                 RetryCount          = 10
                 DependsOn           = "[MountImage]SQLServerImageMounted"
             }
-            
+
         }
     }
 }

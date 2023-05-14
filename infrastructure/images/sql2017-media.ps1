@@ -6,34 +6,34 @@ try
     {
         param(
         )
-    
+
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 9.1.0
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
-    
+
         Node $AllNodes.NodeName
         {
-    
+
             #$SQLImageUrl = "https://download.microsoft.com/download/E/F/2/EF23C21D-7860-4F05-88CE-39AA114B014B/SQLServer2017-x64-ENU-Dev.iso";
             $SQLImageUrl = "https://download.microsoft.com/download/E/F/2/EF23C21D-7860-4F05-88CE-39AA114B014B/SQLServer2017-x64-ENU-Dev.iso";
             $SQLImageUrl -match '[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))' | Out-Null
             $SQLImageFileName = $matches[0]
             $SQLImageDestinationPath = "C:\Install\SQLRTMImage\$SQLImageFileName"
-    
+
             xRemoteFile SQLServerImageFilePresent
             {
                 Uri             = $SQLImageUrl
                 DestinationPath = $SQLImageDestinationPath
                 MatchSource     = $false
             }
-    
+
             MountImage SQLServerImageMounted
             {
                 ImagePath   = $SQLImageDestinationPath
                 DriveLetter = 'F'
                 DependsOn   = "[xRemoteFile]SQLServerImageFilePresent"
             }
-    
+
             WaitForVolume SQLServerImageMounted
             {
                 DriveLetter         = 'F'
@@ -48,7 +48,7 @@ try
                 DestinationPath = "C:\Install\SQLUpdates\SQLServer2017-KB5016884-x64.exe"
                 MatchSource     = $false
             }
-    
+
             xRemoteFile SQLServerRSFilePresent
             {
                 Uri             = "https://download.microsoft.com/download/E/6/4/E6477A2A-9B58-40F7-8AD6-62BB8491EA78/SQLServerReportingServices.exe"

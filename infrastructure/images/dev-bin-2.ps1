@@ -32,13 +32,13 @@ try
                 Name                    = "fiddler"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-            
+
             cChocoPackageInstaller GitInstalled
             {
                 Name                    = "git"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-            
+
             cChocoPackageInstaller SoapuiInstalled
             {
                 Name                    = "soapui"
@@ -57,7 +57,7 @@ try
                 Name                    = "notepadplusplus"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-    
+
             cChocoPackageInstaller PostmanInstalled
             {
                 Name                    = "postman"
@@ -70,25 +70,25 @@ try
                 Name                    = "xrmtoolbox"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-    
+
             cChocoPackageInstaller GitExtensionsInstalled
             {
                 Name                    = "gitextensions"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-    
+
             #cChocoPackageInstaller NCrunchForVS2019Installed
             #{
             #    Name                    = "ncrunch-vs2019"
             #    DependsOn               = "[cChocoInstaller]ChocoInstalled"
             #}
-    
+
             cChocoPackageInstaller NCrunchForVS2022Installed
             {
                 Name                    = "ncrunch-vs2022"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
-    
+
         }
     }
 }

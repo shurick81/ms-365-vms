@@ -17,7 +17,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2016-ad-sql2016-rs-crm-wp.json
 ```
 
@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2016-ad-sql2016-rs-crm-wp.json
 ```
 
@@ -176,7 +176,7 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ```
 
 ```PowerShell
-docker run -it --rm mcr.microsoft.com/azure-cli:2.46.0 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
+docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "az login --service-principal -u $env:ARM_CLIENT_ID -p $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID; `
     az group delete --subscription $env:ARM_SUBSCRIPTION_ID -n $env:MS_365_VMS_STACK_INSTANCE_ID -y"
 ```
 

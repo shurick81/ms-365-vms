@@ -29,7 +29,7 @@ try
                 ServiceAccountCredential        = $ADFSServiceCredential
                 Credential                      = $DomainAdminCredential
             }
-        
+
         }
     }
 }

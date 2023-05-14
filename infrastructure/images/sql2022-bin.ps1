@@ -11,7 +11,7 @@ try
 
         Node $AllNodes.NodeName
         {
-            
+
             FireWall SQLFirewallRuleTCP
             {
                 Name        = "AllowSQLConnection"
@@ -62,7 +62,7 @@ try
                 InstanceName    = "SQLInstance01"
                 DependsOn       = "[SQLSetup]SQLSetup"
             }
-            
+
         }
     }
 }

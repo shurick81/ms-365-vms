@@ -12,7 +12,7 @@ try
 
         Node $AllNodes.NodeName
         {
-            
+
             PSModule "PSModule_AdfsDsc"
             {
                 Ensure              = "Present"

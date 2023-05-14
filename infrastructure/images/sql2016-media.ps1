@@ -6,26 +6,26 @@ try
     {
         param(
         )
-    
+
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 9.1.0
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
-    
+
         Node $AllNodes.NodeName
         {
-    
+
             $SQLImageUrl = "https://download.microsoft.com/download/F/E/9/FE9397FA-BFAB-4ADD-8B97-91234BC774B2/SQLServer2016-x64-ENU.iso";
             $SQLImageUrl -match '[^/\\&\?]+\.\w{3,4}(?=([\?&].*$|$))' | Out-Null
             $SQLImageFileName = $matches[0]
             $SQLImageDestinationPath = "C:\Install\SQLRTMImage\$SQLImageFileName"
-    
+
             xRemoteFile SQLServerImageFilePresent
             {
                 Uri             = $SQLImageUrl
                 DestinationPath = $SQLImageDestinationPath
                 MatchSource     = $false
             }
-    
+
             MountImage SQLServerImageMounted
             {
                 ImagePath   = $SQLImageDestinationPath
@@ -47,7 +47,7 @@ try
                 DestinationPath = "C:\Install\SQLUpdates\SQLServer2016SP3-KB5003279-x64-ENU.exe"
                 MatchSource     = $false
             }
-    
+
             xRemoteFile CUFilePresent
             {
                 Uri             = "https://download.microsoft.com/download/4/1/d/41d10f6a-58dd-43ee-ad2a-cb2c3a6148ff/SQLServer2016-KB5021129-x64.exe"
