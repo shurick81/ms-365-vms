@@ -74,7 +74,6 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
     -var "MS_365_VMS_PIPELINE_RUNNER_VERSION=$env:MS_365_VMS_PIPELINE_RUNNER_VERSION";
 ```
 
-
 ```bash
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_hyperv/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_hyperv;
@@ -131,20 +130,4 @@ docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/st
 
 ```bash
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_hyperv hashicorp/terraform:1.4.6 taint module.SERVER00.azurerm_windows_virtual_machine.main
-```
-
-# Access the VM
-
-```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-    vm_name=$(printf $MS_365_VMS_VM_NAME_SPEC "server00");
-    az network public-ip show --id /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_STACK_INSTANCE_ID/providers/Microsoft.Network/publicIPAddresses/\$vm_name\-pip --query 'ipAddress' -o tsv"
-```
-
-# Turn on the VM
-
-```bash
-docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
-    vm_name=$(printf $MS_365_VMS_VM_NAME_SPEC "server00");
-    az vm show --id /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$MS_365_VMS_STACK_INSTANCE_ID/providers/Microsoft.Compute/virtualMachines/\$vm_name"
 ```
