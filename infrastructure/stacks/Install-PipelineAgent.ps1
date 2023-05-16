@@ -25,8 +25,55 @@ switch ($env:MS_365_VMS_PIPELINE_PROVIDER) {
             Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.294.0/actions-runner-win-x64-2.294.0.zip -OutFile actions-runner-win-x64-2.294.0.zip
             $ProgressPreference = $currentProgressPreference;
             if((Get-FileHash -Path actions-runner-win-x64-2.294.0.zip -Algorithm SHA256).Hash.ToUpper() -ne '22295b3078f7303ffb5ded4894188d85747b1b1a3d88a3eac4d0d076a2f62caa'.ToUpper()){ throw 'Computed checksum did not match' }
-            Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.294.0.zip", "$PWD")
-            ./config.cmd --url $env:MS_365_VMS_PIPELINE_URL --token $env:MS_365_VMS_PIPELINE_TOKEN --name (New-Guid).Guid --labels $env:MS_365_VMS_PIPELINE_LABELS --unattended --runasservice
+            Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.294.0.zip", "$PWD");
+            $runnerId = (New-Guid).Guid;
+            ./config.cmd --url $env:MS_365_VMS_PIPELINE_URL --token $env:MS_365_VMS_PIPELINE_TOKEN --name $runnerId --labels $env:MS_365_VMS_PIPELINE_LABELS --unattended --runasservice;
+            $runnerPass = (New-Guid).Guid;
+            $securedPassword = ConvertTo-SecureString $runnerPass -AsPlainText -Force;
+            $runnerAccountName = "ga" + $runnerId.Substring(0,18);
+            New-LocalUser -Name $runnerAccountName -Password $securedPassword;
+            Add-LocalGroupMember -Group "Administrators" -Member "$env:COMPUTERNAME\$runnerAccountName" -Verbose;
+
+            $AccountSid = (Get-LocalUser $runnerAccountName).SID.Value;
+            $ExportFile = "$env:TEMP\CurrentConfig.inf"
+            $SecDb = "$env:TEMP\secedt.sdb"
+            $ImportFile = "$env:TEMP\NewConfig.inf"
+            #Export the current configuration
+            secedit /export /cfg $ExportFile
+            #Find the current list of SIDs having already this right
+            $CurrentServiceLogonRight = Get-Content -Path $ExportFile |
+                Where-Object -FilterScript {$PSItem -match 'SeServiceLogonRight'}
+            #Create a new configuration file and add the new SID
+$FileContent = @'
+[Unicode]
+Unicode=yes
+[System Access]
+[Event Audit]
+[Registry Values]
+[Version]
+signature="$CHICAGO$"
+Revision=1
+[Profile Description]
+Description=GrantLogOnAsAService security template
+[Privilege Rights]
+{0}*{1}
+'@ -f $(
+                    if($CurrentServiceLogonRight){"$CurrentServiceLogonRight,"}
+                    else{'SeServiceLogonRight = '}
+                ), $AccountSid
+
+            Set-Content -Path $ImportFile -Value $FileContent
+
+            #Import the new configuration 
+            secedit /import /db $SecDb /cfg $ImportFile
+            secedit /configure /db $SecDb
+
+            $serviceName = (Get-Service actions.runner.*.$runnerId).Name;
+            $svc = gwmi win32_service -filter "name ='$servicename'";
+            $svc.StopService();
+            $svc.change($null,$null,$null,$null,$null,$null,".\$runnerAccountName",$runnerPass,$null,$null,$null);
+            $svc.StartService();
+            Start-Service $serviceName;
         }
         catch
         {
