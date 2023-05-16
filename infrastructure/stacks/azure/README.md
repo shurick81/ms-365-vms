@@ -132,6 +132,11 @@ docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "az login --
     az vm list -d --subscription $env:ARM_SUBSCRIPTION_ID -g $env:MS_365_VMS_STACK_INSTANCE_ID -o table"
 ```
 
+```bash
+docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID; \
+    az vm list -d --subscription $ARM_SUBSCRIPTION_ID -g $MS_365_VMS_STACK_INSTANCE_ID -o table"
+```
+
 ## Start machines
 
 ```PowerShell
@@ -234,6 +239,7 @@ docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azur
 ```
 az group list --query "[?starts_with(name, 'pkr-Resource-Group-')].name" --output tsv |
 while read -r resourceGroup; do
-    az group delete --name $resourceGroup --no-wait -y
+    echo "Removing "$resourceGroup;
+    az group delete --name $resourceGroup --no-wait -y;
 done
 ```
