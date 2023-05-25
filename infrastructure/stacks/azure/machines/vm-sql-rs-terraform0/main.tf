@@ -274,6 +274,24 @@ resource "azurerm_virtual_machine" "main" {
     ]
   }
 
+  provisioner "remote-exec" {
+    connection {
+      user     = "${var.vm_admin_username}"
+      password = "${var.vm_admin_password}"
+      port     = 5986
+      https    = true
+      timeout  = "10m"
+
+      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
+      insecure = true
+      #host = "${azurerm_public_ip.main.ip_address}"
+    }
+
+    inline = [
+      "powershell.exe -command \"Uninstall-Module SqlServerDsc -Force; Install-Module SqlServerDsc -RequiredVersion 16.3.1 -Force\"",
+    ]
+  }
+
   provisioner "file" {
     connection {
       user     = "${var.vm_admin_username}"
@@ -306,25 +324,6 @@ resource "azurerm_virtual_machine" "main" {
 
     inline = [
       "powershell.exe -command \".\\common\\sqlconfig.ps1\"",
-    ]
-  }
-
-  # Workaround for provisioining reporting services. The module version 16.1.0 fails, see https://github.com/dsccommunity/SqlServerDsc/issues/1868
-  provisioner "remote-exec" {
-    connection {
-      user     = "${var.vm_admin_username}"
-      password = "${var.vm_admin_password}"
-      port     = 5986
-      https    = true
-      timeout  = "10m"
-
-      # NOTE: if you're using a real certificate, rather than a self-signed one, you'll want this set to `false`/to remove this.
-      insecure = true
-      #host = "${azurerm_public_ip.main.ip_address}"
-    }
-
-    inline = [
-      "powershell.exe -command \"Uninstall-Module SqlServerDsc; Install-Module SqlServerDsc -RequiredVersion 16.3.1\"",
     ]
   }
 

@@ -486,7 +486,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"Uninstall-Module SqlServerDsc; Install-Module SqlServerDsc -RequiredVersion 16.3.1\"",
+      "powershell.exe -command \"Uninstall-Module SqlServerDsc -Force; Install-Module SqlServerDsc -RequiredVersion 16.3.1 -Force\"",
     ]
   }
 
