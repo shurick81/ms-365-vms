@@ -37,7 +37,7 @@ try
                 Name                = "SqlServerDsc"
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
-                RequiredVersion     = "16.1.0"
+                RequiredVersion     = "16.3.1"
             }
 
             PSModule "PSModule_ReportingServicesTools"
