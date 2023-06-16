@@ -6,11 +6,11 @@ try
     {
         param(
         )
-    
+
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName xPSDesiredStateConfiguration -Name xRemoteFile -ModuleVersion 9.1.0
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
-    
+
         Node $AllNodes.NodeName
         {
             $provider = $null
@@ -41,8 +41,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "https://download.microsoft.com/download/9/6/8/96819b0c-c8fb-4b44-91b5-c97015bbda9f/SQLServer2022-KB5024396-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5024396-x64.exe"
+                    Uri             = "https://download.microsoft.com/download/9/6/8/96819b0c-c8fb-4b44-91b5-c97015bbda9f/SQLServer2022-KB5026717-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026717-x64.exe"
                     MatchSource     = $false
                 }
 
@@ -71,8 +71,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2022-KB5024396-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5024396-x64.exe"
+                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2022-KB5026717-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026717-x64.exe"
                     MatchSource     = $false
                 }
 
@@ -91,14 +91,14 @@ try
                 }
 
             }
-    
+
             MountImage SQLServerImageMounted
             {
                 ImagePath   = "C:\Install\SQLRTMImage\SQLServer2022-x64-ENU-Dev.iso"
                 DriveLetter = 'F'
                 DependsOn   = "[xRemoteFile]SQLServerImageFilePresent"
             }
-    
+
             WaitForVolume SQLServerImageMounted
             {
                 DriveLetter         = 'F'
@@ -106,7 +106,7 @@ try
                 RetryCount          = 10
                 DependsOn           = "[MountImage]SQLServerImageMounted"
             }
-            
+
         }
     }
 }

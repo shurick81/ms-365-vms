@@ -20,7 +20,7 @@ try
             }
 
             $fileShareFullAccessIdentities = $env:FILE_SHARE_FULL_ACCESS_IDENTITIES.Split( "," );
-            
+
             SmbShare 'Common-files'
             {
                 Name        = "common-files"
@@ -28,7 +28,7 @@ try
                 FullAccess  = $fileShareFullAccessIdentities
                 DependsOn   = "[File]CommonSMBSharedDirectory"
             }
-            
+
             $fileShareFullAccessIdentities | % {
 
                 FileSystemAccessRule $_
@@ -38,7 +38,7 @@ try
                     Rights      = @('FullControl')
                     DependsOn   = "[File]CommonSMBSharedDirectory"
                 }
-    
+
             }
 
             if ( $env:MS_365_VMS_SHARED_SOURCE_UNC ) {
@@ -54,7 +54,7 @@ try
                     Credential      = $MediaShareCredential
                     DependsOn       = "[File]CommonSMBSharedDirectory"
                 }
-                        
+
             }
         }
     }

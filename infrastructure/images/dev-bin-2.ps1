@@ -23,7 +23,7 @@ try
 
             cChocoPackageInstaller VSCodeInstalled
             {
-                Name                    = "visualstudiocode"
+                Name                    = "vscode"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
 

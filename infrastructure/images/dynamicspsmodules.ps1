@@ -21,7 +21,7 @@ try
                 InstallationPolicy  = "Trusted"
                 RequiredVersion     = "3.3.0.0"
             }
-            
+
             PSModule "PSModule_CertificateDsc"
             {
                 Ensure              = "Present"

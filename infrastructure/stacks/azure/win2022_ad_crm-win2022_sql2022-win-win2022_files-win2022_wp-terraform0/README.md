@@ -17,7 +17,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2022-ad.json
 ```
 
@@ -34,7 +34,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2022-ad.json
 ```
 
@@ -51,7 +51,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2022-sql2022.json
 ```
 
@@ -68,7 +68,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2022-sql2022.json
 ```
 
@@ -85,7 +85,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2022-soe.json
 ```
 
@@ -102,7 +102,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2022-soe.json
 ```
 
@@ -119,7 +119,7 @@ docker run --rm -v ${pwd}:/workplace -w /workplace `
     -e MS_365_VMS_LOCATION=$env:MS_365_VMS_LOCATION `
     -e MS_365_VMS_IMAGE_RG_NAME=$env:MS_365_VMS_IMAGE_RG_NAME `
     -e MS_365_VMS_PACKER_VM_NAME=$($env:MS_365_VMS_VM_NAME_SPEC.Replace("%s",(Get-Date -Format "ddHHmmss"))) `
-    hashicorp/packer:1.8.5 `
+    hashicorp/packer:1.8.7 `
     build -only azure-arm win2022-wp.json
 ```
 
@@ -136,7 +136,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
     -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
-    hashicorp/packer:1.8.5 \
+    hashicorp/packer:1.8.7 \
     build -only azure-arm win2022-wp.json
 ```
 
@@ -207,6 +207,7 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0;
 sudo rm -rf terraform.tfstate.d;
+sudo rm -rf .terraform #for upgrading terraform?
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 init
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 workspace new $MS_365_VMS_STACK_INSTANCE_ID
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 workspace select $MS_365_VMS_STACK_INSTANCE_ID

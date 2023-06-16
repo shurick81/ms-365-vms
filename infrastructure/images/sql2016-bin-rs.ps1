@@ -6,11 +6,11 @@ try
     {
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.3.1
 
         Node $AllNodes.NodeName
         {
-            
+
             SQLSetup SQLSetup
             {
                 InstanceName            = "RSInstance01"
@@ -25,7 +25,7 @@ try
                 ErrorReporting          = "True"
                 BrowserSvcStartupType   = "Automatic"
             }
-            
+
         }
     }
 }

@@ -7,11 +7,11 @@ try
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.3.1
 
         Node $AllNodes.NodeName
         {
-            
+
             FireWall SQLFirewallRuleTCP
             {
                 Name        = "AllowSQLConnection"
@@ -62,7 +62,7 @@ try
                 InstanceName    = "SQLInstance01"
                 DependsOn       = "[SQLSetup]SQLSetup"
             }
-            
+
         }
     }
 }

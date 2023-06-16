@@ -17,7 +17,7 @@ try
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
         Import-DscResource -ModuleName xPSDesiredStateConfiguration -ModuleVersion 9.1.0
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.3.1
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
 
         Node $AllNodes.NodeName

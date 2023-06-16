@@ -59,7 +59,7 @@ jobs:
     needs: provision-win2016_ad_sql2016_rs_crm_wp-terraform0
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/azure-cli:2.46.0
+      image: mcr.microsoft.com/azure-cli:2.48.1
     env:
       ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}

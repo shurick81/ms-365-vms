@@ -6,10 +6,10 @@ try
     {
         param(
         )
-    
+
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName StorageDsc -ModuleVersion 4.9.0.0
-    
+
         Node $AllNodes.NodeName
         {
 

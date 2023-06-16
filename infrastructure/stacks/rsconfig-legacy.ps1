@@ -14,7 +14,7 @@ try
             $DomainAdminCredential
         )
         Import-DscResource -ModuleName PSDesiredStateConfiguration
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.3.1
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
 
         Node $AllNodes.NodeName
@@ -41,13 +41,13 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow web sites publishing"
             }
-            
+
             FireWall WMI-WINMGMT-In-TCP
             {
                 Name        = "WMI-WINMGMT-In-TCP"
                 Enabled     = "True"
             }
-            
+
             FireWall WMI-RPCSS-In-TCP
             {
                 Name        = "WMI-RPCSS-In-TCP"

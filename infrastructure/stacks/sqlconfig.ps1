@@ -7,11 +7,11 @@ try
 
         Import-DscResource -ModuleName PSDesiredStateConfiguration
         Import-DscResource -ModuleName NetworkingDsc -ModuleVersion 7.4.0.0
-        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.1.0
+        Import-DscResource -ModuleName SqlServerDsc -ModuleVersion 16.3.1
 
         Node $AllNodes.NodeName
         {
-            
+
             SqlMaxDop SQLMaxDop
             {
                 Ensure          = 'Present'
@@ -39,7 +39,7 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow SQL communication"
             }
-            
+
             FireWall AllowSQL2016Service
             {
                 Name        = "AllowSQL2016Service"
@@ -52,7 +52,7 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow SQL communication"
             }
-            
+
             FireWall AllowSQL2017Service
             {
                 Name        = "AllowSQL2017Service"
@@ -65,7 +65,7 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow SQL communication"
             }
-            
+
             FireWall AllowSQL2019Service
             {
                 Name        = "AllowSQL2019Service"
@@ -78,7 +78,7 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow SQL communication"
             }
-            
+
             FireWall AllowSQL2022Service
             {
                 Name        = "AllowSQL2022Service"
@@ -104,7 +104,7 @@ try
                 Protocol    = "UDP"
                 Description = "Firewall rule to allow SQL communication"
             }
-            
+
             FireWall DirectoryService
             {
                 Name        = "DirectoryService"
@@ -117,7 +117,7 @@ try
                 Protocol    = "TCP"
                 Description = "Firewall rule to allow AD communication"
             }
-            
+
         }
     }
 }

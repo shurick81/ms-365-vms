@@ -37,20 +37,20 @@ Invoke-Command $env:COMPUTERNAME -Credential $DomainAdminCredential {
     } else {
         Write-Host "DS is not connected";
     }
-    
+
     $AccountSid = $stringSID;
-    
+
     $ExportFile = "$env:TEMP\CurrentConfig.inf"
     $SecDb = "$env:TEMP\secedt.sdb"
     $ImportFile = "$env:TEMP\NewConfig.inf"
-    
+
     #Export the current configuration
     secedit /export /cfg $ExportFile
-    
+
     #Find the current list of SIDs having already this right
     $CurrentServiceLogonRight = Get-Content -Path $ExportFile |
         Where-Object -FilterScript {$PSItem -match 'SeServiceLogonRight'}
-    
+
     #Create a new configuration file and add the new SID
 $FileContent = @'
 [Unicode]
@@ -69,9 +69,9 @@ Description=GrantLogOnAsAService security template
             if($CurrentServiceLogonRight){"$CurrentServiceLogonRight,"}
             else{'SeServiceLogonRight = '}
         ), $AccountSid
-    
+
     Set-Content -Path $ImportFile -Value $FileContent
-    
+
     #Import the new configuration 
     secedit /import /db $SecDb /cfg $ImportFile
     secedit /configure /db $SecDb
