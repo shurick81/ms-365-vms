@@ -207,6 +207,7 @@ docker run --rm -v ${pwd}/../../../..:/workplace -w /workplace/infrastructure/st
 ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0/shared-variables-ignore-soft.sh
 cd ~/projects/ms-365-vms/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0;
 sudo rm -rf terraform.tfstate.d;
+sudo rm -rf .terraform #for upgrading terraform?
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 init
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 workspace new $MS_365_VMS_STACK_INSTANCE_ID
 docker run --rm -v $(pwd)/../../../..:/workplace -w /workplace/infrastructure/stacks/azure/win2022_ad_crm-win2022_sql2022-win-win2022_files-win2022_wp-terraform0 hashicorp/terraform:0.11.15 workspace select $MS_365_VMS_STACK_INSTANCE_ID
