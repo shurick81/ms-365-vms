@@ -243,3 +243,23 @@ while read -r resourceGroup; do
     az group delete --name $resourceGroup --no-wait -y;
 done
 ```
+
+```PowerShell
+docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c 'ARM_CLIENT_ID='$env:ARM_CLIENT_ID'; ARM_CLIENT_SECRET='$env:ARM_CLIENT_SECRET'; ARM_TENANT_ID='$env:ARM_TENANT_ID'; ENVIRONMENTID='$env:MS_365_VMS_STACK_INSTANCE_ID'; ARM_SUBSCRIPTION_ID='$env:ARM_SUBSCRIPTION_ID'; `
+    az login --service-principal -u `$ARM_CLIENT_ID -p `$ARM_CLIENT_SECRET --tenant `$ARM_TENANT_ID; `
+    az group list --subscription $env:ARM_SUBSCRIPTION_ID --query `"[?starts_with(name, 'pkr-Resource-Group-')].name`" --output tsv |
+    while read -r resourceGroup; do
+        echo `"Removing `"`$resourceGroup;
+        az group delete --name `$resourceGroup --no-wait -y;
+    done'
+```
+
+```bash
+docker run -it --rm mcr.microsoft.com/azure-cli:2.48.1 /bin/bash -c "ENVIRONMENTID='$MS_365_VMS_STACK_INSTANCE_ID';
+    az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+    az group list --subscription $ARM_SUBSCRIPTION_ID --query \"[?starts_with(name, 'pkr-Resource-Group-')].name\" --output tsv |
+    while read -r resourceGroup; do
+        echo \"Removing \"\$resourceGroup;
+        az group delete --name \$resourceGroup --no-wait -y;
+    done"
+```
