@@ -236,7 +236,7 @@ docker run -it --rm -v $(pwd)/../azure-cli:/root -w /root mcr.microsoft.com/azur
 
 ## Remove all temporary Packer groups
 
-```
+```bash
 az group list --query "[?starts_with(name, 'pkr-Resource-Group-')].name" --output tsv |
 while read -r resourceGroup; do
     echo "Removing "$resourceGroup;
