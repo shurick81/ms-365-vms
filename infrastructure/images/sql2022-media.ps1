@@ -41,8 +41,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "https://download.microsoft.com/download/9/6/8/96819b0c-c8fb-4b44-91b5-c97015bbda9f/SQLServer2022-KB5026717-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026717-x64.exe"
+                    Uri             = "https://download.microsoft.com/download/9/6/8/96819b0c-c8fb-4b44-91b5-c97015bbda9f/SQLServer2022-KB5026806-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026806-x64.exe"
                     MatchSource     = $false
                 }
 
@@ -71,8 +71,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2022-KB5026717-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026717-x64.exe"
+                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2022-KB5026806-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2022-KB5026806-x64.exe"
                     MatchSource     = $false
                 }
 

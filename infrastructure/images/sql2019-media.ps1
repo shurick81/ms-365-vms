@@ -46,8 +46,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "https://download.microsoft.com/download/6/e/7/6e72dddf-dfa4-4889-bc3d-e5d3a0fd11ce/SQLServer2019-KB5024276-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5024276-x64.exe"
+                    Uri             = "https://download.microsoft.com/download/6/e/7/6e72dddf-dfa4-4889-bc3d-e5d3a0fd11ce/SQLServer2019-KB5025808-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5025808-x64.exe"
                     MatchSource     = $false
                 }
 
@@ -76,8 +76,8 @@ try
 
                 xRemoteFile SQLServerCUFilePresent
                 {
-                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2019-KB5024276-x64.exe"
-                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5024276-x64.exe"
+                    Uri             = "http://$env:PACKER_HTTP_ADDR/SQLServer2019-KB5025808-x64.exe"
+                    DestinationPath = "C:\Install\SQLUpdates\SQLServer2019-KB5025808-x64.exe"
                     MatchSource     = $false
                 }
 
