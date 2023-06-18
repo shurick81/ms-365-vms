@@ -18,5 +18,6 @@ $ProgressPreference = $currentProgressPreference;
 
 &$tempFilePath /S
 Set-ExecutionPolicy Bypass -Force;
-iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-choco install -y OpenSSL.Light --version 1.1.1.20181020
+$env:chocolateyVersion = '1.4.0';
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'));
+choco install -y OpenSSL.Light --version 1.1.1.20181020;
