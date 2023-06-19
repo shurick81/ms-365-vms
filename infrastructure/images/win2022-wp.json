@@ -113,6 +113,7 @@
         { "type": "powershell", "script": "dev-bin-1.ps1" },
         { "type": "windows-restart" },
         { "type": "powershell", "script": "dev-media-clean.ps1" },
+        { "type": "powershell", "inline": "$env:chocolateyVersion = '1.4.0'; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"},
         { "type": "powershell", "script": "dev-bin-2.ps1" },
         { "type": "powershell", "script": "Setup-WP.ps1"},
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
