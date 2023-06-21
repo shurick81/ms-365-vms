@@ -87,7 +87,6 @@ source "hyperv-iso" "win2022-ad-sql2022-rs2019-crm-wp-000000" {
   winrm_password   = "Fractalsol365"
   winrm_timeout    = "2h"
   winrm_username   = "packer"
-  http_directory   = "./http_root"
 }
 
 source "virtualbox-iso" "win2022-ad-sql2022-rs2019-crm-wp-000000" {
