@@ -55,7 +55,7 @@ source "azure-arm" "azure00" {
   communicator                       = "winrm"
   image_offer                        = "WindowsServer"
   image_publisher                    = "MicrosoftWindowsServer"
-  image_sku                          = "2016-Datacenter"
+  image_sku                          = "2022-Datacenter"
   image_version                      = "latest"
   location                           = "${var.location}"
   managed_image_name                 = "${var.box_name}"
@@ -73,31 +73,32 @@ source "azure-arm" "azure00" {
   winrm_username                     = "packer"
 }
 
-source "hyperv-iso" "win2016-ad-sql2016-rs-crm-wp-000000" {
+source "hyperv-iso" "win2022-ad-sql2022-rs2019-crm-wp-000000" {
   communicator     = "winrm"
   cpus             = 4
   disk_size        = 102400
-  floppy_files     = ["autounattend/hyper-v/win2016/Autounattend.xml", "HyperV/hyperv-init.ps1", "sysprep.bat", "autounattend_sysprep.xml"]
+  floppy_files     = ["autounattend/hyper-v/win2022/Autounattend.xml", "HyperV/hyperv-init.ps1", "sysprep.bat", "autounattend_sysprep.xml"]
   headless         = true
-  iso_checksum     = "18a4f00a675b0338f3c7c93c4f131beb"
-  iso_url          = "https://download.microsoft.com/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO"
+  iso_checksum     = "3e4fa6d8507b554856fc9ca6079cc402df11a8b79344871669f0251535255325"
+  iso_url          = "https://software-static.download.prss.microsoft.com/sg/download/888969d5-f34g-4e03-ac9d-1f9786c66749/SERVER_EVAL_x64FRE_en-us.iso"
   memory           = 4096
   shutdown_command = "a:/sysprep.bat"
   switch_name      = "${var.hyperv_switch_name}"
   winrm_password   = "Fractalsol365"
   winrm_timeout    = "2h"
   winrm_username   = "packer"
+  http_directory   = "./http_root"
 }
 
-source "virtualbox-iso" "win2016-ad-sql2016-rs-crm-wp-000000" {
+source "virtualbox-iso" "win2022-ad-sql2022-rs2019-crm-wp-000000" {
   communicator         = "winrm"
   disk_size            = 102400
-  floppy_files         = ["autounattend/virtualbox/win2016/Autounattend.xml", "winrm.ps1", "sysprep.bat", "autounattend_sysprep.xml"]
+  floppy_files         = ["autounattend/virtualbox/win2022/Autounattend.xml", "winrm.ps1", "sysprep.bat", "autounattend_sysprep.xml"]
   guest_additions_mode = "attach"
   guest_os_type        = "Windows2016_64"
   headless             = true
-  iso_checksum         = "18a4f00a675b0338f3c7c93c4f131beb"
-  iso_url              = "https://download.microsoft.com/download/1/6/F/16FA20E6-4662-482A-920B-1A45CF5AAE3C/14393.0.160715-1616.RS1_RELEASE_SERVER_EVAL_X64FRE_EN-US.ISO"
+  iso_checksum         = "3e4fa6d8507b554856fc9ca6079cc402df11a8b79344871669f0251535255325"
+  iso_url              = "https://software-static.download.prss.microsoft.com/sg/download/888969d5-f34g-4e03-ac9d-1f9786c66749/SERVER_EVAL_x64FRE_en-us.iso"
   shutdown_command     = "a:/sysprep.bat"
   vboxmanage           = [["modifyvm", "{{ .Name }}", "--memory", "4096"], ["modifyvm", "{{ .Name }}", "--cpus", "4"]]
   winrm_password       = "Fractalsol365"
@@ -106,30 +107,26 @@ source "virtualbox-iso" "win2016-ad-sql2016-rs-crm-wp-000000" {
 }
 
 build {
-  sources = ["source.azure-arm.azure00", "source.hyperv-iso.win2016-ad-sql2016-rs-crm-wp-000000", "source.virtualbox-iso.win2016-ad-sql2016-rs-crm-wp-000000"]
+  sources = ["source.azure-arm.azure00", "source.hyperv-iso.win2022-ad-sql2022-rs2019-crm-wp-000000", "source.virtualbox-iso.win2022-ad-sql2022-rs2019-crm-wp-000000"]
 
   provisioner "powershell" {
-    only   = ["virtualbox-iso.win2016-ad-sql2016-rs-crm-wp-000000"]
+    only   = ["virtualbox-iso.win2022-ad-sql2022-rs2019-crm-wp-000000"]
     script = "VirtualBox/installadditions.ps1"
   }
 
   provisioner "powershell" {
-    only   = ["hyperv-iso.win2016-ad-sql2016-rs-crm-wp-000000"]
+    only   = ["hyperv-iso.win2022-ad-sql2022-rs2019-crm-wp-000000"]
     script = "HyperV/integration.ps1"
   }
 
   provisioner "powershell" {
-    only   = ["virtualbox-iso.win2016-ad-sql2016-rs-crm-wp-000000", "hyperv-iso.win2016-ad-sql2016-rs-crm-wp-000000"]
+    only   = ["virtualbox-iso.win2022-ad-sql2022-rs2019-crm-wp-000000", "hyperv-iso.win2022-ad-sql2022-rs2019-crm-wp-000000"]
     script = "rdpenable.ps1"
   }
 
   provisioner "powershell" {
     only   = ["azure-arm.azure00"]
     script = "winrm.ps1"
-  }
-
-  provisioner "powershell" {
-    script = "win-legacy-default-protocols.ps1"
   }
 
   provisioner "powershell" {
@@ -172,17 +169,21 @@ build {
   }
 
   provisioner "powershell" {
+    script = "Install-SSLTools.ps1"
+  }
+
+  provisioner "powershell" {
     script = "adbin.ps1"
   }
 
   provisioner "powershell" {
-    script = "sql2016-media.ps1"
+    script = "sql2022-media.ps1"
   }
 
   provisioner "powershell" {
     environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
     only             = ["azure-arm.azure00"]
-    script           = "sql2016-bin.ps1"
+    script           = "sql2022-bin.ps1"
   }
 
   provisioner "windows-restart" {
@@ -192,17 +193,26 @@ build {
 
   provisioner "powershell" {
     only   = ["azure-arm.azure00"]
-    script = "sql2016-media.ps1"
+    script = "sql2022-media.ps1"
   }
 
   provisioner "powershell" {
-    script = "sql2016-bin.ps1"
+    script = "sql2022-bin.ps1"
+  }
+
+  provisioner "powershell" {
+    environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
+    script           = "sql2022-media-clean.ps1"
+  }
+
+  provisioner "powershell" {
+    script = "sql2019-media.ps1"
   }
 
   provisioner "powershell" {
     environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
     only             = ["azure-arm.azure00"]
-    script           = "sql2016-bin-rs.ps1"
+    script           = "sql2022-bin-rs.ps1"
   }
 
   provisioner "windows-restart" {
@@ -212,16 +222,16 @@ build {
 
   provisioner "powershell" {
     only   = ["azure-arm.azure00"]
-    script = "sql2016-media.ps1"
+    script = "sql2019-media.ps1"
   }
 
   provisioner "powershell" {
-    script = "sql2016-bin-rs.ps1"
+    script = "sql2022-bin-rs.ps1"
   }
 
   provisioner "powershell" {
     environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
-    script           = "sql2016-media-clean.ps1"
+    script           = "sql2019-media-clean.ps1"
   }
 
   provisioner "powershell" {
@@ -233,7 +243,11 @@ build {
   }
 
   provisioner "powershell" {
-    script = "Install-SSLTools.ps1"
+    script = "waitforcpucalm.ps1"
+  }
+
+  provisioner "windows-restart" {
+    restart_timeout = "30m"
   }
 
   provisioner "powershell" {
@@ -290,7 +304,7 @@ build {
   }
 
   post-processor "vagrant" {
-    only   = ["virtualbox-iso.win2016-ad-sql2016-rs-crm-wp-000000", "hyperv-iso.win2016-ad-sql2016-rs-crm-wp-000000"]
+    only   = ["virtualbox-iso.win2022-ad-sql2022-rs2019-crm-wp-000000", "hyperv-iso.win2022-ad-sql2022-rs2019-crm-wp-000000"]
     output = "${var.box_name}.box"
   }
 }
