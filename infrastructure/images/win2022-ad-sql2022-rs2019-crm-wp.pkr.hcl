@@ -180,22 +180,6 @@ build {
   }
 
   provisioner "powershell" {
-    environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
-    only             = ["azure-arm.azure00"]
-    script           = "sql2022-bin.ps1"
-  }
-
-  provisioner "windows-restart" {
-    only            = ["azure-arm.azure00"]
-    restart_timeout = "30m"
-  }
-
-  provisioner "powershell" {
-    only   = ["azure-arm.azure00"]
-    script = "sql2022-media.ps1"
-  }
-
-  provisioner "powershell" {
     script = "sql2022-bin.ps1"
   }
 
@@ -209,28 +193,20 @@ build {
   }
 
   provisioner "powershell" {
-    environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
-    only             = ["azure-arm.azure00"]
-    script           = "sql2022-bin-rs.ps1"
-  }
-
-  provisioner "windows-restart" {
-    only            = ["azure-arm.azure00"]
-    restart_timeout = "30m"
-  }
-
-  provisioner "powershell" {
-    only   = ["azure-arm.azure00"]
-    script = "sql2019-media.ps1"
-  }
-
-  provisioner "powershell" {
     script = "sql2022-bin-rs.ps1"
   }
 
   provisioner "powershell" {
     environment_vars = ["VMDEVOPSSTARTER_NODSCTEST=TRUE"]
     script           = "sql2019-media-clean.ps1"
+  }
+
+  provisioner "powershell" {
+    script = "waitforcpucalm.ps1"
+  }
+
+  provisioner "windows-restart" {
+    restart_timeout = "30m"
   }
 
   provisioner "powershell" {
