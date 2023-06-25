@@ -156,13 +156,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 | Remove-VM -Force
-          cd infrastructure\images
+          Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 -ErrorAction Ignore | Remove-VM -Force;
+          cd infrastructure\images;
           packer build -only hyperv-iso.* .\win2022-ad-sql2022-rs2019-crm-wp.pkr.hcl;
+  preparefordeletion-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv:
+    if: ${{ always() }}
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-01'
+      - 'wp00'
+    needs: build-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
+    steps:
+      - run: Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 -ErrorAction Ignore | Set-VM -AutomaticStartAction Nothing;
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: build-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
+    needs: preparefordeletion-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
     container:
       image: mcr.microsoft.com/azure-cli:2.48.1
     env:
@@ -228,13 +237,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 | Remove-VM -Force
-          cd infrastructure\images
+          Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore | Remove-VM -Force;
+          cd infrastructure\images;
           packer build -only hyperv-iso.* .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
+  preparefordeletion-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    if: ${{ always() }}
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-02'
+      - 'wp00'
+    needs: build-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    steps:
+      - run: Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore | Set-VM -AutomaticStartAction Nothing;
   deallocate-ms-365-vms-win2022_hyperv-ci-02:
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: build-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    needs: preparefordeletion-win2016-ad-sql2016-rs-crm-wp-image-hyperv
     container:
       image: mcr.microsoft.com/azure-cli:2.48.1
     env:
