@@ -156,8 +156,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
+          Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 | Remove-VM -Force
           cd infrastructure\images
-          packer build -only hyperv-iso.* -force .\win2022-ad-sql2022-rs2019-crm-wp.pkr.hcl;
+          packer build -only hyperv-iso.* .\win2022-ad-sql2022-rs2019-crm-wp.pkr.hcl;
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
     if: ${{ always() }}
     runs-on: ubuntu-latest
@@ -227,8 +228,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
+          Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 | Remove-VM -Force
           cd infrastructure\images
-          packer build -only hyperv-iso.* -force .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
+          packer build -only hyperv-iso.* .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
   deallocate-ms-365-vms-win2022_hyperv-ci-02:
     if: ${{ always() }}
     runs-on: ubuntu-latest
