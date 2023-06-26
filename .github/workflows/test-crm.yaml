@@ -6,6 +6,23 @@ on:
     paths:
       - '.github/workflows/test-crm.yaml'
 jobs:
+  build-win2022-ad-sql2022-rs2019-crm-wp:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/packer:1.8.7
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+      MS_365_VMS_VM_SIZE: Standard_D4s_v5
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-ad-sql2022-rs2019-crm-wp-westeurope-000000
+      MS_365_VMS_LOCATION: westeurope
+      MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
+      MS_365_VMS_PACKER_VM_NAME: swaz16${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd infrastructure/images; packer build -only azure-arm.azure00 -force win2022-ad-sql2022-rs2019-crm-wp.pkr.hcl
   build-win2016-ad-sql2016-rs-crm-wp:
     runs-on: ubuntu-latest
     container:
@@ -19,10 +36,10 @@ jobs:
       MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-sql2016-rs-crm-wp-westeurope-000000
       MS_365_VMS_LOCATION: westeurope
       MS_365_VMS_IMAGE_RG_NAME: CommonRGWestEurope
-      MS_365_VMS_PACKER_VM_NAME: swaz11${{ github.run_number }}
+      MS_365_VMS_PACKER_VM_NAME: swaz17${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
-      - run: cd infrastructure/images; packer build -only azure-arm -force win2016-ad-sql2016-rs-crm-wp.json
+      - run: cd infrastructure/images; packer build -only azure-arm.azure00 -force win2016-ad-sql2016-rs-crm-wp.pkr.hcl
   provision-win2016_ad_sql2016_rs_crm_wp-terraform0:
     needs: build-win2016-ad-sql2016-rs-crm-wp
     runs-on: ubuntu-latest
@@ -113,7 +130,7 @@ jobs:
           }
           iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
           choco install -y packer --version=1.8.7;
-  remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+  remove-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv:
     runs-on:
       - self-hosted
       - 'ms-365-vms-win2022_hyperv-ci-01'
@@ -122,28 +139,39 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          if (Get-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore) {
-            Remove-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -Recurse
+          if (Get-Item infrastructure\images\output-win2022-ad-sql2022-rs2019-crm-wp-000000 -ErrorAction Ignore) {
+            Remove-Item infrastructure\images\output-win2022-ad-sql2022-rs2019-crm-wp-000000 -Recurse
           }
-  build-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+          Remove-Item infrastructure\images\*.box
+  build-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv:
     runs-on:
       - self-hosted
       - 'ms-365-vms-win2022_hyperv-ci-01'
       - 'wp00'
-    needs: remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    needs: remove-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
     env:
       MS_365_VMS_PROJECT_PREFIX: ms-365-vms-
-      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-sql2016-rs-crm-wp-000000
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2022-ad-sql2022-rs2019-crm-wp-000000
       MS_365_VMS_HYPERV_SWITCH: NATSwitch00
     steps:
       - uses: actions/checkout@v3
       - run: |
-          cd infrastructure\images
-          packer build -only hyperv-iso.* .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
+          Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 -ErrorAction Ignore | Remove-VM -Force;
+          cd infrastructure\images;
+          packer build -only hyperv-iso.* .\win2022-ad-sql2022-rs2019-crm-wp.pkr.hcl;
+  preparefordeletion-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv:
+    if: ${{ always() }}
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-01'
+      - 'wp00'
+    needs: build-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
+    steps:
+      - run: Get-VM packer-win2022-ad-sql2022-rs2019-crm-wp-000000 -ErrorAction Ignore | Set-VM -AutomaticStartAction Nothing;
   deallocate-ms-365-vms-win2022_hyperv-ci-01:
     if: ${{ always() }}
     runs-on: ubuntu-latest
-    needs: build-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    needs: preparefordeletion-win2022-ad-sql2022-rs2019-crm-wp-image-hyperv
     container:
       image: mcr.microsoft.com/azure-cli:2.48.1
     env:
@@ -154,3 +182,84 @@ jobs:
     steps:
       - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
       - run: az vm deallocate --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-01/providers/Microsoft.Compute/virtualMachines/swazserver00
+  start-ms-365-vms-win2022_hyperv-ci-02:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/azure-cli:2.48.1
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+    steps:
+      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+      - run: az vm start --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-02/providers/Microsoft.Compute/virtualMachines/swazserver00
+  hyperv-prereqs-ms-365-vms-win2022_hyperv-ci-02:
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-02'
+      - 'wp00'
+    needs: start-ms-365-vms-win2022_hyperv-ci-02
+    steps:
+      - run: |
+          if (!(Get-VMSwitch -Name NATSwitch00 -ErrorAction Ignore)) {
+            New-VMSwitch -SwitchName NATSwitch00 -SwitchType Internal;
+            New-NetIPAddress -IPAddress 169.254.0.1 -PrefixLength 16 -InterfaceAlias "vEthernet (NATSwitch00)";
+          }
+          if (!(Get-NetNat -Name NATNetwork00 -ErrorAction Ignore)) {
+            New-NetNAT -Name NATNetwork00 -InternalIPInterfaceAddressPrefix 169.254.0.0/16;
+          }
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
+          choco install -y packer --version=1.8.7;
+  remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-02'
+      - 'wp00'
+    needs: hyperv-prereqs-ms-365-vms-win2022_hyperv-ci-02
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          if (Get-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore) {
+            Remove-Item infrastructure\images\output-win2016-ad-sql2016-rs-crm-wp-000000 -Recurse
+          }
+          Remove-Item infrastructure\images\*.box
+  build-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-02'
+      - 'wp00'
+    needs: remove-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    env:
+      MS_365_VMS_PROJECT_PREFIX: ms-365-vms-
+      MS_365_VMS_IMAGE_NAME: ms-365-vms-win2016-ad-sql2016-rs-crm-wp-000000
+      MS_365_VMS_HYPERV_SWITCH: NATSwitch00
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore | Remove-VM -Force;
+          cd infrastructure\images;
+          packer build -only hyperv-iso.* .\win2016-ad-sql2016-rs-crm-wp.pkr.hcl;
+  preparefordeletion-win2016-ad-sql2016-rs-crm-wp-image-hyperv:
+    if: ${{ always() }}
+    runs-on:
+      - self-hosted
+      - 'ms-365-vms-win2022_hyperv-ci-02'
+      - 'wp00'
+    needs: build-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    steps:
+      - run: Get-VM packer-win2016-ad-sql2016-rs-crm-wp-000000 -ErrorAction Ignore | Set-VM -AutomaticStartAction Nothing;
+  deallocate-ms-365-vms-win2022_hyperv-ci-02:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: preparefordeletion-win2016-ad-sql2016-rs-crm-wp-image-hyperv
+    container:
+      image: mcr.microsoft.com/azure-cli:2.48.1
+    env:
+      ARM_CLIENT_ID: 59897406-8d0d-42c9-9fb5-9c9fa14c4e53
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: 86fab581-914f-4c91-be92-9a5d70691d54
+      ARM_TENANT_ID: 85173d93-99ef-4dff-9b45-495719659133
+    steps:
+      - run: az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID;
+      - run: az vm deallocate --ids /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/ms-365-vms-win2022_hyperv-ci-02/providers/Microsoft.Compute/virtualMachines/swazserver00

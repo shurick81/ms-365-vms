@@ -18,7 +18,7 @@ try
                 Script VSInstallerRunning
                 {
                     SetScript = {
-                        Start-Process -FilePath C:\Install\VSInstall\vs_professional.exe -ArgumentList '--quiet --wait --add Microsoft.VisualStudio.Workload.Office --includeRecommended --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --remove Microsoft.ComponentGroup.Blend --add Microsoft.VisualStudio.Component.JavaScript.TypeScript --add Microsoft.VisualStudio.Workload.NetWeb' -Wait;
+                        Start-Process -FilePath C:\Install\VSInstall\vs_professional.exe -ArgumentList '--quiet --wait --add Microsoft.VisualStudio.Workload.Office --includeRecommended --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --remove Microsoft.ComponentGroup.Blend --add Microsoft.VisualStudio.Component.JavaScript.TypeScript --add Microsoft.VisualStudio.Workload.NetWeb --norestart' -Wait;
                     }
                     TestScript = {
                         $products = Get-WmiObject -Class Win32_Product | ? { $_.Name -eq "Microsoft Visual Studio Setup Configuration" }
@@ -41,7 +41,7 @@ try
                 Script VSInstallerRunning
                 {
                     SetScript = {
-                        Start-Process -FilePath C:\Install\VSInstall\vs_professional.exe -ArgumentList '--quiet --wait --add Microsoft.VisualStudio.Workload.Office --includeRecommended --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --remove Microsoft.ComponentGroup.Blend --add Microsoft.VisualStudio.Component.JavaScript.TypeScript --add Microsoft.VisualStudio.Workload.NetWeb' -Wait;
+                        Start-Process -FilePath C:\Install\VSInstall\vs_professional.exe -ArgumentList '--quiet --wait --add Microsoft.VisualStudio.Workload.Office --includeRecommended --add Microsoft.VisualStudio.Workload.CoreEditor --add Microsoft.VisualStudio.Workload.ManagedDesktop --remove Microsoft.ComponentGroup.Blend --add Microsoft.VisualStudio.Component.JavaScript.TypeScript --add Microsoft.VisualStudio.Workload.NetWeb --norestart' -Wait;
                     }
                     TestScript = {
                         $products = Get-WmiObject -Class Win32_Product | ? { $_.Name -eq "Microsoft Visual Studio Setup Configuration" }
