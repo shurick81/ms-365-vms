@@ -88,7 +88,7 @@ module "SERVER00" {
   vm_name                             = "${format(var.MS_365_VMS_VM_NAME_SPEC, "server00")}"
   vm_size                             = "${var.MS_365_VMS_WIN2022_HYPERV_VM_SIZE}"
   os_disk_type                        = "${var.MS_365_VMS_WIN2022_HYPERV_DISK_TYPE}"
-  os_disk_size_gb                     = "127"
+  os_disk_size_gb                     = "192"
   ms_365_vms_pipeline_provider        = "${var.MS_365_VMS_PIPELINE_PROVIDER}"
   ms_365_vms_pipeline_url             = "${var.MS_365_VMS_PIPELINE_URL}"
   ms_365_vms_pipeline_token           = "${var.MS_365_VMS_PIPELINE_TOKEN}"
