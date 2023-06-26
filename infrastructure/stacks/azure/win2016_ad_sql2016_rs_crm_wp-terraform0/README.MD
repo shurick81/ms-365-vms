@@ -33,7 +33,7 @@ docker run --rm -v $(pwd):/workplace -w /workplace \
     -e MS_365_VMS_IMAGE_NAME=$MS_365_VMS_WIN2016_AD_SQL2016_RS_CRM_WP_IMAGE_NAME \
     -e MS_365_VMS_LOCATION=$MS_365_VMS_LOCATION \
     -e MS_365_VMS_IMAGE_RG_NAME=$MS_365_VMS_IMAGE_RG_NAME \
-    -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//%s/$(date '+%d%H%M%S')} \
+    -e MS_365_VMS_PACKER_VM_NAME=${MS_365_VMS_VM_NAME_SPEC//\%s/$(date '+%d%H%M%S')} \
     hashicorp/packer:1.8.7 \
     build -only azure-arm win2016-ad-sql2016-rs-crm-wp.json
 ```
