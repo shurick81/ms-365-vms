@@ -100,8 +100,6 @@
         { "type": "powershell", "script": "basepsmodules.ps1" },
         { "type": "powershell", "script": "domainclientpsmodules.ps1" },
         { "type": "powershell", "script": "sqlpsmodules.ps1" },
-        { "type": "powershell", "inline": "Install-Module PowerShellGet -Force" },
-        { "type": "powershell", "inline": "Install-Module -Name SqlServer -Force -RequiredVersion 22.0.49-preview -AllowPrerelease" },
         { "type": "powershell", "script": "waitforcpucalm.ps1" },
         { "type": "powershell", "script": "nodefender.ps1" },
         { "type": "windows-restart" },

@@ -28,7 +28,7 @@ try
                 Name                = "SqlServer"
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
-                RequiredVersion     = "21.1.18226"
+                RequiredVersion     = "22.1.1"
             }
 
             PSModule "PSModule_SqlServerDsc"
