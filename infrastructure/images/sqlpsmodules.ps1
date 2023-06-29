@@ -58,6 +58,15 @@ try
                 RequiredVersion     = "2.10.0.0"
             }
 
+            PSModule "PSModule_NetworkingDsc"
+            {
+                Ensure              = "Present"
+                Name                = "NetworkingDsc"
+                Repository          = "PSGallery"
+                InstallationPolicy  = "Trusted"
+                RequiredVersion     = "7.4.0.0"
+            }
+
         }
     }
 }
