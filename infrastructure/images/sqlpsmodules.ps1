@@ -28,7 +28,7 @@ try
                 Name                = "SqlServer"
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
-                RequiredVersion     = "21.1.18226"
+                RequiredVersion     = "22.1.1"
             }
 
             PSModule "PSModule_SqlServerDsc"
@@ -56,6 +56,15 @@ try
                 Repository          = "PSGallery"
                 InstallationPolicy  = "Trusted"
                 RequiredVersion     = "2.10.0.0"
+            }
+
+            PSModule "PSModule_NetworkingDsc"
+            {
+                Ensure              = "Present"
+                Name                = "NetworkingDsc"
+                Repository          = "PSGallery"
+                InstallationPolicy  = "Trusted"
+                RequiredVersion     = "7.4.0.0"
             }
 
         }

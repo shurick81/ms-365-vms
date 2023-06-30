@@ -141,15 +141,16 @@ build {
   }
 
   provisioner "powershell" {
-    script = "domainclientpsmodules.ps1"
-  }
-
-  provisioner "powershell" {
     script = "adpsmodules.ps1"
   }
 
   provisioner "powershell" {
     script = "sqlpsmodules.ps1"
+  }
+
+  # TODO: implement a better solution instead of this workaround
+  provisioner "powershell" {
+    inline = ["Uninstall-Module SqlServer -Force; Install-Module SqlServer -RequiredVersion 21.1.18226 -Force"]
   }
 
   provisioner "powershell" {
