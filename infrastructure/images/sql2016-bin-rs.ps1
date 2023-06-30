@@ -13,11 +13,11 @@ try
 
             SQLSetup SQLSetup
             {
-                InstanceName            = "RSInstance01"
+                InstanceName            = "SSRS"
                 SourcePath              = "F:\"
                 Features                = "RS"
                 ProductKey              = "22222-00000-00000-00000-00000"
-                InstallSharedDir        = "C:\Program Files\Microsoft SQL Server\RSInstance01"
+                InstallSharedDir        = "C:\Program Files\Microsoft SQL Server\SSRS"
                 SQLSysAdminAccounts     = "BUILTIN\Administrators"
                 UpdateEnabled           = "True"
                 UpdateSource            = "C:\Install\SQLUpdates"

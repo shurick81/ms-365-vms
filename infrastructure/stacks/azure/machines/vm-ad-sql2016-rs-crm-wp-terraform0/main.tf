@@ -382,7 +382,7 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"Stop-Service ReportServer`$RSInstance01; Stop-Service W3SVC\""
+      "powershell.exe -command \"Stop-Service ReportServer`$SSRS; Stop-Service W3SVC\""
     ]
   }
 
@@ -432,7 +432,7 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"Start-Service ReportServer`$RSInstance01; Start-Service W3SVC\""
+      "powershell.exe -command \"Start-Service ReportServer`$SSRS; Start-Service W3SVC\""
     ]
   }
 
@@ -467,7 +467,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"$env:SERVICE_NAME = 'ReportServer$RSInstance01'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\rs-serviceaccount-update.ps1\"",
+      "powershell.exe -command \"$env:SERVICE_NAME = 'ReportServer$SSRS'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $env:VM_ADMIN_USERNAME = '${var.vm_admin_username}'; $env:MS_365_VMS_DOMAIN_ADMIN_PASSWORD = '${var.vm_admin_password}'; .\\common\\rs-serviceaccount-update.ps1\"",
     ]
   }
 
@@ -633,7 +633,7 @@ resource "azurerm_virtual_machine" "main" {
       #host = azurerm_public_ip.main.ip_address
     }
     inline     = [
-      "powershell.exe -command \"$env:MS_365_VMS_DYNAMICS_CRM_BASE = '${var.ms_365_vms_dynamics_crm_base}';$env:MS_365_VMS_DYNAMICS_CRM_UPDATE = '${var.ms_365_vms_dynamics_crm_update}';$env:MS_365_VMS_DYNAMICS_CRM_RE_UPDATE = '${var.ms_365_vms_dynamics_crm_re_update}'; $env:SQL_SERVER = $env:COMPUTERNAME + '\\SqlInstance01'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:CRM_INSTALL_PASSWORD = '${var.crm_install_password}'; $env:CRM_SERVICE_PASSWORD = '${var.crm_service_password}'; $env:CRM_DEPLOYMENT_SERVICE_PASSWORD = '${var.crm_deployment_service_password}'; $env:CRM_SANDBOX_SERVICE_PASSWORD = '${var.crm_sandbox_service_password}'; $env:CRM_VSS_WRITER_PASSWORD = '${var.crm_vss_writer_password}'; $env:CRM_ASYNC_SERVICE_PASSWORD = '${var.crm_async_service_password}'; $env:CRM_MONITORING_SERVICE_PASSWORD = '${var.crm_monitoring_service_password}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE = '${var.ms_365_vms_dynamics_crm_base_iso_currency_code}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME = '${var.ms_365_vms_dynamics_crm_base_currency_name}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL = '${var.ms_365_vms_dynamics_crm_base_currency_symbol}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION = '${var.ms_365_vms_dynamics_crm_base_currency_precision}'; $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION = '${var.ms_365_vms_dynamics_crm_organization_collation}'; $env:REPORT_SERVER_HOST_NAME = $env:COMPUTERNAME; $env:CRM_HOST_NAME = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; .\\common\\Install-Dynamics.ps1\""
+      "powershell.exe -command \"$env:MS_365_VMS_DYNAMICS_CRM_BASE = '${var.ms_365_vms_dynamics_crm_base}';$env:MS_365_VMS_DYNAMICS_CRM_UPDATE = '${var.ms_365_vms_dynamics_crm_update}';$env:MS_365_VMS_DYNAMICS_CRM_RE_UPDATE = '${var.ms_365_vms_dynamics_crm_re_update}'; $env:SQL_SERVER = $env:COMPUTERNAME + '\\SqlInstance01'; $env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:CRM_INSTALL_PASSWORD = '${var.crm_install_password}'; $env:CRM_SERVICE_PASSWORD = '${var.crm_service_password}'; $env:CRM_DEPLOYMENT_SERVICE_PASSWORD = '${var.crm_deployment_service_password}'; $env:CRM_SANDBOX_SERVICE_PASSWORD = '${var.crm_sandbox_service_password}'; $env:CRM_VSS_WRITER_PASSWORD = '${var.crm_vss_writer_password}'; $env:CRM_ASYNC_SERVICE_PASSWORD = '${var.crm_async_service_password}'; $env:CRM_MONITORING_SERVICE_PASSWORD = '${var.crm_monitoring_service_password}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE = '${var.ms_365_vms_dynamics_crm_base_iso_currency_code}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME = '${var.ms_365_vms_dynamics_crm_base_currency_name}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL = '${var.ms_365_vms_dynamics_crm_base_currency_symbol}'; $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION = '${var.ms_365_vms_dynamics_crm_base_currency_precision}'; $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION = '${var.ms_365_vms_dynamics_crm_organization_collation}'; $env:REPORT_SERVER_HOST_NAME = $env:COMPUTERNAME; $env:REPORT_SERVER_RELATIVE_URL = 'ReportServer_SSRS'; $env:CRM_HOST_NAME = '${var.vm_domain_name_label}.${var.location}.cloudapp.azure.com'; .\\common\\Install-Dynamics.ps1\""
     ]
   }
   

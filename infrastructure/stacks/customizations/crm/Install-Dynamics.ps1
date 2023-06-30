@@ -18,7 +18,7 @@ Do {
 
 #Reporting Services Content Managers
 $attemptsLeft = 100;
-$resourceUrl = "http://swazsrv00/ReportServer_RSInstance01/ReportService2010.asmx"
+$resourceUrl = "http://$env:REPORT_SERVER_HOST_NAME/$env:REPORT_SERVER_RELATIVE_URL/ReportService2010.asmx"
 $resource = $null
 Do {
     Try {
@@ -35,10 +35,12 @@ Do {
     $attemptsLeft--;
 } until ( $statusCode -eq "Unauthorized" -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
 
+Start-Sleep 10;
+
 $securedPassword = ConvertTo-SecureString $env:CRM_INSTALL_PASSWORD -AsPlainText -Force
 $CRMInstallAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmadmin", $securedPassword );
-Grant-RsCatalogItemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01 -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "Content Manager" -Path "/" -Credential $CRMInstallAccountCredential;
-Grant-RsSystemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01 -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "System Administrator" -Credential $CRMInstallAccountCredential;
+Grant-RsCatalogItemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/$env:REPORT_SERVER_RELATIVE_URL -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "Content Manager" -Path "/" -Credential $CRMInstallAccountCredential;
+Grant-RsSystemRole -ReportServerUri http://$env:REPORT_SERVER_HOST_NAME/$env:REPORT_SERVER_RELATIVE_URL -Identity "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmdplsrv" -RoleName "System Administrator" -Credential $CRMInstallAccountCredential;
 
 $configName = "CRMNode"
 Write-Host "$(Get-Date) Defining DSC"
@@ -306,7 +308,7 @@ Invoke-Command $env:REPORT_SERVER_HOST_NAME -Credential $CRMInstallAccountCreden
         -MediaDir c:\DynamicsResources\Dynamics365ServerRTM\SrsDataConnector `
         -Patch c:\DynamicsResources\Dynamics365ServerReportingExtensionsUpdate `
         -ConfigDBServer $SQL_SERVER `
-        -InstanceName RSInstance01 `
+        -InstanceName SSRS `
         -AutoGroupManagementOff `
         -LogFilePullToOutput;
 } -ArgumentList $env:MS_365_VMS_DYNAMICS_CRM_BASE, $env:MS_365_VMS_DYNAMICS_CRM_RE_UPDATE, $env:SQL_SERVER;
@@ -323,6 +325,10 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             [ValidateNotNullorEmpty()]
             [string]
             $REPORT_SERVER_HOST_NAME,
+            [Parameter(Mandatory=$true)]
+            [ValidateNotNullorEmpty()]
+            [string]
+            $REPORT_SERVER_RELATIVE_URL,
             [Parameter(Mandatory=$true)]
             [ValidateNotNullorEmpty()]
             [string]
@@ -354,7 +360,7 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             -BaseCurrencyPrecision $MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION `
             -SqlCollation $MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION `
             -SqlServerName $SQL_SERVER `
-            -SrsUrl http://$REPORT_SERVER_HOST_NAME/ReportServer_RSInstance01;
+            -SrsUrl http://$REPORT_SERVER_HOST_NAME/$REPORT_SERVER_RELATIVE_URL;
         Write-Host "`$crmJobId: $crmJobId";
         do {
             $operationStatus = Get-CrmOperationStatus -OperationId $crmJobId;
@@ -370,7 +376,7 @@ if ( $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE ) {
             Write-Host $diagOperationStatus.ProcessingError.Message;
         }
         Write-Output $operationStatus.State;
-    } -ArgumentList $env:SQL_SERVER, $env:REPORT_SERVER_HOST_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION, $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
+    } -ArgumentList $env:SQL_SERVER, $env:REPORT_SERVER_HOST_NAME, $env:REPORT_SERVER_RELATIVE_URL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_ISO_CURRENCY_CODE, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_NAME, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_SYMBOL, $env:MS_365_VMS_DYNAMICS_CRM_BASE_CURRENCY_PRECISION, $env:MS_365_VMS_DYNAMICS_CRM_ORGANIZATION_COLLATION
     Write-Host "`$operationState: $operationState";
     if ( $operationState -eq 3 ) {
         Write-Host "Test OK";
