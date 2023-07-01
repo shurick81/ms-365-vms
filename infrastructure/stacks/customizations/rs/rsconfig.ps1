@@ -84,7 +84,7 @@ $configurationData = @{ AllNodes = @(
 ) }
 
 $securedPassword = ConvertTo-SecureString $env:INSTALL_PASSWORD -AsPlainText -Force
-$InstallAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_install", $securedPassword );
+$InstallAccountCredential = New-Object System.Management.Automation.PSCredential( $env:INSTALL_USERNAME, $securedPassword );
 $securedPassword = ConvertTo-SecureString $env:RS_SERVICE_PASSWORD -AsPlainText -Force
 $SqlRSAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_ssrs", $securedPassword );
 Write-Host "$(Get-Date) Compiling DSC";
