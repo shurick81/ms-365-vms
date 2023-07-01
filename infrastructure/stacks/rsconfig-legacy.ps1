@@ -22,7 +22,7 @@ try
 
             SqlRS ReportingServicesConfig
             {
-                InstanceName            = 'RSInstance01'
+                InstanceName            = 'SSRS'
                 DatabaseServerName      = $rsDatabaseInstance.Split( "\" )[0]
                 DatabaseInstanceName    = $rsDatabaseInstance.Split( "\" )[1]
                 ReportServerReservedUrl = @( 'http://+:80' )
