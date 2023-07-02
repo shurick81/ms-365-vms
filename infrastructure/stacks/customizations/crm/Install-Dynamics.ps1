@@ -35,7 +35,7 @@ Do {
     $attemptsLeft--;
 } until ( $statusCode -eq "Unauthorized" -or ( $attemptsLeft -le 0 ) -or ( Start-Sleep 5 ) )
 
-Start-Sleep 10;
+Start-Sleep 120;
 
 $securedPassword = ConvertTo-SecureString $env:CRM_INSTALL_PASSWORD -AsPlainText -Force
 $CRMInstallAccountCredential = New-Object System.Management.Automation.PSCredential( "$($env:MS_365_VMS_DOMAIN_NAME.Split( "." )[0].ToUpper())\_crmadmin", $securedPassword );
