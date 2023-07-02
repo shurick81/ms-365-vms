@@ -270,7 +270,7 @@ resource "azurerm_virtual_machine" "main" {
     }
 
     inline = [
-      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:INSTALL_PASSWORD = '${var.install_password}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $rsDatabaseInstance = '${var.database_instance}'; .\\common\\rsconfig.ps1\"",
+      "powershell.exe -command \"$env:MS_365_VMS_DOMAIN_NAME = '${var.ms_365_vms_domain_name}'; $env:INSTALL_USERNAME = '${var.ms_365_vms_domain_name}\\_install'; $env:INSTALL_PASSWORD = '${var.install_password}'; $env:RS_SERVICE_PASSWORD = '${var.rs_service_password}'; $rsDatabaseInstance = '${var.database_instance}'; .\\common\\rsconfig.ps1\"",
     ]
   }
 
