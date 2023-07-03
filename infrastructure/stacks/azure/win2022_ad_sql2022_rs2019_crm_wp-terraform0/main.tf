@@ -4,8 +4,8 @@ variable "ARM_SUBSCRIPTION_ID" {}
 variable "ARM_TENANT_ID" {}
 variable "MS_365_VMS_LOCATION" {}
 variable "MS_365_VMS_IMAGE_RG_NAME" {}
-variable "MS_365_VMS_WIN2016_AD_SQL2016_RS_CRM_WP_IMAGE_ID" {}
-variable "MS_365_VMS_WIN2016_AD_SQL2016_RS_CRM_WP_VM_SIZE" {}
+variable "MS_365_VMS_WIN2022_AD_SQL2022_RS2019_CRM_WP_IMAGE_ID" {}
+variable "MS_365_VMS_WIN2022_AD_SQL2022_RS2019_CRM_WP_VM_SIZE" {}
 variable "MS_365_VMS_VM_NAME_SPEC" {}
 variable "VM_ADMIN_USERNAME" {
   default = "custom3094857"
@@ -68,15 +68,16 @@ resource "azurerm_subnet" "mainterraformsubnet" {
 }
 
 module "SRV00" {
-  source                                          = "./../machines/vm-ad-sql-rs-legacy-crm-wp-terraform0"
+  source                                          = "./../machines/vm-ad-sql-rs-crm-wp-terraform0"
   environmentId                                   = "${terraform.workspace}"
   location                                        = "${var.MS_365_VMS_LOCATION}"
   vm_admin_username                               = "${var.VM_ADMIN_USERNAME}"
   vm_admin_password                               = "${var.MS_365_VMS_DOMAIN_ADMIN_PASSWORD}"
+  database_instance                               = "${format(var.MS_365_VMS_VM_NAME_SPEC, "srv00")}\\SQLInstance01"
   rs_service_password                             = "${var.RS_SERVICE_PASSWORD}"
   crm_test_1_password                             = "${var.CRM_TEST_1_PASSWORD}"
   crm_test_2_password                             = "${var.CRM_TEST_2_PASSWORD}"
-  crm_install_password                            = "${var.CRM_INSTALL_PASSWORD}"
+  install_password                            = "${var.CRM_INSTALL_PASSWORD}"
   crm_service_password                            = "${var.CRM_SERVICE_PASSWORD}"
   crm_deployment_service_password                 = "${var.CRM_DEPLOYMENT_SERVICE_PASSWORD}"
   crm_sandbox_service_password                    = "${var.CRM_SANDBOX_SERVICE_PASSWORD}"
@@ -85,9 +86,9 @@ module "SRV00" {
   crm_monitoring_service_password                 = "${var.CRM_MONITORING_SERVICE_PASSWORD}"
   vm_resource_group_name                          = "${azurerm_resource_group.environment.name}"
   main_subnet_id                                  = "${azurerm_subnet.mainterraformsubnet.id}"
-  image_id                                        = "${var.MS_365_VMS_WIN2016_AD_SQL2016_RS_CRM_WP_IMAGE_ID}"
+  image_id                                        = "${var.MS_365_VMS_WIN2022_AD_SQL2022_RS2019_CRM_WP_IMAGE_ID}"
   vm_name                                         = "${format(var.MS_365_VMS_VM_NAME_SPEC, "srv00")}"
-  vm_size                                         = "${var.MS_365_VMS_WIN2016_AD_SQL2016_RS_CRM_WP_VM_SIZE}"
+  vm_size                                         = "${var.MS_365_VMS_WIN2022_AD_SQL2022_RS2019_CRM_WP_VM_SIZE}"
   vm_domain_name_label                            = "${var.MS_365_VMS_DNS_PREFIX}${format(var.MS_365_VMS_VM_NAME_SPEC, "srv00")}"
   ms_365_vms_domain_name                          = "${var.MS_365_VMS_DOMAIN_NAME}"
   ms_365_vms_ssl_cache_unc                        = "${var.MS_365_VMS_SSL_CACHE_UNC}"
