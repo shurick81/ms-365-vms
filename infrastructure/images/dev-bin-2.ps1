@@ -61,7 +61,7 @@ try
             cChocoPackageInstaller PostmanInstalled
             {
                 Name                    = "postman"
-                Version                 = "9.0.7"
+                Version                 = "10.21.0"
                 DependsOn               = "[cChocoInstaller]ChocoInstalled"
             }
 
